@@ -2,6 +2,43 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_001 RUN → 🔴 rig = REFUSED (2/5), and the card caught its own defect
+
+- RAN H_001's five falsifiers (`state/h001_f1-codec-refit-gate_2026-07-16/run_h001.py`,
+  deterministic · stdlib · $0). Verdict **rig = REFUSED** — H_002 is blocked. A result, not a delay.
+- **G-5 RESOLVED — the protocol was never lost.** The H_9288 recombination protocol is intact in the
+  v1 repo (`anima`), the evidence trail the campaign itself designated. The card's claim that it was
+  "specified nowhere" was true of *this* repo and false of the campaign — the blocker was a failure to
+  look where the campaign said the evidence lives.
+- The recovery **falsified two of the card's own frozen premises**: F2 is a FORCED-CHOICE flip accuracy
+  with chance = 0.50, not a recombination F-score with an unknown chance rate; and n_items = 120,
+  recovered exactly (the published rates are integer counts: 0.6167=74/120, 0.9083=109/120,
+  0.9167=110/120). `chance_p0`/`n_items` were frozen as `?` pending G-5, so this is a legitimate
+  resolution, not a post-hoc edit.
+- **G-4 triggered — and its stated interpretation is a DEFECT IN THE CARD.** C1 control = 0.6167 sits
+  inside the exact 99% chance band [0.3833, 0.6167] (p=0.0134), which G-4 reads as "L4(b) was never
+  above floor". That inference is backwards: G-4 tests the CONTROL arm, and a control is supposed to
+  sit at chance — a raw-utf8 baseline that could recombine would mean the setup leaks. **`salvage`
+  l4(b) STANDS**: the claim rests on M = 0.9083 (p=1.9e-21) with C3 leak-ceiling liveness = 0.9167
+  (p=1.9e-22) proving the harness can detect the effect. The write-lever axis is not demoted and F1
+  remains correctly selected.
+- The trigger still carries real information: since C1 is indistinguishable from chance, p_control =
+  0.617 is not a baseline capability but noise, so G-2's operating point (p1=0.6167 → p2=0.7667,
+  N ≥ 444/arm) is fictitious and must be re-derived from p0 = 0.50.
+- **G-1/G-2 are UNEVALUABLE**: the jamo-drill generator the card presupposes does not exist. An
+  unevaluable gate cannot return PASS (`break-walls` — under-invest is a wall, not a verdict).
+- Recorded that the v1 anchor is WEAKER than the design assumed: 1 seed, n=120 (underpowered by its own
+  admission and against its own spec's n≥400), synthetic drill, a custom non-canonical harness, and the
+  CONFIRMED reading only appeared after four measurement bugs were fixed in that same harness.
+  `delta_min` = 0.15 rests on that.
+- Harness: added the closed-form primitives the run needs — `binom_pmf`/`binom_sf`/`binom_cdf`/
+  `binom_two_sided_p` (exact, no normal approximation — near a band edge the approximation makes the
+  verdict a property of the estimator), `chance_band`, `two_proportion_n`, `normal_quantile`. Fixtures
+  extended to 46 known-answer cases, all PASS.
+- Lesson recorded in the tree: a falsifier written against an unrecovered metric encodes a GUESS about
+  that metric. The card froze `chance_p0` as `?` without noticing that G-4's LOGIC — not just its
+  parameter — depended on the answer.
+
 ## 2026-07-16 — selection: F1 alone, and the gate that licenses its rig (H_001 pre-registered)
 
 - SELECTED one family — **F1 codec-is-the-self** — closing the divergence stage. Criterion was

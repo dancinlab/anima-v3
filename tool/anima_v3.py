@@ -238,6 +238,110 @@ def bits_per_byte(ce_nats_per_token: float, n_tokens: int, n_bytes: int) -> floa
     return (ce_nats_per_token * n_tokens) / (LN2 * n_bytes)
 
 
+# --- closed-form power + chance bands (G-2 / G-4) ------------------------------
+
+def binom_pmf(k: int, n: int, p: float) -> float:
+    """Exact binomial probability mass P(X = k) for n trials at rate p."""
+    if not (0 <= k <= n):
+        raise ValueError(f"k must be in [0, n]: k={k}, n={n}")
+    if not (0.0 <= p <= 1.0):
+        raise ValueError(f"p must be in [0,1]: {p}")
+    return math.comb(n, k) * (p ** k) * ((1.0 - p) ** (n - k))
+
+
+def binom_sf(k: int, n: int, p: float) -> float:
+    """Exact upper tail P(X >= k). Summed directly — no normal approximation.
+
+    The approximation is what makes a razor-thin verdict unfalsifiable: near the
+    band edge the normal and exact answers straddle the threshold, and then the
+    verdict is a property of the estimator rather than of the data.
+    """
+    return sum(binom_pmf(i, n, p) for i in range(k, n + 1))
+
+
+def binom_cdf(k: int, n: int, p: float) -> float:
+    """Exact lower tail P(X <= k)."""
+    return sum(binom_pmf(i, n, p) for i in range(0, k + 1))
+
+
+def binom_two_sided_p(k: int, n: int, p: float) -> float:
+    """Two-sided exact binomial p-value for observing k successes under rate p.
+
+    Doubles the smaller tail (clipped at 1.0) — the standard convention for a
+    symmetric null (p = 0.5), which is the only case this campaign uses it for.
+    """
+    tail = min(binom_cdf(k, n, p), binom_sf(k, n, p))
+    return min(1.0, 2.0 * tail)
+
+
+def chance_band(n: int, p0: float = 0.5, conf: float = 0.99) -> tuple:
+    """Exact binomial chance band as a (low_rate, high_rate) pair of RATES.
+
+    Returns the widest interval of observed rates that a pure-chance process at
+    p0 produces with probability >= conf. A score inside this band is not
+    distinguishable from chance at that confidence — which is the whole question
+    G-4 asks of a control arm.
+    """
+    if n <= 0:
+        raise ValueError(f"n must be > 0: {n}")
+    if not (0.0 < conf < 1.0):
+        raise ValueError(f"conf must be in (0,1): {conf}")
+    alpha = 1.0 - conf
+    lo = 0
+    while lo <= n and binom_cdf(lo, n, p0) < alpha / 2.0:
+        lo += 1
+    hi = n
+    while hi >= 0 and binom_sf(hi, n, p0) < alpha / 2.0:
+        hi -= 1
+    return (lo / n, hi / n)
+
+
+def two_proportion_n(p1: float, p2: float, alpha: float = 0.01, power: float = 0.99) -> int:
+    """Per-arm N for a two-proportion test to detect p1 vs p2 (normal approx).
+
+    n = (z_{alpha/2} + z_{beta})^2 * [p1(1-p1) + p2(1-p2)] / (p1-p2)^2
+
+    Normal approximation is appropriate HERE (unlike the chance band): this sizes
+    a study before it exists, so the answer only needs to be right to the nearest
+    handful of items, and the operating point is far from 0 or 1.
+    """
+    if p1 == p2:
+        raise ValueError("p1 and p2 must differ — a zero effect needs infinite N")
+    for name, p in (("p1", p1), ("p2", p2)):
+        if not (0.0 < p < 1.0):
+            raise ValueError(f"{name} must be in (0,1): {p}")
+    z_a = normal_quantile(1.0 - alpha / 2.0)
+    z_b = normal_quantile(power)
+    var = p1 * (1.0 - p1) + p2 * (1.0 - p2)
+    n = ((z_a + z_b) ** 2) * var / ((p1 - p2) ** 2)
+    return math.ceil(n)
+
+
+def normal_quantile(p: float) -> float:
+    """Standard-normal inverse CDF via Acklam's rational approximation
+    (|error| < 1.15e-9 over the open interval) — stdlib-only, deterministic."""
+    if not (0.0 < p < 1.0):
+        raise ValueError(f"p must be in (0,1): {p}")
+    a = [-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02,
+         1.383577518672690e+02, -3.066479806614716e+01, 2.506628277459239e+00]
+    b = [-5.447609879822406e+01, 1.615858368580409e+02, -1.556989798598866e+02,
+         6.680131188771972e+01, -1.328068155288572e+01]
+    c = [-7.784894002430293e-03, -3.223964580411365e-01, -2.400758277161838e+00,
+         -2.549732539343734e+00, 4.374664141464968e+00, 2.938163982698783e+00]
+    dd = [7.784695709041462e-03, 3.224671290700398e-01, 2.445134137142996e+00,
+          3.754408661907416e+00]
+    p_low, p_high = 0.02425, 1.0 - 0.02425
+    if p < p_low:
+        q = math.sqrt(-2.0 * math.log(p))
+        return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((dd[0]*q+dd[1])*q+dd[2])*q+dd[3])*q+1.0)
+    if p > p_high:
+        q = math.sqrt(-2.0 * math.log(1.0 - p))
+        return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((dd[0]*q+dd[1])*q+dd[2])*q+dd[3])*q+1.0)
+    q = p - 0.5
+    r = q * q
+    return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q / (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1.0)
+
+
 # --- falsifier harness --------------------------------------------------------
 
 @dataclass

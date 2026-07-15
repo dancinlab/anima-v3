@@ -201,6 +201,117 @@ Outputs (measured by this card):
 
 ## Verdict
 
-_None yet — pre-register-frozen, still-to-run._
+**🔴 rig = REFUSED** (2/5 falsifiers PASS · run 2026-07-16 ·
+`state/h001_f1-codec-refit-gate_2026-07-16/result.json`). H_002 is BLOCKED. This is a
+result, not a delay — and the card caught a defect in *itself*, which is what a gate that
+can refuse its own successor is for.
 
-<!-- After running, paste the VERBATIM stdout in a fenced block + link result.json. -->
+### What the run established
+
+1. **G-5 RESOLVED, and the resolution falsified two of this card's own premises.** The
+   H_9288 protocol was never lost — it is intact in the v1 repo (`anima`), the evidence
+   trail the campaign itself designated. This card asserted it was "specified nowhere",
+   which was true of *this* repo and false of the campaign. The recovered spec then broke
+   two frozen assumptions:
+   - **F2 is a FORCED-CHOICE flip accuracy with chance = 0.50**, not a recombination
+     F-score with an unknown chance rate. `chance_p0` was marked `?` pending G-5, so this
+     is a legitimate resolution rather than a post-hoc edit.
+   - **n_items = 120**, recovered exactly: the published rates are integer counts over 120
+     (0.6167 = 74/120, 0.9083 = 109/120, 0.9167 = 110/120).
+2. **G-4 triggers — but its stated interpretation is WRONG, and that is a defect in this
+   card.** The control C1 = 74/120 = 0.6167 sits inside the exact 99% chance band
+   [0.3833, 0.6167] (two-sided p = 0.0134). As written, G-4 reads that as "L4(b) was never
+   above floor". That inference is backwards: **G-4 tests the control arm, and a control is
+   SUPPOSED to sit at chance** — a raw-utf8 baseline that could do held-out recombination
+   would mean the setup leaks. The claim never rested on C1. It rests on:
+   - **M (codec) = 109/120 = 0.9083, two-sided p = 1.9e-21** — 21 orders of magnitude from
+     chance.
+   - **C3 (leak-ceiling liveness) = 110/120 = 0.9167, p = 1.9e-22** — the harness provably
+     *can* detect held-out flip, so M's score is not a dead instrument reading zero.
+   **`salvage.l4-write-side-crack` (b) therefore STANDS.** The write-lever axis is not
+   demoted, and F1 remains the correctly selected family.
+3. **The trigger still carries real information, just not the information it claimed.**
+   Because C1 is statistically indistinguishable from chance, `p_control = 0.617` is *not a
+   baseline capability* — it is noise. So G-2's operating point (p1 = 0.6167 → p2 = 0.7667,
+   N ≥ 444/arm) is computed at a fictitious operating point and must be re-derived against
+   p0 = 0.50. Fable's independently-chosen `delta_min` = 0.15 does coincide exactly with
+   v1's own pre-registered PASS rule (Δ(M−C1) ≥ 0.15), which is reassuring about the effect
+   size if not about the baseline.
+4. **G-1 and G-2 are UNEVALUABLE: the jamo-drill generator this card presupposes does not
+   exist.** An unevaluable gate cannot return PASS (`break-walls` — under-invest is a wall,
+   not a verdict). The card specified `rig.corpus` in full but nothing built it.
+
+### Repairs required before a successor card
+
+- Build the jamo-drill generator (`rig.corpus`), then measure the boundary-shift rate (G-1)
+  and confirm it can emit N ≥ n_required non-overlapping held-out items (G-2).
+- Re-specify the bounds check to test the **treatment arm + liveness arm** (is M above the
+  chance band? is C3 above it?), not the control. Keep a separate control-at-chance check
+  as a *leak* test, which is what C1 actually measures.
+- Re-derive the power operating point from p0 = 0.50 now that C1 is known to be chance.
+
+### Verbatim stdout
+
+```
+==============================================================================
+H_001 — f1-codec-refit-gate · verdict = rig LICENSED or REFUSED
+==============================================================================
+
+[G-5] protocol reconstruction
+  RECOVERED from the v1 repo (`anima`) — the campaign's evidence trail.
+    metric      : F2 = held-out flip accuracy on the stem never seen in the drill
+    format      : FORCED CHOICE (binary flip: affirmative vs negated)
+    chance p0   : 0.5   <- NOT an F-score; a forced-choice rate
+    n_items     : 120
+    seeds       : 1 (seed 4302)
+    harness     : custom morphatom_eval.py (NOT canonical anima-py evaluate)
+
+[G-4] salvage bounds check — is MORPH-ATOM above the chance floor?
+  exact 99% chance band at n=120, p0=0.5: [0.3833, 0.6167]
+    C1 control  = 74/120 = 0.6167  inside_band=True  two-sided p=0.0134
+    M  codec    = 109/120 = 0.9083  inside_band=False  two-sided p=1.938e-21
+    C3 liveness = 110/120 = 0.9167  two-sided p=1.917e-22
+    delta(M-C1) = +0.2917
+
+[G-2] closed-form power
+  two-proportion, alpha=0.01, power=0.99, delta_min=0.15
+    operating point p1=0.6167 -> p2=0.7667
+    N required per arm = 444
+    the v1 anchor run used n=120 -> underpowered=True (v1's own card admits this)
+    anima-v3's generator can emit N>=444? UNKNOWN — generator does not exist
+
+[G-3] estimator fixtures (positive control on the instruments)
+  tool/test_anima_v3.py exit=0 -> fixtures_pass=True
+
+[G-1] drift existence
+  generator_exists=False -> boundary-shift rate is NOT MEASURABLE.
+  G-1 cannot be evaluated: the jamo-drill generator this card presupposes
+  has not been built. An unevaluable gate cannot return PASS.
+
+==============================================================================
+FALSIFIER LEDGER
+==============================================================================
+  FAIL  G-1 drift existence
+  FAIL  G-2 closed-form power
+  PASS  G-3 estimator fixtures
+  FAIL  G-4 salvage bounds check
+  PASS  G-5 protocol reconstruction
+
+  2/5 PASS
+
+  VERDICT: rig = REFUSED
+
+  artifacts: state/h001_f1-codec-refit-gate_2026-07-16/result.json
+```
+
+### Limits this run added
+
+- **L8**: the v1 anchor is weaker than this card assumed — 1 seed, n=120 (underpowered by
+  its own admission and against its own spec's n≥400), synthetic drill, a custom harness
+  that is not the canonical evaluator, and the CONFIRMED reading only appeared after four
+  measurement bugs were fixed in the harness that produced it. `delta_min` = 0.15 rests on
+  that.
+- **L9**: G-4's defect was invisible until the protocol was recovered. The general lesson
+  is not "Fable erred" but that **a falsifier written against an unrecovered metric encodes
+  a guess about that metric**, and this card froze `chance_p0` as `?` without noticing that
+  G-4's *logic*, not just its parameter, depended on the answer.

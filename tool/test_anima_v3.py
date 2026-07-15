@@ -28,12 +28,19 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from anima_v3 import (
     ablation_delta,
     ablation_fraction,
+    binom_cdf,
+    binom_pmf,
+    binom_sf,
+    binom_two_sided_p,
     bits_per_byte,
+    chance_band,
     effective_rank,
     gram_matrix,
+    normal_quantile,
     participation_ratio,
     singular_values,
     stable_rank,
+    two_proportion_n,
 )
 
 _results: list = []
@@ -140,6 +147,48 @@ def main() -> int:
     check("ablation_fraction: half the headroom to floor", ablation_fraction(2.5, 2.0, 3.0), 0.5)
     check("ablation_fraction: channel carries everything", ablation_fraction(3.0, 2.0, 3.0), 1.0)
     check("ablation_fraction: channel carries nothing", ablation_fraction(2.0, 2.0, 3.0), 0.0)
+
+    print("\n=== binomial — closed-form, exact (G-4 chance band) ===")
+    # Closed-form: a fair coin, 1 toss. P(X=1) = 1/2. P(X>=1) = 1/2.
+    check("binom_pmf(1, 1, 0.5)", binom_pmf(1, 1, 0.5), 0.5)
+    check("binom_sf(1, 1, 0.5)", binom_sf(1, 1, 0.5), 0.5)
+    # Closed-form: n=2, p=1/2 -> pmf = 1/4, 1/2, 1/4.
+    check("binom_pmf(1, 2, 0.5) = 1/2", binom_pmf(1, 2, 0.5), 0.5)
+    check("binom_cdf(2, 2, 0.5) = 1 (total mass)", binom_cdf(2, 2, 0.5), 1.0)
+    check("binom_sf(0, 10, 0.5) = 1 (total mass)", binom_sf(0, 10, 0.5), 1.0)
+    # Symmetry of a fair coin: P(X<=k) == P(X>=n-k).
+    check("binom symmetry: cdf(40,120) == sf(80,120)", binom_cdf(40, 120, 0.5), binom_sf(80, 120, 0.5))
+    # An exactly-median observation cannot be evidence against the null.
+    check("binom_two_sided_p at the median = 1.0", binom_two_sided_p(60, 120, 0.5), 1.0)
+    # The band must contain the median and exclude the extremes.
+    lo, hi = chance_band(120, 0.5, 0.99)
+    ok = lo < 0.5 < hi and lo > 0.3 and hi < 0.7
+    _results.append(ok)
+    print(f"{'PASS' if ok else 'FAIL'}  {'chance_band(120) brackets 0.5 sanely':<52} got=({lo:.4f},{hi:.4f})")
+    # A wider confidence demands a wider band — monotonicity, not a magic number.
+    lo99, hi99 = chance_band(120, 0.5, 0.99)
+    lo95, hi95 = chance_band(120, 0.5, 0.95)
+    ok = lo99 <= lo95 and hi99 >= hi95
+    _results.append(ok)
+    print(f"{'PASS' if ok else 'FAIL'}  {'chance_band 99% wider than 95%':<52} 99=({lo99:.4f},{hi99:.4f}) 95=({lo95:.4f},{hi95:.4f})")
+    # More trials -> a tighter band around the same null.
+    ok = (chance_band(480, 0.5, 0.99)[1] - 0.5) < (chance_band(120, 0.5, 0.99)[1] - 0.5)
+    _results.append(ok)
+    print(f"{'PASS' if ok else 'FAIL'}  {'chance_band tightens as n grows':<52} n=480 tighter than n=120")
+
+    print("\n=== normal quantile + power ===")
+    check("normal_quantile(0.5) = 0", normal_quantile(0.5), 0.0, tol=1e-9)
+    check("normal_quantile(0.975) = 1.959964", normal_quantile(0.975), 1.959964, tol=1e-5)
+    check("normal_quantile(0.995) = 2.575829", normal_quantile(0.995), 2.575829, tol=1e-5)
+    check("normal_quantile(0.99) = 2.326348", normal_quantile(0.99), 2.326348, tol=1e-5)
+    # Symmetry of the standard normal.
+    check("normal_quantile symmetry", normal_quantile(0.9) + normal_quantile(0.1), 0.0, tol=1e-8)
+    # A bigger effect needs fewer items; sanity, not a fitted number.
+    n_small = two_proportion_n(0.617, 0.767, 0.01, 0.99)
+    n_big = two_proportion_n(0.617, 0.917, 0.01, 0.99)
+    ok = n_big < n_small
+    _results.append(ok)
+    print(f"{'PASS' if ok else 'FAIL'}  {'two_proportion_n: bigger effect -> smaller N':<52} d=0.15:{n_small} > d=0.30:{n_big}")
 
     print("\n=== guards — a broken control must RAISE, never return a number ===")
     check_raises("floor <= intact CE (broken control)", lambda: ablation_fraction(2.5, 2.0, 1.0))

@@ -962,51 +962,98 @@
     },
     {
      "id": "verification-h001",
-     "role": "H_001 f1-codec-refit-gate — PRE-REGISTER-FROZEN 2026-07-16, still-to-run. Its verdict is about the RIG, not about F1: LICENSED (H_002 may run) or REFUSED (blocked until the named defect is repaired).",
+     "role": "H_001 f1-codec-refit-gate — RUN 2026-07-16 · verdict **rig = REFUSED** (2/5). H_002 is BLOCKED. The verdict is about the RIG, not about F1.",
      "children": [
       {
-       "id": "verification-h001-falsifiers",
-       "role": "5 falsifiers: G-1 drift existence · G-2 closed-form power (N>=~400 items) · G-3 estimator fixtures (wired into `sidecar ci`) · G-4 salvage bounds check · G-5 protocol reconstruction."
-      },
-      {
-       "id": "verification-h001-own-kill-power",
-       "role": "G-4 can indict the very evidence that selected F1 — a gate that cannot refuse its own successor is not a gate.",
+       "id": "verification-h001-g5-resolved",
+       "role": "G-5 RESOLVED — the H_9288 protocol was never lost: it is intact in the v1 repo (`anima`), the evidence trail the campaign itself designated. 'Specified nowhere' was true of THIS repo and false of the campaign.",
        "children": [
         {
-         "id": "verification-h001-own-kill-power-test",
-         "role": "If MORPH-ATOM's control score 0.617 sits INSIDE the 99% binomial chance band for the drill format, L4(b) was never above floor: the campaign's only green causal measurement was noise, and the whole write-lever axis is demoted."
+         "id": "verification-h001-g5-premise-break",
+         "role": "Recovery falsified two of the card's own frozen premises: F2 is a FORCED-CHOICE flip accuracy with chance = 0.50 (not a recombination F-score with unknown chance), and n_items = 120 (recovered exactly — the published rates are integer counts: 0.6167=74/120, 0.9083=109/120, 0.9167=110/120)."
         }
        ]
       },
       {
-       "id": "verification-h001-blocker",
-       "role": "OPEN BLOCKER (G-5): the 'H_9288 held-out recombination protocol' is cited in `salvage` but SPECIFIED NOWHERE in this repo.",
+       "id": "verification-h001-g4-card-defect",
+       "role": "G-4 TRIGGERED, but its stated interpretation is a DEFECT IN THE CARD: it tests the CONTROL arm, and a control is supposed to sit at chance. The claim never rested on C1.",
        "children": [
         {
-         "id": "verification-h001-blocker-cause",
-         "role": "v1 is discarded and state/ holds only the divergence seed — the protocol left no trace here."
+         "id": "verification-h001-g4-l4-stands",
+         "role": "salvage l4(b) STANDS — the write-lever axis is NOT demoted and F1 stays correctly selected.",
+         "children": [
+          {
+           "id": "h001-g4-control-at-chance",
+           "role": "C1 control = 74/120 = 0.6167 sits inside the exact 99% chance band [0.3833, 0.6167] (p=0.0134) — which is CORRECT for a control: a raw-utf8 baseline that could recombine would mean the setup leaks."
+          },
+          {
+           "id": "h001-g4-claim-arm",
+           "role": "The claim rests on M = 109/120 = 0.9083 (two-sided p=1.9e-21) — 21 orders of magnitude from chance."
+          },
+          {
+           "id": "h001-g4-liveness",
+           "role": "C3 leak-ceiling liveness = 110/120 = 0.9167 (p=1.9e-22) proves the harness CAN detect held-out flip, so M's score is not a dead instrument reading zero."
+          }
+         ]
         },
         {
-         "id": "verification-h001-blocker-impact",
-         "role": "G-2's power calc and G-4's chance band both depend on it (chance_p0, n_items). Unrecovered -> H_001 returns REFUSED, which is a RESULT, not a delay."
+         "id": "verification-h001-g4-real-information",
+         "role": "The trigger still carries real information, just not what it claimed.",
+         "children": [
+          {
+           "id": "h001-g4-baseline-is-noise",
+           "role": "Since C1 is indistinguishable from chance, p_control=0.617 is NOT a baseline capability — it is noise."
+          },
+          {
+           "id": "h001-g4-power-refit",
+           "role": "So G-2's operating point (p1=0.6167 -> p2=0.7667, N>=444/arm) is computed at a fictitious point and must be re-derived from p0=0.50."
+          }
+         ]
         }
        ]
       },
       {
-       "id": "verification-h001-self-deception",
-       "role": "The most likely SUPPORTED-but-wrong path for the successor: 'refit-as-noise' wearing 'refit-as-self' as a costume — the adaptive arm wins because ANY periodic codec perturbation regularizes segmentation.",
+       "id": "verification-h001-g1-g2-unevaluable",
+       "role": "G-1 and G-2 are UNEVALUABLE: the jamo-drill generator this card presupposes (`rig-corpus`) does not exist. An unevaluable gate cannot return PASS (break-walls — under-invest is a wall, not a verdict)."
+      },
+      {
+       "id": "verification-h001-anchor-weaker",
+       "role": "The v1 anchor is WEAKER than the design assumed — delta_min = 0.15 rests on it.",
        "children": [
         {
-         "id": "verification-h001-self-deception-survives",
-         "role": "It would survive the main metric, the L1 gate (perturbation noise inflates PR for free) AND the L2 gate (regularization moves real bpb). Both mandated gates pass on a wrong result."
+         "id": "h001-anchor-scope",
+         "role": "1 seed, n=120 (underpowered by its own admission and against its own spec's n>=400), synthetic drill, and a custom harness that is not the canonical evaluator."
         },
         {
-         "id": "verification-h001-self-deception-catch",
-         "role": "Only the scramble-refit arm catches it — see `rig-scramble-arm`."
+         "id": "h001-anchor-bugs",
+         "role": "The CONFIRMED reading only appeared after four measurement bugs were fixed in that same harness."
         }
        ]
+      },
+      {
+       "id": "verification-h001-repairs",
+       "role": "Repairs required before a successor card.",
+       "children": [
+        {
+         "id": "h001-repair-generator",
+         "role": "(a) Build the jamo-drill generator, then measure G-1's boundary-shift rate and G-2's emittable N."
+        },
+        {
+         "id": "h001-repair-bounds",
+         "role": "(b) Re-specify the bounds check to test the TREATMENT + LIVENESS arms, keeping control-at-chance as a SEPARATE leak test."
+        },
+        {
+         "id": "h001-repair-power",
+         "role": "(c) Re-derive the power operating point from p0=0.50."
+        }
+       ]
+      },
+      {
+       "id": "verification-h001-lesson",
+       "role": "A falsifier written against an unrecovered metric encodes a GUESS about that metric. This card froze chance_p0 as `?` without noticing that G-4's LOGIC — not just its parameter — depended on the answer."
       }
-     ]
+     ],
+     "type": "gate"
     }
    ]
   }
