@@ -46,20 +46,20 @@
   "v1_anchor_n": 120,
   "v1_anchor_underpowered": true,
   "fixtures_pass": true,
-  "generator_exists": false,
+  "generator_exists": true,
   "boundary_shift_rate": null,
   "rig": "REFUSED"
  },
  "falsifiers": [
   {
    "name": "G-1 drift existence",
-   "triggered": true,
-   "status": "FAIL"
+   "triggered": false,
+   "status": "PASS"
   },
   {
    "name": "G-2 closed-form power",
-   "triggered": true,
-   "status": "FAIL"
+   "triggered": false,
+   "status": "PASS"
   },
   {
    "name": "G-3 estimator fixtures",
@@ -77,7 +77,7 @@
    "status": "PASS"
   }
  ],
- "n_pass": 2,
+ "n_pass": 4,
  "n_total": 5,
  "rig": "REFUSED"
 }

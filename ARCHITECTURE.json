@@ -319,6 +319,44 @@
        "role": "It also contradicts the design's literature-based comfort: ZeTT's ~1-3% swap cost assumes hypernetwork embeddings at 7B. Plain warm-start across a codec change at 303M measured WORSE than random init. The campaign's own evidence trail is the more pessimistic — and the more relevant — anchor."
       }
      ]
+    },
+    {
+     "id": "l11-fusability-is-recoverability",
+     "role": "L11 — fusability IS recoverability (the frequency tautology). v3-EARNED (not inherited from v1; earned here at $0).",
+     "children": [
+      {
+       "id": "l11-statement",
+       "role": "For any FIXED frequent pattern, the property that lets an adaptive codec dedicate a unit to it (frequency x fixedness) is the SAME property that lets a frozen system read it with a low-order statistic (its terminal n-gram). Verified 12/12; G-C=0.9954 vs G-D frozen 0/12."
+      },
+      {
+       "id": "l11-corollary-a",
+       "role": "Corollary A (both-ways): representation adaptivity can only pay where patterns are non-fixed or spans exceed binding reach — and THERE frequency-driven adaptation has nothing to grab either.",
+       "children": [
+        {
+         "id": "l11-cor-a-detail",
+         "role": "Constructions only push the shortcut order up by 1 (order-1 -> order-2 measured); a transformer follows with one attention head per order."
+        }
+       ]
+      },
+      {
+       "id": "l11-corollary-b",
+       "role": "Corollary B (measurement, extends L6): in any two-arm contrast, the CONTROL arm's trivial-statistic ceiling (lookup battery at order 1,2,... deterministic $0) MUST be measured BEFORE training.",
+       "children": [
+        {
+         "id": "l11-cor-b-detail",
+         "role": "A contrast whose control ceiling ~ oracle is structurally dead; a planned Delta is meaningless until this ceiling exists. H_004's entire spend was pre-empted by this battery."
+        }
+       ]
+      },
+      {
+       "id": "l11-corollary-c",
+       "role": "Corollary C (relabel): v1's only green causal measurement was LOW-ORDER CLASS EXPOSURE, not atomicity; raw utf-8 failed for span-reach, not for want of atoms."
+      },
+      {
+       "id": "l11-design-consequence",
+       "role": "Design consequence: a lever is only isolable if the credit path is forced through it by a STRUCTURAL BOUNDARY (information physically absent from the visible context), never by inventory/frequency engineering inside the context."
+      }
+     ]
     }
    ]
   },
@@ -907,6 +945,50 @@
       {
        "id": "decision-f1-liveness-additive",
        "role": "The liveness hole is real but ADDITIVE — one extra run, not a redesign."
+      }
+     ]
+    },
+    {
+     "id": "decision-redecide-h004",
+     "role": "RE-DECISION 2026-07-16 (post H_004 terminal): F1 yields first place, and the WRITE-LEVER axis yields with it. F3 (diary) — the pre-registered second card — is promoted to first. Belief-killed-per-dollar, re-run.",
+     "children": [
+      {
+       "id": "decision-f1-spent",
+       "role": "F1 is not falsified as a metaphysical claim but SPENT as a measurable one: every proposed survivor (generation · refit-under-drift · long-range depth) is L11's frequency tautology in a costume.",
+       "children": [
+        {
+         "id": "decision-f1-abstract",
+         "role": "Its restated verbal form ('codec compresses the credit-assignment span; refit maintains it') is parked as an ABSTRACT card (H_A001), not another rig."
+        }
+       ]
+      },
+      {
+       "id": "decision-f4-bad-rig",
+       "role": "F4 (corpus-farmer) inherits an odd half-promotion (H_004 collapsed the write-lever onto 'what the stream CONTAINS is the lever, not how it is re-segmented') but a BAD RIG.",
+       "children": [
+        {
+         "id": "decision-f4-detail",
+         "role": "Its falsifier needs a training loop per policy step, its effect size is exactly as unanchored as F1's was, and its ceiling pilot can't run for $0. Buying it now repeats H_001's unattributable-null disease."
+        }
+       ]
+      },
+      {
+       "id": "decision-f6-dented",
+       "role": "F6 (swarm) is DENTED by H_004: its reproduction operator mutates the CODEC (f6-how-reproduce) — the axis of variation it pre-registered is exactly the lever L11 shows non-separable. SUSPENDED pending a new variation axis before it is even coherent."
+      },
+      {
+       "id": "decision-f3-cures",
+       "role": "F3 promoted: its two known diseases now have H_004-shaped cures.",
+       "children": [
+        {
+         "id": "decision-f3-cure1",
+         "role": "Disease 1 (a null can't separate 'diary carries no load' from 'stream has no cross-day MI') -> cure: measure the stream's MI FIRST, deterministically (the premise before the organ)."
+        },
+        {
+         "id": "decision-f3-cure2",
+         "role": "Disease 2 (synthetic planted-latent) -> cure: the eventual twin escapes L11 STRUCTURALLY because the transported info sits OUTSIDE the context window, so no within-context statistic of any order substitutes for the bottleneck."
+        }
+       ]
       }
      ]
     }

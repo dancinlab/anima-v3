@@ -2,6 +2,33 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — campaign re-decision: F1 yields, F3 promoted, L11 sealed
+
+- The campaign re-decision (Fable) after the H_004 terminal: **F1 is done — spent as a measurable claim,
+  not falsified as a metaphysical one** — and the WRITE-LEVER axis yields with it. Every proposed F1
+  survivor (generation · refit-under-drift · long-range depth) is L11's frequency tautology in a costume;
+  the restated verbal form is parked as an ABSTRACT card, not another rig.
+- SEALED **L11 — fusability IS recoverability** (`salvage.l11-*`), the campaign's FIRST v3-earned law (earned
+  here at $0, not inherited from v1): for any FIXED frequent pattern, the property that lets an adaptive codec
+  dedicate a unit to it (frequency × fixedness) is the same property that lets a frozen system read it with a
+  low-order n-gram. Corollary A (adaptivity only pays on non-fixed patterns / spans beyond reach — where
+  adaptation also starves), B (measure the control's trivial-statistic ceiling BEFORE training — the lookup
+  battery, extends L6), C (relabel: v1 measured low-order exposure, not atomicity), and the design consequence
+  (a lever is isolable only via a STRUCTURAL BOUNDARY — info physically absent from the visible context —
+  never inventory/frequency engineering).
+- AXIS RE-DECISION (`decision-redecide-h004`): F3 (diary) — the pre-registered second card — is promoted to
+  first, on belief-killed-per-dollar. F4 has a bad rig (repeats H_001's unanchored-null disease). F6 is DENTED
+  (its reproduction mutates the codec = the non-separable lever) and SUSPENDED pending a new variation axis.
+  F3's two known diseases now have H_004-shaped cures: measure the stream's MI FIRST (premise before organ),
+  and the eventual twin escapes L11 structurally because the transported info sits OUTSIDE the context window.
+- NEXT CARD: `H_005 f3-stream-mi-precheck` — $0-deterministic + cheap numpy proxy, measuring whether any
+  available experience stream (dancinlab git history, owner logs) carries cross-boundary information for a
+  diary to transport. The hindsight-optimal k-token summary is the oracle-diary CEILING, doubling as the
+  campaign's first pre-anchored delta_min (institutionalizing the H_004 lesson). A null retires F3 + F8's
+  diary premise for $0; a positive is the first honestly-anchored delta_min.
+- Seed of record: `state/h004_static-anchor-pilot_2026-07-16/DESIGN_redecide.md`.
+
+
 ## 2026-07-16 — H_004 STRUCTURAL TERMINAL: atomicity is not isolable from n-gram binding ($0, no GPU)
 
 - The F1 reframing analysis (Fable) + a $0 guard battery drove H_004 to a **structural terminal**:
