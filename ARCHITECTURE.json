@@ -116,7 +116,7 @@
       },
       {
        "id": "l4-lens-b-morph-atom",
-       "role": "(b) MORPH-ATOM: a BPE-jamo codec was CAUSAL for held-out negation recombination. REPLICATED — not a single seed, contrary to what H_001's limits recorded.",
+       "role": "(b) MORPH-ATOM: a BPE-jamo codec was CAUSAL for held-out negation recombination (M F2 0.908 vs raw-utf8 C1 0.617, delta +0.291, replicated). MEASUREMENT STANDS; its 'atomicity' LABEL was wrong (see child).",
        "children": [
         {
          "id": "l4-morph-atom-runs",
@@ -140,7 +140,23 @@
           },
           {
            "id": "l4-slot-transfer",
-           "role": "This is the best available reason to expect the mechanism to survive a 303M -> 10M transfer `?` — settled by `rig-pilot`, not by argument."
+           "role": "WEAKENED 2026-07-16 (H_004 proxy · Q1): under a last-token lookup the decision never consults the stem.",
+           "children": [
+            {
+             "id": "l4-slot-weakened-why",
+             "role": "So stem-deletion invariance (CEMENT C2 = 0.917) is PREDICTED by the shortcut — C2 no longer isolates 'slot' compositionality. Survives only as 'the class unit needn't be pretrained-addressed', not as evidence of recombination."
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "id": "l4-morph-atom-relabel",
+         "role": "RELABELED 2026-07-16 (H_004 proxy · Q4): what L4(b) established is 'codec segmentation that concentrates class into a LOW-ORDER positional feature is causal for the flip' — NOT that single-token atomicity is the operative property.",
+         "children": [
+          {
+           "id": "l4-relabel-why",
+           "role": "No arm ever contrasted 'atomic' vs 'fragmented-but-low-order'; the proxy shows the latter suffices. C1 failed for ABSENCE OF ANY LOW-ORDER FEATURE (bytes maximally shared), not absence of atomicity. 'held-out recombination' was never cleanly separated from stem-irrelevant lookup."
           }
          ]
         }
@@ -1038,7 +1054,7 @@
       },
       {
        "id": "rig-pilot-frozen-control-invalid",
-       "role": "BLOCKER (H_004 $0 proxy): the FROZEN arm is NOT a valid no-atomicity control — its fragments of the novel allomorphs are class-exclusive (27/27 neg-only), so it solves the held-out flip by fragment-lookup without atomicity. A valid control needs class-AMBIGUOUS fragments. See `verification-h004`.",
+       "role": "RESOLVED into a STRUCTURAL TERMINAL (see `verification-h004-terminal`): the frozen control was fixable at order-1 (donor pairs) but the NEG class is trivially recoverable at order-2, and oracle-fusability IS n-gram-recoverability. The pilot cannot isolate atomicity. Delta_pilot >= 0.20 impossible.",
        "children": [
         {
          "id": "rig-pilot-lever-question",
@@ -1348,7 +1364,7 @@
     },
     {
      "id": "verification-h004",
-     "role": "H_004 f1-static-anchor-pilot — PRE-REGISTER-FROZEN 2026-07-16 (genspec fbcf0c8, K=512). The seeded torch/MPS pilot is BLOCKED: a $0 numpy pre-check caught a rig-invalidating defect before any spend.",
+     "role": "H_004 f1-static-anchor-pilot — STRUCTURAL TERMINAL 2026-07-16, reached at $0. The pilot is TWIN-REFUSED not by a training run but by a theorem: atomicity cannot be isolated from n-gram binding for a fixed morpheme. No torch/MPS run needed or fired.",
      "children": [
       {
        "id": "verification-h004-proxy-finding",
@@ -1360,11 +1376,21 @@
        "children": [
         {
          "id": "h004-defect-exclusive",
-         "role": "The 12 novel NEG allomorphs come from a DISJOINT inventory, so under the frozen codec they fragment into 27 tokens that are ALL neg-exclusive."
+         "role": "CORRECTED 2026-07-16 (Fable adversarial re-check + my re-verify): my first claim '27/27 fragments neg-exclusive' was OVERSTATED. Checked against full plain BODIES (not plain affixes alone), 25/27 fragment types are SHARED; only 2 are exclusive. The leak is POSITIONAL, not type-exclusivity."
         },
         {
          "id": "h004-defect-lastok",
-         "role": "The LAST token alone separates NEG from PLAIN with 0 overlap. So Delta_pilot ~ 0 is a RIG DEFECT (frozen control too strong), not evidence about F1 — at any scale."
+         "role": "The real leak is POSITIONAL: the body-final token is nearly class-disjoint.",
+         "children": [
+          {
+           "id": "h004-lastok-numbers",
+           "role": "A last-token Bayes lookup scores 0.9993 on the eval (12 neg last-token types vs 62 plain, overlap 1); a length-only lookup scores 0.572. The flip is an order-1 shortcut."
+          },
+          {
+           "id": "h004-lastok-evidence",
+           "role": "Delta_pilot ~ 0 is a RIG DEFECT at any scale — the STRUCTURAL audits (deterministic), not the weak training runs, are the evidence."
+          }
+         ]
         }
        ]
       },
@@ -1378,7 +1404,27 @@
         },
         {
          "id": "h004-reframe-consequence",
-         "role": "A frozen BPE that only FRAGMENTS the morpheme but keeps fragments class-exclusive recombines fine. That would demote F1's central atomicity thesis to a special case. Unresolved."
+         "role": "SHARPENED: the lever is the ORDER of the statistic needed to read the class, not 'atomic token' nor 'class-exclusive fragment'.",
+         "children": [
+          {
+           "id": "h004-reframe-orders",
+           "role": "Raw utf-8 (C1=0.617) demands binding an ~18-byte all-shared sequence (high order); the frozen codec concentrates class into an order-1 feature (final-token identity); an atomic codec is order-1 by construction."
+          },
+          {
+           "id": "h004-reframe-special-case",
+           "role": "Atomicity is a special case of LOW-ORDER class exposure, and a static codec can supply it accidentally."
+          },
+          {
+           "id": "h004-reframe-f1-restated",
+           "role": "F1 restated: the codec's causal contribution is COMPRESSING THE CREDIT-ASSIGNMENT SPAN between form and consequence; refit maintains that compression under drift.",
+           "children": [
+            {
+             "id": "h004-reframe-survives",
+             "role": "'codec-is-the-self' survives verbally as a mechanism-class claim, but its measured support is now thinner — the record never isolated ATOMICITY as the lever."
+            }
+           ]
+          }
+         ]
         }
        ]
       },
@@ -1389,6 +1435,67 @@
         {
          "id": "h004-fix-open",
          "role": "OPEN: whether BPE's frequency-driven merging always recovers a class-exclusive fragment anyway. If it does, the synthetic-atomicity approach may be unable to isolate the lever at all."
+        }
+       ]
+      },
+      {
+       "id": "verification-h004-terminal",
+       "role": "STRUCTURAL VERDICT (run_guards.py, $0): the repaired donor-pair rig closes order-1 shortcuts (G-A last-token 0.527, G-B length 0.551, PASS) and keeps the atomicity contrast (G-D frozen 0/12 oracle 12/12) and zero leak (G-E).",
+       "children": [
+        {
+         "id": "h004-terminal-gc",
+         "role": "BUT G-C order-2 bigram lookup = 0.9954: the frozen arm has a TRIVIAL bigram path to the NEG class. That is the frozen ceiling, and it kills the pilot."
+        },
+        {
+         "id": "verification-h004-theorem",
+         "role": "THE THEOREM (verified 12/12): oracle-fusable <=> n-gram-recoverable — the SAME property.",
+         "children": [
+          {
+           "id": "h004-theorem-why",
+           "role": "For the ORACLE to atomize an allomorph it must be a frequent FIXED jamo sequence — but then its terminal n-gram under the FROZEN codec recovers it. So atomicity is NOT separable from n-gram binding for a fixed morpheme. A fact about BPE, not a rig defect; Fable's Q2 predicted it."
+          }
+         ]
+        },
+        {
+         "id": "verification-h004-transformer",
+         "role": "A transformer binds order-2 with one attention head, so frozen F2 ~ 0.995 regardless of training -> Delta_pilot >= 0.20 is STRUCTURALLY IMPOSSIBLE. Confirmed by three converging lenses: Fable's Q5 prediction, the deterministic G-C guard, and the earlier proxy (frozen 0.971 >= oracle 0.923)."
+        },
+        {
+         "id": "verification-h004-campaign-result",
+         "role": "CAMPAIGN RESULT: a static codec's order-<=2 fragment statistics already deliver the write-lever's RECEPTIVE value; a refit organ buys nothing MEASURABLE here.",
+         "children": [
+          {
+           "id": "h004-result-morphatom",
+           "role": "What the record ever isolated was NOT atomicity — MORPH-ATOM's raw-utf8 control failed only because its binding span (~18 bytes) exceeded the small model's n-gram reach, not because atomicity per se helps."
+          }
+         ]
+        }
+       ]
+      }
+     ],
+     "type": "gate"
+    }
+   ]
+  },
+  {
+   "id": "convergence",
+   "role": "Cross-cutting lessons the campaign paid to learn.",
+   "children": [
+    {
+     "id": "convergence-records",
+     "role": "records[]",
+     "children": [
+      {
+       "id": "cr-atomicity-not-isolable",
+       "role": "cr-atomicity-not-isolable (H_004, 2026-07-16): 'atomicity' (single-token morpheme) cannot be isolated from n-gram binding for a FIXED morpheme — oracle-fusability IS n-gram-recoverability (the same fixed sequence).",
+       "children": [
+        {
+         "id": "cr-atom-corollary",
+         "role": "Corollary: MORPH-ATOM's codec-vs-raw-utf8 measured LOW-ORDER class exposure, not atomicity — raw utf-8 failed only because its ~18-byte binding span exceeded the small model's n-gram reach."
+        },
+        {
+         "id": "cr-atom-lesson",
+         "role": "LESSON: a synthetic drill can never prove 'atomicity helps' against a transformer that binds n-grams; the honest F1 question is GENERATION / long-range credit / continual-interference, not receptive flip classification. Reached at $0 by a guard battery, pre-empting a GPU run."
         }
        ]
       }

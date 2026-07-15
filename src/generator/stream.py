@@ -71,13 +71,40 @@ def line(spec: dict, phase: int, rng: random.Random, allow_heldout_neg: bool = F
         af = _pick_neg(spec, phase, rng)
         mark = NEG_MARK
     else:
-        af = rng.choice(plain_forms(spec, phase))
+        af = _pick_plain(spec, phase, rng)
         mark = POS_MARK
     # The polarity mark is a SEPARATE sentinel-delimited token, never glued to the
     # affix. Gluing it (the original design) let BPE fuse `affix+mark` as one merge,
     # so the affix itself never became a single token and the REFIT codec stalled at
     # 3-5/12 on N-2 no matter the frequency. Splitting it restores 12/12 (H_003 N-2).
     return render(stem, [af]) + SENTINEL + mark
+
+
+# How much to over-weight the 24 donor plain affixes as STANDALONE plains in phase 2.
+# The donor-pair novel NEG allomorphs end in a donor plain, so without this boost the
+# body-final token still leaks NEG probabilistically (P(NEG|last=donor) ~ 0.76). Boosting
+# each donor's standalone plain usage flattens P(NEG|final token) toward 0.5 — the order-1
+# guard G-A. Value chosen to pass the guard battery (verified in run_proxy / guards).
+DONOR_PLAIN_BOOST = 8.0
+
+
+def _pick_plain(spec: dict, phase: int, rng: random.Random) -> str:
+    """Choose a PLAIN affix. In phase 2 the donor plains (which also form the tails of
+    the novel NEG allomorphs) are over-weighted so the body-final token does not leak
+    the NEG class — see DONOR_PLAIN_BOOST."""
+    plains = plain_forms(spec, phase)
+    if phase == 1 or not spec.get("donor_plains"):
+        return rng.choice(plains)
+    donors = set(spec["donor_plains"])
+    weights = [DONOR_PLAIN_BOOST if p in donors else 1.0 for p in plains]
+    total = sum(weights)
+    x = rng.random() * total
+    acc = 0.0
+    for p, w in zip(plains, weights):
+        acc += w
+        if x <= acc:
+            return p
+    return plains[-1]
 
 
 def _pick_neg(spec: dict, phase: int, rng: random.Random) -> str:
@@ -171,12 +198,18 @@ def eval_items(spec: dict) -> list:
     rng = random.Random(spec["seed"] + 777)
     heldout = spec["heldout_stems"]
     novel = spec["novel_neg_forms"]
-    plains = plain_forms(spec, 2)
+    # The affirmative (pos) continuation draws its plain affix from the SAME donor
+    # pool the novel NEG allomorphs are built from, so a pos body and a neg body end
+    # in the same token TYPE (a donor plain). Otherwise a pos body ending in a
+    # non-donor plain is trivially non-NEG and the last-token lookup separates the
+    # classes for free (H_004 guard G-A). With matched final tokens the only signal
+    # left is whole-token atomicity (or an order-2 bigram).
+    donor_plains = spec.get("donor_plains") or plain_forms(spec, 2)
 
     items = []
     for si, stem in enumerate(heldout):
         for ai, af in enumerate(novel):
-            plain = plains[(si * len(novel) + ai) % len(plains)]
+            plain = donor_plains[(si * len(novel) + ai) % len(donor_plains)]
             items.append({
                 "stem": stem,
                 "stem_id": si,

@@ -93,7 +93,31 @@ def build_spec() -> dict:
     # table by construction, which is what makes the frozen arm a local C1 on
     # exactly the material the eval looks at (`rig-drift-wasting-asset`).
     carried = sorted(rng.sample(affixes_p1, N_CARRIED), key=lambda a: (a["cls"], a["form"]))
-    novel_neg = _make_affixes(rng, N_NOVEL_NEG, "NEG", 1, taken, syllables=(2, 2))
+
+    # Novel NEG allomorphs as DONOR PAIRS (H_004 reframing fix): each novel form is
+    # the concatenation of two DISTINCT 1-syllable carried PLAIN affixes. Two
+    # consequences make the frozen arm a valid no-atomicity control:
+    #   (1) the frozen (phase-1) codec can NEVER fuse the whole pair — the two
+    #       affixes never occur adjacent in phase 1 (one affix per body), so no
+    #       (a_i, a_j) merge exists → atomicity deficit 1.0 is GUARANTEED, not
+    #       sampled; the >=2-syllable length hack is no longer needed.
+    #   (2) every sub-token is a real PLAIN affix that also appears in plain
+    #       bodies, so the class is NOT readable from any single fragment — the
+    #       order-1 (last-token) shortcut that invalidated the disjoint-inventory
+    #       design is broken. Only the WHOLE (atomic) token, or an order-2 bigram,
+    #       carries NEG. See `verification-h004` / `rig-pilot-frozen-control-invalid`.
+    plain_1syl = sorted(a["form"] for a in plain_p1 if len(a["form"]) == 1)
+    if len(plain_1syl) < 2 * N_NOVEL_NEG:
+        raise ValueError(
+            f"need {2 * N_NOVEL_NEG} one-syllable plain donors, have {len(plain_1syl)}")
+    donors = rng.sample(plain_1syl, 2 * N_NOVEL_NEG)
+    novel_neg = []
+    donor_set = set()
+    for i in range(N_NOVEL_NEG):
+        a, b = donors[2 * i], donors[2 * i + 1]
+        novel_neg.append({"form": a + b, "cls": "NEG", "slot": 1})
+        donor_set.update((a, b))
+    novel_neg = sorted(novel_neg, key=lambda a: a["form"])
     affixes_p2 = sorted(carried + novel_neg, key=lambda a: (a["cls"], a["form"]))
 
     # Zipf collocation weights over stems; phase 2 reassigns P2_SHIFT of the mass.
@@ -118,6 +142,7 @@ def build_spec() -> dict:
         "affixes_p1": affixes_p1,
         "affixes_p2": affixes_p2,
         "novel_neg_forms": sorted(a["form"] for a in novel_neg),
+        "donor_plains": sorted(donor_set),   # the 24 plain affixes used to build novel NEG pairs
         "neg_p1_forms": sorted(a["form"] for a in neg_p1),
         "colloc": {"zipf_s": ZIPF_S, "p2_shift": P2_SHIFT, "w1": w1, "w2": w2},
         "phase_bytes": PHASE_BYTES,

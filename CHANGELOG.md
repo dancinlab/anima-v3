@@ -2,6 +2,43 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_004 STRUCTURAL TERMINAL: atomicity is not isolable from n-gram binding ($0, no GPU)
+
+- The F1 reframing analysis (Fable) + a $0 guard battery drove H_004 to a **structural terminal**:
+  **TWIN-REFUSED**, reached without firing the torch/MPS run. This is research-before-real-measurement
+  and break-walls working as intended — a GPU pilot pre-empted by deterministic analysis.
+- HONESTY CORRECTION first: my earlier proxy claim "27/27 fragments neg-exclusive" was OVERSTATED
+  (I checked plain affixes, not plain bodies). Fable's adversarial re-check + my re-verify: 25/27
+  fragments are SHARED; the leak was POSITIONAL (a last-token Bayes lookup scores 0.9993), not
+  type-exclusivity. Corrected in the SSOT (`h004-defect-exclusive`).
+- REFRAMED F1's lever (`h004-reframe-*`): not "atomic token" nor "class-exclusive fragment" but the
+  ORDER of the statistic needed to read the class. Raw utf-8 (~18-byte binding = high order) fails;
+  a frozen codec concentrates class into order-1 (final token); an atomic codec is order-1 by
+  construction. Atomicity is a special case of low-order class exposure.
+- RELABELED MORPH-ATOM in the SSOT (`l4-morph-atom-relabel`): M=0.908 vs C1=0.617 STANDS as a
+  measurement, but it established "class concentrated into a low-order feature is causal", NOT
+  "single-token atomicity is the lever" — no arm ever contrasted atomic vs fragmented-but-low-order.
+  Demoted `slot-not-address` (`l4-slot-transfer`): under a last-token lookup the decision never
+  consults the stem, so C2's stem-deletion invariance is predicted by the shortcut.
+- REPAIRED the generator (donor-pair novel allomorphs = two 1-syllable carried plains concatenated;
+  frequency balancing; matched pos/neg final-token distributions). Frozen can never fuse the pair
+  (never adjacent in phase 1) → atomicity deficit 1.0 GUARANTEED. genspec `2016a4ee`→`fbcf0c8`→`75b19bba`.
+- The repair worked at order-1 (G-A 0.527, G-B 0.551) but the guard battery found the terminal:
+  **G-C order-2 bigram lookup = 0.9954**. THEOREM (verified 12/12): **oracle-fusable ⟺
+  n-gram-recoverable** — for the oracle to atomize an allomorph it must be a frequent FIXED sequence,
+  whose terminal n-gram the frozen codec then recovers. Atomicity is NOT separable from n-gram binding
+  for a fixed morpheme (a fact about BPE, not a rig defect). A transformer binds order-2 trivially, so
+  Δ_pilot ≥ 0.20 is structurally impossible.
+- CAMPAIGN RESULT (`cr-atomicity-not-isolable` in convergence): a static codec's order-≤2 fragment
+  statistics already deliver the write-lever's RECEPTIVE value; a refit organ buys nothing measurable
+  here. A synthetic drill can never prove "atomicity helps" against an n-gram-binding transformer. The
+  honest F1 question moves to GENERATION / long-range credit / continual-interference, or F1 yields
+  first place — per `rig-sequence-h004-kills`, a campaign re-decision, not a silent switch.
+- Artifacts: `run_guards.py` + `guards_result.json` (the $0 verdict), `run_proxy.py` +
+  `proxy_result.json` (the pre-check), `nlm.py` (validated numpy LM), `materialize.py`,
+  `DESIGN_reframe.md` (verbatim Fable). H_004 card verdict = STRUCTURAL TERMINAL; registry = 🔴.
+
+
 ## 2026-07-16 — H_004 pre-registered; a $0 numpy pre-check BLOCKED the GPU run and reframed F1
 
 - PRE-REGISTERED + FROZEN `H_004 f1-static-anchor-pilot` (Fable design): the campaign's first

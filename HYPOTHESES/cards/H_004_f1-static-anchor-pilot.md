@@ -230,12 +230,42 @@ fragments, so it wins.
   single-token **atomicity**. If a frozen BPE already achieves non-sharing, a refit organ may
   buy little — which sharpens, and may pre-empt, Δ_pilot's whole question.
 
-### Status
+### Resolution: STRUCTURAL TERMINAL — TWIN-REFUSED at $0 (no torch run needed)
 
-Card stays pre-register-frozen. The **torch/MPS run is blocked** pending the rig fix + the
-F1 reframing verdict. The design (arms, model, eval, falsifiers) is preserved above and is
-correct FOR THE REDESIGNED RIG once the frozen control is made valid; only the generator's
-allomorph construction needs to change, so this card is repaired-in-place when that lands
-(the update-in-place discipline, as H_003 was).
+The rig defect was repaired (donor-pair allomorphs + frequency balancing, genspec
+`75b19bba…`) and the repair WORKED at order-1 — but revealed a deeper terminal. The `$0`
+guard battery (`run_guards.py`):
 
-_No torch run yet — blocked on the rig defect the $0 pre-check surfaced._
+| guard | value | reading |
+|---|---|---|
+| G-A last-token (order-1) lookup | **0.527** | PASS (≤0.55) — order-1 shortcut closed |
+| G-B length-only lookup | 0.551 | marginal |
+| **G-C order-2 bigram lookup** | **0.9954** | the frozen ceiling — TRIVIAL bigram path |
+| G-D atomicity contrast | frozen 0/12, oracle 12/12 | PASS |
+| G-E leak / co-occurrence | 0 / 0 | PASS |
+
+**The theorem (verified 12/12): oracle-fusable ⟺ n-gram-recoverable.** For the ORACLE to
+atomize an allomorph it must be a frequent FIXED jamo sequence — but then its terminal
+n-gram under the FROZEN codec recovers it. Atomicity is not separable from n-gram binding
+for a fixed morpheme; this is a fact about BPE, not a rig defect (Fable's Q2 predicted it).
+
+A transformer binds order-2 with one attention head, so frozen F2 ≈ 0.995 regardless of
+training → **Δ_pilot ≥ 0.20 is structurally impossible → TWIN-REFUSED.** Three converging
+lenses: Fable's Q5 prediction, the deterministic G-C guard, and the earlier proxy
+(frozen 0.971 ≥ oracle 0.923).
+
+**Campaign result** (`verification-h004-campaign-result`, `cr-atomicity-not-isolable`): a
+static codec's order-≤2 fragment statistics already deliver the write-lever's RECEPTIVE
+value; a refit organ buys nothing measurable here. What the record ever isolated was NOT
+atomicity — MORPH-ATOM's raw-utf8 control failed only because its ~18-byte binding span
+exceeded the small model's n-gram reach. Per `rig-sequence-h004-kills` this forces a
+campaign re-decision: F1's honest question moves to GENERATION / long-range credit /
+continual-training interference (none of which a receptive flip-classification pilot can
+see), or F1 yields first place — NOT a silent switch.
+
+**No torch/MPS run was fired** — the $0 structural analysis is decisive, which is exactly
+what research-before-real-measurement is for. The pilot spend was pre-empted by a guard
+battery, not incurred and wasted.
+
+_Terminal reached at $0. The verdict is TWIN-REFUSED-STRUCTURAL; the campaign re-decision is
+the live frontier._
