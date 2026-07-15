@@ -1,0 +1,85 @@
+{
+ "metrics": {
+  "genspec_sha256": "2016a4ee9df24820a46ff897b86d7508876f36daf8f1ecf38f4133ffdaed32ea",
+  "genspec_matches_card": true,
+  "band_counts": [
+   46,
+   74
+  ],
+  "B1_M_above": true,
+  "B2_C3_live": true,
+  "B3_C1_no_leak": true,
+  "B4_cement_agrees": true,
+  "boundary_shift_rate": 0.07632688492063493,
+  "drift_floor": 0.05,
+  "deficit_frozen": 0.33333333333333337,
+  "deficit_refit": 0.41666666666666663,
+  "frozen_single_token": 8,
+  "refit_single_token": 7,
+  "eval_candidate_pairs": 1536,
+  "leak_hits": 0,
+  "heldout_neg_cooccurrence": 2363,
+  "leak_scan_lines_per_phase": 200000,
+  "n_clean_items": 1536,
+  "n_required_worst": 1178,
+  "spec_hash_stable": true,
+  "bpe_deterministic": true,
+  "roundtrip_ok": true,
+  "rig": "REFUSED"
+ },
+ "falsifiers": [
+  {
+   "name": "B-1 treatment above floor",
+   "triggered": false,
+   "status": "PASS"
+  },
+  {
+   "name": "B-2 liveness",
+   "triggered": false,
+   "status": "PASS"
+  },
+  {
+   "name": "B-3 leak test",
+   "triggered": false,
+   "status": "PASS"
+  },
+  {
+   "name": "B-4 replication",
+   "triggered": false,
+   "status": "PASS"
+  },
+  {
+   "name": "N-1 drift existence",
+   "triggered": false,
+   "status": "PASS"
+  },
+  {
+   "name": "N-2 contrast existence",
+   "triggered": true,
+   "status": "FAIL"
+  },
+  {
+   "name": "N-3 emittability",
+   "triggered": false,
+   "status": "PASS"
+  },
+  {
+   "name": "N-4 zero leak",
+   "triggered": true,
+   "status": "FAIL"
+  },
+  {
+   "name": "N-5 determinism+roundtrip",
+   "triggered": false,
+   "status": "PASS"
+  },
+  {
+   "name": "genspec matches card",
+   "triggered": false,
+   "status": "PASS"
+  }
+ ],
+ "n_pass": 8,
+ "n_total": 10,
+ "rig": "REFUSED"
+}

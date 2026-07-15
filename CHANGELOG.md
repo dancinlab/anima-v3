@@ -2,6 +2,40 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_003 RUN → 🔴 REFUSED (8/10): anchor GREEN, generator hits a real wall
+
+- Built the synthetic drill generator (`src/generator/`, deterministic · stdlib · $0): jamo composition
+  (`lang.py`, Hangul's algorithmic syllable block supplies the composition rule, vocabulary invented),
+  a frozen `GenSpec` (`spec.py`, sha256 `2016a4ee…` pinned into the H_003 card — 512 stems, 128 held-out,
+  64 phase-1 affixes / 4 NEG, phase-2 = 52 carried + 12 novel NEG allomorphs), phase streams + probes +
+  eval items (`stream.py`), BPE-on-jamo codec + boundary/atomicity estimators (`codec.py`), leak audit
+  (`audit.py`).
+- PRE-REGISTERED + FROZEN `H_003 f1-anchor-recheck` (9 falsifiers B-1..B-4 anchor + N-1..N-5 generator),
+  then RAN it. Verdict **rig = REFUSED (8/10)** — H_004 pilot BLOCKED. The two halves separated cleanly.
+- **ANCHOR HALF ALL GREEN.** Correctly specified — test the treatment and liveness arms, keep
+  control-at-chance as a SEPARATE leak test — MORPH-ATOM stands exactly as `salvage.l4(b)` claims:
+  B-1 M=109/120 outside the band (p=1.9e-21) · B-2 C3=110/120 liveness · B-3 C1=74/120 inside band (no
+  leak) · B-4 CEMENT replicate agrees. H_001's REFUSED-on-G-4 is now fully explained: the reading was
+  backwards and the anchor was never in doubt. It is a two-seed result.
+- **N-2 contrast is a genuine DESIGN WALL.** No K in {256,512,1024,2048} makes the frozen codec blind to
+  the novel allomorphs AND the refit codec atomic on them — the refit deficit never reaches 0 (best 5/12
+  at K=256). Cause: the affixes are 1-2 random jamo syllables, too rare in-stream for BPE to fuse into
+  single tokens, so atomicity is not induced by the data in EITHER arm. The generator does not yet
+  instantiate the mechanism it is meant to test. Recorded as `rig-atomicity-not-induced` with three forks.
+- **N-4 co-occurrence = 2363 is an AUDIT false-positive, not a corpus leak** (`leak_hits = 0`). It is
+  `parse()` finding an ambiguous (held-out stem + NEG) decomposition of a word the stream emitted as
+  (non-held-out stem + PLAIN). Verified: `line()` emits 0 held-out+NEG words in 40k lines. The audit was
+  moved from raw-substring → whole-word → parse-based over the session (each weaker form gave false
+  positives); the residual is that an agglutinative language admits ambiguous parses, so the detector must
+  score against the EMITTED parse, not any admissible one. An audit repair, not a leak.
+- Deliberate deviation from the design spec, logged in `src/generator/CLAUDE.md`: boundaries are indexed
+  in JAMO positions, not bytes — each conjoining jamo is exactly 3 UTF-8 bytes, so a byte-indexed matrix
+  has 2/3 of its columns structurally zero and would deflate the boundary-shift rate ~3x. Jamo is the
+  codec's base alphabet, so the index is still codec-independent (the actual requirement).
+- Net: the anchor is settled (no future card re-litigates l4(b)); the pilot is blocked on a spec-design
+  problem (make BPE-on-jamo actually induce atomicity). Handed to the successor spec design.
+
+
 ## 2026-07-16 — repair pass: three false premises corrected, a blind instrument fixed, a new salvage law
 
 - **Corrected a FALSE PREMISE that the F1 selection rested on.** `rig-model` and H_001 both claimed 10M is

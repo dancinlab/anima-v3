@@ -1059,6 +1059,34 @@
        "role": "H_002' — 12 runs (frozen/adaptive/scramble x3 seeds + 2 frozen + 1 shared-ID liveness), delta_min = delta_pilot/2, N from the re-derived table, F-1 restated as 'refit recovers < half of oracle headroom -> dead', compound seed rule, INVALID != FAIL wired via C3'."
       }
      ]
+    },
+    {
+     "id": "rig-atomicity-not-induced",
+     "role": "OPEN WALL (H_003 N-2): BPE-on-jamo does NOT induce morpheme atomicity from the current synthetic stream at any K tried — the refit codec atomizes at most 5/12 novel allomorphs. The whole F1 twin presumes atomicity is inducible; if it is not, F1 has no substrate at drill scale.",
+     "children": [
+      {
+       "id": "rig-atomicity-cause",
+       "role": "Cause: affixes are 1-2 random jamo syllables, too rare in-stream for BPE to fuse into single tokens. 'Atomicity' must be induced by the DATA, and this data does not induce it."
+      },
+      {
+       "id": "rig-atomicity-forks",
+       "role": "Forks to break it, handed to the successor spec design.",
+       "children": [
+        {
+         "id": "rig-atomicity-fork-a",
+         "role": "(a) A frequency-shaped affix inventory so NEG allomorphs recur enough for BPE to fuse them into single tokens."
+        },
+        {
+         "id": "rig-atomicity-fork-b",
+         "role": "(b) A different atomicity-induction than BPE-frequency."
+        },
+        {
+         "id": "rig-atomicity-fork-c",
+         "role": "(c) Accept that jamo-BPE cannot induce atomicity synthetically = a partial answer about F1 itself."
+        }
+       ]
+      }
+     ]
     }
    ]
   },
@@ -1284,6 +1312,38 @@
       }
      ],
      "type": "gate"
+    },
+    {
+     "id": "verification-h003",
+     "role": "H_003 f1-anchor-recheck — RUN 2026-07-16 · verdict rig = REFUSED (8/10). The two halves separated: anchor GREEN, generator fails on two.",
+     "children": [
+      {
+       "id": "verification-h003-anchor-green",
+       "role": "ANCHOR HALF ALL GREEN. Correctly specified (B-1 treatment M=109/120 outside band · B-2 liveness C3=110/120 · B-3 leak C1=74/120 inside band · B-4 CEMENT replicate agrees), l4(b) stands exactly as claimed. H_001's G-4 was the only thing ever wrong with it; the anchor is now a two-seed result."
+      },
+      {
+       "id": "verification-h003-n2-wall",
+       "role": "N-2 CONTRAST is a genuine design WALL: no K in {256,512,1024,2048} produces the required contrast.",
+       "children": [
+        {
+         "id": "h003-n2-detail",
+         "role": "The frozen codec must be blind to the novel allomorphs (deficit 1.0) AND the refit codec atomic on them (deficit 0.0). The refit deficit never reaches 0 — best 5/12 atomized at K=256."
+        },
+        {
+         "id": "h003-n2-cause",
+         "role": "The affixes are 1-2 random jamo syllables that do not recur often enough for BPE to fuse them, so atomicity is not induced by the data in EITHER arm — the generator does not yet instantiate the mechanism it tests (SPEC problem, not code)."
+        }
+       ]
+      },
+      {
+       "id": "verification-h003-n4-artifact",
+       "role": "N-4 co-occurrence = 2363 is an AUDIT false-positive, not a corpus leak (leak_hits=0). parse() found an ambiguous held-out+NEG decomposition of a word emitted as non-heldout+PLAIN. Verified: line() emits 0 heldout+NEG words in 40k lines. Fix = score against the EMITTED parse, not any admissible one."
+      },
+      {
+       "id": "verification-h003-licenses",
+       "role": "LICENSES: the anchor is settled — no future card re-litigates l4(b). BLOCKS: the H_004 pilot cannot fire until the generator instantiates the atomicity contrast (N-2) — a spec-design problem."
+      }
+     ]
     }
    ]
   }
