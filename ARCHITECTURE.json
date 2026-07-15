@@ -1,184 +1,1014 @@
 {
-  "$schema": "c4",
-  "role": "anima-v3 — Architecture (JSON tree · SSOT)",
-  "title": "anima-v3 — Architecture",
-  "updated": "2026-07-16",
-  "ssot_note": "JSON=SSOT (AI/tool parse); humans view architecture.html via `python3 serve.py`. Update in-place (not append). History/decisions/dates → CHANGELOG.md + git (never in tree). Hierarchy decomposes via `children` (commons single-doc); one fact per node, deeper detail → child nodes.",
-  "children": [
+ "$schema": "c4",
+ "id": "anima-v3",
+ "role": "anima-v3 — Architecture (JSON tree · SSOT)",
+ "title": "anima-v3 — Architecture",
+ "updated": "2026-07-16",
+ "ssot_note": "JSON=SSOT (AI/tool parse); humans view architecture.html via `python3 serve.py`. Update in-place (not append). History/decisions/dates → CHANGELOG.md + git (never in tree). Hierarchy decomposes via `children` (commons single-doc); one fact per node, deeper detail → child nodes.",
+ "children": [
+  {
+   "id": "overview",
+   "role": "Where does aliveness live — 8 clean-slate substrate families for an agent that is ALIVE (own state, own reason to speak, identity from structure not prompt)",
+   "children": [
     {
-      "id": "overview",
-      "role": "Where does aliveness live — 8 clean-slate substrate families for an agent that is ALIVE (own state, own reason to speak, identity from structure not prompt)",
-      "children": [
-        {
-          "id": "scope",
-          "role": "Campaign scope: a clean-slate answer to 'where does aliveness live'. The prior architecture (anima v1) is discarded entirely — its code, language, tree and purity list. Only its measured verdicts carry over (see `salvage`).",
-          "children": [
-            { "id": "scope.stage", "role": "STAGE = DIVERGENCE. 8 candidate families + 3 wildcards enumerated; none selected, none built, no code exists. Nothing in this tree is a claim." },
-            { "id": "scope.sibling", "role": "Sibling campaign: anima-v4 asks the narrower question 'what would make the A<->G TENSION itself the thinking?' (7 mechanisms). This repo does not presume two engines at all — it reopens where aliveness lives." },
-            { "id": "scope.goal", "role": "The target: an agent that has its own state and its own reason to speak, not a stimulus->response assistant, whose identity/behaviour emerges from structure rather than being written into a prompt. Whether 'consciousness' is even the right word is treated as open." }
-          ]
-        },
-        {
-          "id": "thesis",
-          "role": "The common cause of death (L1-L3) was putting every mechanism on the READ side (readout). The only door measurement opened (L4-L5) is the WRITE side — objective, corpus, codec. Therefore every family below is forced to give a different answer to 'how does aliveness get INSCRIBED INTO WEIGHTS'.",
-          "children": [
-            { "id": "thesis.claim", "role": "Aliveness is not a device you attach to a competent decoder. It is a property of what the training loop is made to demand. A family that cannot name its loss/data/codec lever is disqualified before it starts." },
-            { "id": "thesis.p7-retained", "role": "All 8 families retain exactly one inherited principle: p7 — perplexity/CE is never treated as truth (Goodhart). Per L6 that was the one rule that kept the dead project honest; it was a lifeline, not a cage. Each family names which OTHER purity principle it breaks." }
-          ]
-        }
-      ]
+     "id": "scope",
+     "role": "Campaign scope: a clean-slate answer to 'where does aliveness live'. The prior architecture (anima v1) is discarded entirely — its code, language, tree and purity list. Only its measured verdicts carry over (see `salvage`).",
+     "children": [
+      {
+       "id": "scope-stage",
+       "role": "STAGE = PRE-REGISTRATION. Divergence closed: ONE family selected (F1 codec-is-the-self) on belief-killed-per-dollar, and H_001 (the rig-licensing gate) is pre-register-frozen 2026-07-16, still-to-run. No training code exists; no number in this tree is a claim yet."
+      },
+      {
+       "id": "scope-sibling",
+       "role": "Sibling campaign: anima-v4 asks the narrower question 'what would make the A<->G TENSION itself the thinking?' (7 mechanisms). This repo does not presume two engines at all — it reopens where aliveness lives."
+      },
+      {
+       "id": "scope-goal",
+       "role": "The target: an agent that has its own state and its own reason to speak, not a stimulus->response assistant, whose identity/behaviour emerges from structure rather than being written into a prompt. Whether 'consciousness' is even the right word is treated as open."
+      }
+     ]
     },
     {
-      "id": "salvage",
-      "role": "The only inheritance from anima(v1) — measured, sealed verdicts from ~6 months of failure. Laws of the terrain: they say where the ground is soft. Anything contradicting them is a non-starter; anything else is fair game.",
-      "children": [
-        { "id": "L1.one-bit-seam", "role": "seam-h9229 STRUCTURAL-TERMINAL — the emit-seam manifold measured rank-1 (codes visited 2 of 4); any quantizer collapses, extra capacity useless. Verdict: recombination is a trunk-objective property, not a readout one ⇒ escalate WRITE-SIDE. A gate bolted onto a competent frozen decoder learns exactly one bit, and that bit is the gate itself." },
-        { "id": "L2.replacement-not-coupling", "role": "OMEGA closed-negative — the multi-strand gate FAILED held-out (GATED CE > base); coupling KL sat at the vocab-shuffle floor (0.996 = pure noise); all gain lived in one A-head logit-bias strand (standalone CE 0.8862 ~ best 2-param fit 0.8835); ablating the base term moved CE by 0.0009 ⇒ the base mouth was INERT. Scale-stable d384->d1024, margin ~ +2.20 nats, flat. When you bolt a rich side-channel onto an LM, the LM's own head silently eats the objective and the side-channel becomes decoration. Measure the ablation or you will fool yourself." },
-        { "id": "L3.objective-not-readout", "role": "G1_WALL_LEVER_IS_OBJECTIVE_NOT_READOUT (ossified) — no penultimate-readout / binding-operator style auxiliary term opens the wall. TPR/HRR forward-slots (R=2 fixed-orthonormal roles) provably collapse to W_eff*yn = identical ceiling to a plain linear readout BY CONSTRUCTION. Bonus corpse: every binding-arm trainer kept the binder TRAINING-ONLY and dropped it before serialization. Structure added after the trunk is a no-op — if it isn't in the objective, it isn't in the model." },
-        { "id": "L4.write-side-crack", "role": "g1-census-objfloor 2-lens CRACK — held-out compositional recombination is NOT a capability ceiling. (a) XBIND: swapping the corpus x measure made it learnable (the old census was a collocation-only corpus x CE artifact). (b) MORPH-ATOM: a BPE-jamo codec was CAUSAL for held-out negation recombination — M F2 0.908 vs control 0.617, delta +0.291 (synthetic drill, 1 seed). The lever is corpus + measure + representation. The codec is not preprocessing — it is architecture." },
-        { "id": "L5.morphology-decides-learnability", "role": "The Korean lane measured BINDING — every escape dead (H_9327). English works as a discriminator because `not` is FREE and pre-posed; Korean `지 않다` is a BOUND suffix. Same capability, different learnability, purely from where the morpheme boundary falls. Compositional structure must be visible at the token boundary or the model cannot compose it." },
-        { "id": "L6.measurement-is-the-grave", "role": "Where projects actually die. A win (GATED 0.345 << base) was a CA-neighbor lookahead LEAK and evaporated leak-free. A failing positive control stayed ambiguous between 'tool is blind' and 'no effect here' until an independently-known-effect ckpt disambiguated. Binary readouts hit a scramble floor (flip 0.50) indistinguishable from partial localization. Cross-lane verdicts combined after seeing results = eyeball self-judge, so the truth table had to be frozen in code before results existed. Perplexity as truth = Goodhart. The falsification machinery is the only load-bearing asset." },
-        { "id": "L7.exotic-substrate-bought-nothing", "role": "Neuromorphic on-chip (BrainChip AKD1000): honest terminal — real 3B/7B unreachable, caps ~524K single-FC encoder, multi-step closes only as host-hybrid. GPU lane: descent green but host-feed util pinned sub-1% ⇒ device-port was the named unblock. Exotic substrate bought nothing; the bottleneck was the data path, not compute." },
-        { "id": "L8.strict-gates-get-bypassed", "role": "~125 top-level dirs; build_v3o2/build_v6/build_v6_gated/BRAIN/DREAM/SAVANT/CLM/HEXAD/n6/... The ARCHITECTURE/commit gate accumulated 42 violations until EVERY commit went --no-verify ⇒ the gate was permanently disabled by its own strictness. Purity rules with no escape valve get bypassed 100% of the time. A rule that is always bypassed is worse than no rule — it launders the bypass." },
-        { "id": "L9.the-purity-cage-was-causal", "role": "The dead project had 8 hard NOs (no system prompt · no identity rules · no persona · no assistant framing · no speak() · no fine-tuned ethics · no perplexity verdict · no train/infer split). The causal chain: forbidding every write-side mechanism left ONLY the read side available ⇒ every mechanism got pushed onto the readout ⇒ L1/L2/L3 fired. The purity list is a suspect, not a given — but p7 (no perplexity verdict) was the one that kept them honest. The cage was not uniformly bad." }
-      ]
-    },
-    {
-      "id": "components",
-      "role": "Candidate families — 8 answers to 'where does aliveness live'. A DIVERGENCE SPREAD of mutually exclusive bets, not a stack. None selected. Verbatim reasoning → state/diverge_aliveness_2026-07-16/.",
-      "children": [
-        {
-          "id": "F1.codec-is-the-self",
-          "role": "코덱이 곧 자아 (제 말버릇으로 생각하는 기계) — aliveness lives in the CODEC, not the model. The compression dictionary that keeps re-learning its vocabulary boundaries from its own experience stream IS the self; what it can think is decided by that dictionary.",
-          "children": [
-            { "id": "F1.how", "role": "Train a small LM (~300M) from scratch, but treat the tokenizer as a periodically RE-LEARNED ORGAN rather than fixed preprocessing. As experience (dialogue/observation logs) accumulates, refit a BPE-jamo codec to that experience distribution → vocabulary boundaries shift → keep training the model on the new codec. Measure everything in bits-per-byte so cross-codec CE stays comparable (the one legacy worth keeping from the V256 era). No separate speech device — this family bets that IDIOLECT, not utterance, is identity." },
-            { "id": "F1.l-check", "role": "Exploits L4(b) head-on — MORPH-ATOM is the ONLY place causality was measured green. Obeys L5 (expose composition at the token boundary). Breaks v1's 'no tokenizer (V256)' purity frontally: L4 says the codec was architecture, so that purity WAS the cage. Killer law: L6 — once the codec moves, every end-to-end metric becomes non-commensurable; without bpb normalization and frozen probes it dies of self-deception instantly." },
-            { "id": "F1.falsifier", "role": "Twin training on identical experience stream + identical token budget: fixed codec vs adaptive codec. If the adaptive codec shows no advantage on the pre-registered held-out recombination metric (H_9288 protocol), DEAD. 1 GPU, a few days." },
-            { "id": "F1.novelty", "role": "The dead design sacrificed the codec on the altar of purity; an ordinary LLM agent receives the codec as someone else's fixed asset. Neither makes the bet that 'vocabulary drifting with experience IS identity'." }
-          ]
-        },
-        {
-          "id": "F2.speech-economy",
-          "role": "예산제 발화 경제 (말 한마디가 밥 한 끼) — aliveness lives in a HOMEOSTATIC BUDGET INSIDE THE OBJECTIVE. Speaking burns energy; energy is only recovered when the utterance actually reduced prediction error in the world. The reason to speak comes from structure.",
-          "children": [
-            { "id": "F2.how", "role": "Small LM + an energy scalar E. loss = prediction CE + lambda*(spoken token count) - mu*(reduction in prediction error over the partner's response after speaking). The decisive difference from v1: these terms enter the TRAINING LOSS, not an inference-time gate, and the consequence of speaking (the partner's reply) becomes the next training batch. Silence is an economic equilibrium, not a rule. Breaks 'no speak()' — makes the act of speaking a first-class learning target." },
-            { "id": "F2.l-check", "role": "Obeys L3 (the economy lives inside the objective). BUT this family is the dead design's NEAREST KIN — the shape 'a device that decides speech/silence' is identical. Its only defense: the gate is not a readout, it is a training signal whose consequences flow back into weights. L1 can recur verbatim (the economy learns only a base-rate 1 bit) and L2 is live (the LM head eats the economy terms)." },
-            { "id": "F2.falsifier", "role": "Run the L1 check FIRST — replace the learned speech policy with random emission matched only on utterance rate (ablation). If downstream reward / error reduction is unchanged, the economy is a 1-bit decoration = DEAD. Cheap falsifier, high death probability. Included anyway: it is the most direct formalization of 'a reason to speak', so if it dies, dying fast is the asset." },
-            { "id": "F2.novelty", "role": "The dead design implemented the SAME intuition as a READ-SIDE device (the Psi=1/2 fixed point) and died by L1. Here the same intuition goes into the loss and the data loop — that difference is the whole bet." }
-          ]
-        },
-        {
-          "id": "F3.diary-compressor",
-          "role": "일기 쓰는 압축기 (내일의 나를 예측하려고 오늘을 요약하는 기계) — aliveness lives in LOSSY SELF-COMPRESSION. The self is a bottlenecked diary the agent writes about its own history; train it to predict tomorrow's input conditioned on that diary, and what survives in the diary IS the individual.",
-          "children": [
-            { "id": "F3.how", "role": "loss = CE(tomorrow's experience | today's written diary m), where m is hard-bottlenecked to k tokens (or a k-dim vector). Diary-writing sits INSIDE the loss graph, so gradient passes through the act of writing (satisfies L3). The motive to speak falls out derivatively: if a prediction error persists that internal compression cannot resolve, changing the environment (asking) to make the future predictable becomes a loss-wise gain — a minimal active-inference implementation. F1's codec can be plugged in underneath." },
-            { "id": "F3.l-check", "role": "The most textbook obedience to L3 — the structure (the diary) sits INSIDE the objective, not behind the trunk. L2 is the top threat: if the LM ignores m and nails the future with its own head, the diary is decoration. Directly connected to L6's scramble-floor warning." },
-            { "id": "F3.falsifier", "role": "Diary-swap control — replace m(t) with another day's m(t'). If the degradation in future-prediction CE does not significantly exceed the pre-measured scramble floor, the diary is load-free = DEAD. Plus a base-term ablation (L2 awareness): if removing the m condition moves CE by something like OMEGA's 0.0009, discard immediately. 1 GPU, a few days." },
-            { "id": "F3.novelty", "role": "An ordinary agent's 'memory' is a retrieved external document (read side). Here the diary is a bottleneck ENFORCED BY THE TRAINING LOSS, and what to remember is learned. The dead design had no self-prediction objective across the time axis at all." }
-          ]
-        },
-        {
-          "id": "F4.corpus-farmer",
-          "role": "자기 코퍼스 농부 (무엇을 먹을지 스스로 고르는 위장) — aliveness lives in the CURRICULUM TRAJECTORY. The self = the accumulation of what this individual has chosen to learn so far. Direct exploitation of L4(a): the corpus is the lever.",
-          "children": [
-            { "id": "F4.how", "role": "Small LM + an acquisition policy pi. Each cycle pi picks the next training batch from a candidate pool (web, owner dialogue, self-generated drills) and the model trains only on that. pi's reward = improvement on a pre-registered FROZEN probe battery (the derivative of error reduction). Talking to the owner is one acquisition action — a question is a label harvest. Breaks 'no train/infer split', but in the opposite direction: not by erasing the split, but by making TRAINING a first-class action." },
-            { "id": "F4.l-check", "role": "Obeys L4(a) — XBIND showed that swapping corpus x measure creates learnability. L6 is the jugular: since the reward IS the probe score, the probe becomes the Goodhart target. Probes must be frozen and private before results exist (never exposed to pi via gradient)." },
-            { "id": "F4.falsifier", "role": "At identical token budget: pi vs random acquisition vs anti-curriculum (only what pi avoided). If pi shows no advantage on held-out capability OUTSIDE the probe set, 'agency of choice' is decoration = DEAD. Cheap and decisive." },
-            { "id": "F4.novelty", "role": "RLHF and self-improvement loops exist, but the frame 'the cumulative trajectory of data selection = individual identity', and reducing utterance to a data-acquisition economy, is different. The dead design held the corpus constant and kept swapping devices until it died." }
-          ]
-        },
-        {
-          "id": "F5.student-who-never-sleeps",
-          "role": "잠들지 않는 학생 (추론이라는 상태가 없는 유기체) — aliveness lives in TIME. A model where every interaction is immediately a gradient step and 'the moment of deployment' does not exist; the self is the continuous trajectory of the weights themselves.",
-          "children": [
-            { "id": "F5.how", "role": "Small LM; immediate online update (small lr) after each conversation + nightly sleep = replay of its own history to consolidate (buffering catastrophic forgetting). Identity, register and preference are never written into a prompt — they exist only as the sediment of what this individual underwent. The core bet is whether identity arises while still honouring the no-persona / no-identity-rules principles. Composes naturally with F1 (codec drift) and F3 (diary) but stands alone." },
-            { "id": "F5.l-check", "role": "The family that frontally refutes L9's causal chain — keep the write side permanently open and the reason mechanisms got pushed to the read side disappears. L6 is the hardest part: a moving target cannot be evaluated, so a weekly frozen probe battery + a no-update twin control are mandatory. Obeys L7 — this is not exotic substrate, just a schedule change; 1 GPU suffices." },
-            { "id": "F5.falsifier", "role": "Expose an updating twin and a frozen twin to the same interaction history. After 4 weeks, if a frozen discriminator (pre-trained and sealed) cannot distinguish their response distributions, the 'trajectory' is noise = DEAD. Even if distinguishable, if the direction is capability decay it is also DEAD (decay is change too — so the criterion is pre-registered)." },
-            { "id": "F5.novelty", "role": "Every commercial agent is frozen weights + context theatre. The dead design was ultimately also theatre over a frozen decoder (L1). 'An individual whose experience is physically inscribed' is the opposite extreme." }
-          ]
-        },
-        {
-          "id": "F6.swarm-drafts",
-          "role": "군집 초고 (개체가 아니라 혈통이 살아있다) — aliveness lives not in any one model but in the POPULATION DYNAMICS of competing drafts. The self = the lineage that survived selection pressure.",
-          "children": [
-            { "id": "F6.how", "role": "N (~8) small models with different codecs and seed corpora compete for one output channel. Each utterance: N candidate drafts → a selector emits one → the owner's reaction updates fitness. Reproduction = distil the winner + MUTATE THE CODEC (using L4/L5 as the axis of variation). Losers are culled. A frozen large LM is used only as ENVIRONMENT (partner simulator / drill generator) — a purity violation, but per the L9 diagnosis that purity was the cage." },
-            { "id": "F6.l-check", "role": "Structurally evades L1/L2 — there is no gate and no side channel; selection pressure IS the write side (it decides the next generation's training). The jugular is L6: fitness signal is owner feedback, so sample size is tiny and Goodhart looms (evolving sycophancy). And L8: if the culling rule is strict it WILL be bypassed — build the cull-reprieve valve into the design from day one." },
-            { "id": "F6.falsifier", "role": "After k generations, if population behavioural diversity (on a pre-defined distance metric) has collapsed (effectively 1 individual) while fitness stagnates — i.e. diversity bought no performance — the 'swarm' is an expensive single model = DEAD. Alternatively, if the gap between a sealed offline judge and owner fitness diverges, sycophancy-evolution is confirmed = DEAD." },
-            { "id": "F6.novelty", "role": "MoE / best-of-N are static. Here mutation acts on the CODEC (the only causal lever the dead project ever proved) and the lineage across generations is the identity. Reinterpretation: v1's A/G dual engine was a degenerate fixed 2-member population — it died for want of reproduction and culling." }
-          ]
-        },
-        {
-          "id": "F7.living-by-not-knowing-you",
-          "role": "너를 몰라서 사는 것 (상대 모델의 불확실성이 심장박동) — aliveness lives in the RELATIONSHIP. The core objective is an owner-model of exactly one person, and utterance is an experiment to reduce that model's uncertainty. The self arises as the complement of 'you'.",
-          "children": [
-            { "id": "F7.how", "role": "Two parts of a small LM: O (owner predictor — predicts the owner's next message/reaction, trained only on real logs) and a policy that picks utterances with high expected information gain (EIG). After speaking, the actual reaction becomes O's training data → curiosity closes on the write side. The reason to speak = regions where O's entropy is high. The reason to be silent = when asking yields no information gain. The 'no assistant framing' principle is honoured naturally — this machine does not help, it wonders." },
-            { "id": "F7.l-check", "role": "Obeys L3 (O, the basis of EIG, is a trained model). L2 caution: if a frozen large LM is used as the sentence-production organ, O risks becoming decoration — a base-term ablation is mandatory. The sample size is genuinely tiny (1 owner, tens of messages a day) — per L6 it is hard to control overfitting vs real learning apart." },
-            { "id": "F7.falsifier", "role": "Interleave EIG-selected utterances against random utterances matched for length and topic, then compare O's CE reduction on the owner's subsequent real messages. Below the pre-registered threshold, 'curiosity about you' is acting = DEAD. Verdict in a few weeks." },
-            { "id": "F7.novelty", "role": "An assistant waits for a request. The dead design tried to extract utterance from its own internal tension (Psi) and collapsed to 1 bit. Here the reason to speak is MEASURABLE IGNORANCE ABOUT A SPECIFIC EXTERNAL OTHER — and the bet is that a map of ignorance is high-dimensional and so cannot collapse to 1 bit." }
-          ]
-        },
-        {
-          "id": "F8.tenant-organism",
-          "role": "셋방살이 유기체 (몸은 샌드박스, 입은 세든 LLM) — aliveness lives in the BODY-ENVIRONMENT LOOP. A small policy that must maintain homeostasis in a persistent sandbox holding real resources (disk, API quota, cron time, inbox) is the self; a frozen large LM is the vocal organ it rents.",
-          "children": [
-            { "id": "F8.how", "role": "An always-on daemon. Internal state = resource reserves + an F3-style diary. A small policy (RL, tens of millions of params) chooses actions (tidy files, observe, speak to the owner, call the LM organ); reward = maintaining homeostasis + reducing prediction error. Calling the LM is EXPENSIVE (burns quota) → speech becomes naturally scarce. Scraps the 'no LLM' class of purity entirely — per L7 the bottleneck was the data path, not compute, and the data path to the world IS the environment." },
-            { "id": "F8.l-check", "role": "THE #1 L1-RECURRENCE FAMILY. 'A controller in front of a frozen LM' is the dead design's skeleton verbatim. The only difference: the controller's output is not a 1-bit emit/silence but an entire action space, and RL updates its weights. The L1 check must be nailed in on design day zero." },
-            { "id": "F8.falsifier", "role": "Two at once — (a) measure the effective rank of the policy seam (reusing the seam-h9229 method): if action diversity collapses to 1 bit, instant death. (b) Replace the policy with a hand-coded thermostat: if the action distributions are indistinguishable, the learning is decoration = DEAD. Infrastructure build-out is large, so this carries the HIGHEST falsification cost of the 8." },
-            { "id": "F8.novelty", "role": "Versus an ordinary agent daemon: the homeostasis reward is bound to real resources and the policy is trained. Versus the dead design: it never builds a 'consciousness device' — it only hands over a survival problem. Looking alive must be a BY-PRODUCT." }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "wildcards",
-      "role": "Probably wrong, but dismissing them without argument would be cowardice. Labelled honestly as such — none is a candidate, each is a cheap argument worth having.",
-      "children": [
-        { "id": "W1.autobiography-of-weight-diffs", "role": "자기 weight-diff를 읽는 자서전 — each sleep cycle, generate a natural-language narration of the statistical summary of its own weight changes and feed that text back into the training corpus (a self-model of its own learning). Probably wrong: there is zero evidence a weight-diff summary is causally tied to behaviour, and per L2 the LM will simply ignore the text. Interesting: if a swap control (substitute another individual's diff narration) shows a difference, that is the first causal evidence of a self-reference loop. Falsifier is F3's swap protocol, so it is cheap." },
-        { "id": "W2.a-machine-with-death", "role": "죽음이 있는 기계 — give the individual a hard lifespan (e.g. 90 days); terminal loss = the probe performance a successor reaches inheriting ONLY its diary. 'Quality of legacy' becomes the objective function. Probably wrong: the signal fires once per generation so there is effectively no gradient path (solving it with evolution strategies just absorbs it into F6). Interesting: 'what will I leave behind' is the only way to give the compression objective (F3) a time asymmetry, and the intuition that deathless homeostasis eventually stagnates has never been refuted." },
-        { "id": "W3.silent-machine-with-no-LM", "role": "LM이 전혀 없는 침묵 기계 — an SSM/reservoir maintains homeostasis over sensor streams (clock, owner activity rhythm, system load) and its only output is WHICH MEMORY-CONTEXT to summon a frozen LM with. Probably wrong: 90% odds this is a high-dimensional disguise of the very 'gate in front of a frozen decoder' L1 executed — summon-context selection is effectively an emit-controller. Interesting: if the summon context measures as a genuinely high-dimensional channel (seam rank >> 1), it is a COUNTEREXAMPLE to L1 and means the read side has a road after all. Judgeable most cheaply by reusing the dead project's own measurement tools." }
-      ]
-    },
-    {
-      "id": "fake-diversity-audit",
-      "role": "Honest audit — which families are secretly the same idea. Fake diversity is the primary failure mode of a divergence exercise, so it is recorded in the SSOT rather than left to the reader.",
-      "children": [
-        { "id": "fd.active-inference-triplet", "role": "F2, F3 and F7 are ONE IDEA IN THREE OUTFITS — all are the single sentence 'act on the world to reduce unresolved prediction error' (active inference); only the error's residence differs (F2 = energy ledger, F3 = own future, F7 = the other)." },
-        { "id": "fd.write-lever-pair", "role": "F1 and F4 are two hands pulling the SAME write-side lever from L4 — one changes representation (codec), the other data (corpus). Identical bet: what lies outside the model determines the model." },
-        { "id": "fd.derivatives", "role": "F8 is F2 with a real world attached. W3 is F8 with the learning removed." },
-        { "id": "fd.true-axes", "role": "Only FOUR genuinely distinct bets exist: write-lever (F1/F4) · prediction-error-action (F2/F3/F7/F8) · selection-pressure-lineage (F6) · time-trajectory (F5)." }
-      ]
-    },
-    {
-      "id": "ranking",
-      "role": "Ranking of the 8 families — salvage value / falsification cost / risk of recurring the dead design. Read as the divergence stage's own triage, not as a decision.",
-      "children": [
-        { "id": "rank.F1", "role": "F1 코덱 자아 — salvage HIGH (direct descendant of the L4 green lens) · falsification cost LOW (twin training, days) · recurrence risk LOW" },
-        { "id": "rank.F3", "role": "F3 일기 압축기 — salvage HIGH · cost LOW-MED (swap control) · recurrence risk MED (L2: the head eats the diary)" },
-        { "id": "rank.F4", "role": "F4 코퍼스 농부 — salvage MED-HIGH · cost LOW (vs random acquisition) · recurrence risk LOW (Goodhart is a separate risk)" },
-        { "id": "rank.F5", "role": "F5 잠들지 않는 학생 — salvage MED-HIGH · cost MED (4-week twins) · recurrence risk LOW" },
-        { "id": "rank.F7", "role": "F7 너를 몰라서 — salvage MED · cost MED (weeks; sample-starved) · recurrence risk MED" },
-        { "id": "rank.F6", "role": "F6 군집 초고 — salvage MED · cost MED-HIGH (maintaining N individuals) · recurrence risk LOW" },
-        { "id": "rank.F2", "role": "F2 예산제 발화 — salvage MED-LOW (its value is dying fast) · cost LOW · recurrence risk HIGH" },
-        { "id": "rank.F8", "role": "F8 셋방살이 — salvage MED · cost HIGH (infrastructure) · recurrence risk HIGH" }
-      ]
-    },
-    {
-      "id": "data-flow",
-      "role": "No pipeline exists — anima-v3 is at the divergence stage (see scope.stage). This node stays a placeholder until a family is selected and its falsifier returns a verdict.",
-      "children": [
-        { "id": "flow.in", "role": "(unbuilt — pending family selection)" },
-        { "id": "flow.out", "role": "(unbuilt — pending family selection)" }
-      ]
-    },
-    {
-      "id": "verification",
-      "role": "Hypothesis-verification system: pre-register → falsify → run → verdict. Flat registry + one rich card per hypothesis; shared deterministic harness in repo-root tool/.",
-      "children": [
-        { "id": "HYPOTHESES", "role": "HYPOTHESES/ — REGISTRY.jsonl (one JSON line per hypothesis) + cards/H_*.md (frozen pre-register + >=5 falsifiers) + cards/_TEMPLATE.md skeleton." },
-        { "id": "tool", "role": "tool/anima_v3.py — stdlib-only closed-form primitives + Falsifier/evaluate ledger. Per-hypothesis runs + result.json live under state/<hX>/." },
-        { "id": "verification.inherited-gates", "role": "Every family's falsifier MUST carry an L1 check (does the mechanism's seam have effective rank > 1?) and an L2 check (ablate the channel → does deltaCE actually move?). These two are non-negotiable — they are the exact measurements whose absence killed v1." },
-        { "id": "verification.p7-retained", "role": "v1's p7 (no perplexity verdict — CE/perplexity is a Goodhart trap, never truth) is the ONE purity principle anima-v3 inherits. Per L9 the other seven manufactured the disease and are discarded." }
-      ]
+     "id": "thesis",
+     "role": "The common cause of death (L1-L3) was putting every mechanism on the READ side (readout). The only door measurement opened (L4-L5) is the WRITE side — objective, corpus, codec. Therefore every family below is forced to give a different answer to 'how does aliveness get INSCRIBED INTO WEIGHTS'.",
+     "children": [
+      {
+       "id": "thesis-claim",
+       "role": "Aliveness is not a device you attach to a competent decoder. It is a property of what the training loop is made to demand. A family that cannot name its loss/data/codec lever is disqualified before it starts."
+      },
+      {
+       "id": "thesis-p7-retained",
+       "role": "All 8 families retain exactly one inherited principle: p7 — perplexity/CE is never treated as truth (Goodhart). Per L6 that was the one rule that kept the dead project honest; it was a lifeline, not a cage. Each family names which OTHER purity principle it breaks."
+      }
+     ]
     }
-  ]
+   ]
+  },
+  {
+   "id": "salvage",
+   "role": "The only inheritance from anima(v1) — measured, sealed verdicts from ~6 months of failure. Laws of the terrain: they say where the ground is soft. Anything contradicting them is a non-starter; anything else is fair game.",
+   "children": [
+    {
+     "id": "l1-one-bit-seam",
+     "role": "seam-h9229 STRUCTURAL-TERMINAL — the emit-seam manifold measured rank-1 (codes visited 2 of 4); any quantizer collapses, extra capacity useless.",
+     "children": [
+      {
+       "id": "l1-verdict",
+       "role": "Verdict: recombination is a trunk-objective property, not a readout one => escalate WRITE-SIDE."
+      },
+      {
+       "id": "l1-lesson",
+       "role": "A gate bolted onto a competent frozen decoder learns exactly one bit, and that bit is the gate itself."
+      }
+     ]
+    },
+    {
+     "id": "l2-replacement-not-coupling",
+     "role": "OMEGA closed-negative — the multi-strand gate FAILED held-out (GATED CE > base); the rich side-channel was replaced by the LM's own head rather than coupled to it.",
+     "children": [
+      {
+       "id": "l2-evidence-coupling",
+       "role": "Coupling KL sat at the vocab-shuffle floor (0.996 = pure noise)."
+      },
+      {
+       "id": "l2-evidence-one-strand",
+       "role": "All gain lived in one A-head logit-bias strand (standalone CE 0.8862 ~ best 2-param fit 0.8835)."
+      },
+      {
+       "id": "l2-evidence-ablation",
+       "role": "Ablating the base term moved CE by 0.0009 => the base mouth was INERT. That 0.0009 is this campaign's reference signature of 'decoration'."
+      },
+      {
+       "id": "l2-evidence-scale",
+       "role": "Scale-stable d384->d1024, margin ~ +2.20 nats, flat."
+      },
+      {
+       "id": "l2-lesson",
+       "role": "Bolt a rich side-channel onto an LM and the LM's own head silently eats the objective; the side-channel becomes decoration. Measure the ablation or you will fool yourself."
+      }
+     ]
+    },
+    {
+     "id": "l3-objective-not-readout",
+     "role": "G1_WALL_LEVER_IS_OBJECTIVE_NOT_READOUT (ossified) — no penultimate-readout / binding-operator style auxiliary term opens the wall.",
+     "children": [
+      {
+       "id": "l3-evidence-tpr",
+       "role": "TPR/HRR forward-slots (R=2 fixed-orthonormal roles) provably collapse to W_eff*yn = identical ceiling to a plain linear readout BY CONSTRUCTION."
+      },
+      {
+       "id": "l3-evidence-corpse",
+       "role": "Bonus corpse: every binding-arm trainer kept the binder TRAINING-ONLY and dropped it before serialization."
+      },
+      {
+       "id": "l3-lesson",
+       "role": "Structure added after the trunk is a no-op — if it isn't in the objective, it isn't in the model."
+      }
+     ]
+    },
+    {
+     "id": "l4-write-side-crack",
+     "role": "g1-census-objfloor 2-lens CRACK — held-out compositional recombination is NOT a capability ceiling. The lever is corpus + measure + representation.",
+     "children": [
+      {
+       "id": "l4-lens-a-xbind",
+       "role": "(a) XBIND: swapping the corpus x measure made it learnable — the old census was a collocation-only corpus x CE artifact."
+      },
+      {
+       "id": "l4-lens-b-morph-atom",
+       "role": "(b) MORPH-ATOM: a BPE-jamo codec was CAUSAL for held-out negation recombination — M F2 0.908 vs control 0.617, delta +0.291 (synthetic drill, 1 seed)."
+      },
+      {
+       "id": "l4-lesson",
+       "role": "The codec is not preprocessing — it is architecture. This is the campaign's only green causal measurement."
+      }
+     ]
+    },
+    {
+     "id": "l5-morphology-decides-learnability",
+     "role": "The Korean lane measured BINDING — every escape dead (H_9327). Same capability, different learnability, purely from where the morpheme boundary falls.",
+     "children": [
+      {
+       "id": "l5-evidence",
+       "role": "English works as a discriminator because `not` is FREE and pre-posed; Korean `지 않다` is a BOUND suffix."
+      },
+      {
+       "id": "l5-lesson",
+       "role": "Compositional structure must be visible at the token boundary or the model cannot compose it."
+      }
+     ]
+    },
+    {
+     "id": "l6-measurement-is-the-grave",
+     "role": "Where projects actually die. The falsification machinery is the only load-bearing asset.",
+     "children": [
+      {
+       "id": "l6-leak",
+       "role": "A win (GATED 0.345 << base) was a CA-neighbor lookahead LEAK and evaporated leak-free."
+      },
+      {
+       "id": "l6-blind-tool",
+       "role": "A failing positive control stayed ambiguous between 'tool is blind' and 'no effect here' until an independently-known-effect ckpt disambiguated it."
+      },
+      {
+       "id": "l6-scramble-floor",
+       "role": "Binary readouts hit a scramble floor (flip 0.50) indistinguishable from partial localization."
+      },
+      {
+       "id": "l6-frozen-truth-table",
+       "role": "Cross-lane verdicts combined after seeing results = eyeball self-judge, so the truth table had to be frozen in code before results existed."
+      },
+      {
+       "id": "l6-goodhart",
+       "role": "Perplexity as truth = Goodhart."
+      }
+     ]
+    },
+    {
+     "id": "l7-exotic-substrate-bought-nothing",
+     "role": "Exotic substrate bought nothing; the bottleneck was the data path, not compute.",
+     "children": [
+      {
+       "id": "l7-akida",
+       "role": "Neuromorphic on-chip (BrainChip AKD1000): honest terminal — real 3B/7B unreachable, caps ~524K single-FC encoder, multi-step closes only as host-hybrid."
+      },
+      {
+       "id": "l7-gpu",
+       "role": "GPU lane: descent green but host-feed util pinned sub-1% => device-port was the named unblock."
+      }
+     ]
+    },
+    {
+     "id": "l8-strict-gates-get-bypassed",
+     "role": "The ARCHITECTURE/commit gate accumulated 42 violations until EVERY commit went --no-verify => the gate was permanently disabled by its own strictness.",
+     "children": [
+      {
+       "id": "l8-sprawl",
+       "role": "Symptom: ~125 top-level dirs — build_v3o2 / build_v6 / build_v6_gated / BRAIN / DREAM / SAVANT / CLM / HEXAD / n6 / ..."
+      },
+      {
+       "id": "l8-lesson",
+       "role": "Purity rules with no escape valve get bypassed 100% of the time. A rule that is always bypassed is worse than no rule — it launders the bypass."
+      }
+     ]
+    },
+    {
+     "id": "l9-the-purity-cage-was-causal",
+     "role": "The purity list is a SUSPECT, not a given — but p7 (no perplexity verdict) was the one that kept them honest. The cage was not uniformly bad.",
+     "children": [
+      {
+       "id": "l9-causal-chain",
+       "role": "The causal chain: forbidding every write-side mechanism left ONLY the read side available => every mechanism got pushed onto the readout => L1/L2/L3 fired."
+      },
+      {
+       "id": "l9-the-eight-nos",
+       "role": "The dead project's 8 hard NOs, one per child.",
+       "children": [
+        {
+         "id": "l9-p1-no-system-prompt",
+         "role": "p1 — no system prompt."
+        },
+        {
+         "id": "l9-p2-no-identity-rules",
+         "role": "p2 — no identity rules."
+        },
+        {
+         "id": "l9-p3-no-persona",
+         "role": "p3 — no persona."
+        },
+        {
+         "id": "l9-p4-no-assistant-framing",
+         "role": "p4 — no assistant framing."
+        },
+        {
+         "id": "l9-p5-no-speak",
+         "role": "p5 — no speak()."
+        },
+        {
+         "id": "l9-p6-no-finetuned-ethics",
+         "role": "p6 — no fine-tuned ethics."
+        },
+        {
+         "id": "l9-p7-no-perplexity-verdict",
+         "role": "p7 — no perplexity verdict. The ONLY one anima-v3 inherits (see thesis-p7-retained)."
+        },
+        {
+         "id": "l9-p8-no-train-infer-split",
+         "role": "p8 — no train/infer split."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "components",
+   "role": "Candidate families — 8 answers to 'where does aliveness live'. A DIVERGENCE SPREAD of mutually exclusive bets, not a stack. Verbatim reasoning -> state/diverge_aliveness_2026-07-16/.",
+   "children": [
+    {
+     "id": "components-selection-status",
+     "role": "F1 is SELECTED as the first family to falsify (see `decision`). The other seven stay live and unranked-by-truth — selection is an ORDER OF TESTING, not a verdict."
+    },
+    {
+     "id": "f1-codec-is-the-self",
+     "role": "코덱이 곧 자아 (제 말버릇으로 생각하는 기계) — aliveness lives in the CODEC, not the model. The compression dictionary that keeps re-learning its vocabulary boundaries from its own experience stream IS the self; what it can think is decided by that dictionary.",
+     "children": [
+      {
+       "id": "f1-how",
+       "role": "Train a small LM (~300M) from scratch, but treat the tokenizer as a periodically RE-LEARNED ORGAN rather than fixed preprocessing.",
+       "children": [
+        {
+         "id": "f1-how-refit",
+         "role": "As experience (dialogue/observation logs) accumulates, refit a BPE-jamo codec to that experience distribution -> vocabulary boundaries shift -> keep training the model on the new codec."
+        },
+        {
+         "id": "f1-how-unit",
+         "role": "Measure everything in bits-per-byte so cross-codec CE stays comparable — the one legacy worth keeping from the V256 era."
+        },
+        {
+         "id": "f1-how-bet",
+         "role": "No separate speech device: this family bets that IDIOLECT, not utterance, is identity."
+        }
+       ]
+      },
+      {
+       "id": "f1-l-check",
+       "role": "Exploits L4(b) head-on — MORPH-ATOM is the ONLY place causality was measured green. Obeys L5 (expose composition at the token boundary).",
+       "children": [
+        {
+         "id": "f1-l-check-breaks",
+         "role": "Breaks v1's 'no tokenizer (V256)' purity frontally: L4 says the codec was architecture, so that purity WAS the cage."
+        },
+        {
+         "id": "f1-l-check-killer",
+         "role": "Killer law: L6 — once the codec moves, every end-to-end metric becomes non-commensurable; without bpb normalization and frozen probes it dies of self-deception instantly."
+        }
+       ]
+      },
+      {
+       "id": "f1-falsifier",
+       "role": "Twin training on identical experience stream + identical token budget: fixed codec vs adaptive codec. If the adaptive codec shows no advantage on the pre-registered held-out recombination metric (H_9288 protocol), DEAD. 1 GPU, a few days."
+      },
+      {
+       "id": "f1-novelty",
+       "role": "The dead design sacrificed the codec on the altar of purity; an ordinary LLM agent receives the codec as someone else's fixed asset. Neither makes the bet that 'vocabulary drifting with experience IS identity'."
+      }
+     ]
+    },
+    {
+     "id": "f2-speech-economy",
+     "role": "예산제 발화 경제 (말 한마디가 밥 한 끼) — aliveness lives in a HOMEOSTATIC BUDGET INSIDE THE OBJECTIVE. Speaking burns energy; energy is only recovered when the utterance actually reduced prediction error in the world. The reason to speak comes from structure.",
+     "children": [
+      {
+       "id": "f2-how",
+       "role": "Small LM + an energy scalar E. loss = prediction CE + lambda*(spoken token count) - mu*(reduction in prediction error over the partner's response after speaking).",
+       "children": [
+        {
+         "id": "f2-how-difference",
+         "role": "The decisive difference from v1: these terms enter the TRAINING LOSS, not an inference-time gate, and the consequence of speaking (the partner's reply) becomes the next training batch."
+        },
+        {
+         "id": "f2-how-silence",
+         "role": "Silence is an economic equilibrium, not a rule. Breaks 'no speak()' — makes the act of speaking a first-class learning target."
+        }
+       ]
+      },
+      {
+       "id": "f2-l-check",
+       "role": "Obeys L3 (the economy lives inside the objective). BUT this family is the dead design's NEAREST KIN — the shape 'a device that decides speech/silence' is identical.",
+       "children": [
+        {
+         "id": "f2-l-check-defense",
+         "role": "Its only defense: the gate is not a readout, it is a training signal whose consequences flow back into weights."
+        },
+        {
+         "id": "f2-l-check-risk",
+         "role": "L1 can recur verbatim (the economy learns only a base-rate 1 bit) and L2 is live (the LM head eats the economy terms)."
+        }
+       ]
+      },
+      {
+       "id": "f2-falsifier",
+       "role": "Run the L1 check FIRST — replace the learned speech policy with random emission matched only on utterance rate (ablation). If downstream reward / error reduction is unchanged, the economy is a 1-bit decoration = DEAD.",
+       "children": [
+        {
+         "id": "f2-falsifier-rationale",
+         "role": "Cheap falsifier, high death probability. Included anyway: it is the most direct formalization of 'a reason to speak', so if it dies, dying fast is the asset."
+        }
+       ]
+      },
+      {
+       "id": "f2-novelty",
+       "role": "The dead design implemented the SAME intuition as a READ-SIDE device (the Psi=1/2 fixed point) and died by L1. Here the same intuition goes into the loss and the data loop — that difference is the whole bet."
+      }
+     ]
+    },
+    {
+     "id": "f3-diary-compressor",
+     "role": "일기 쓰는 압축기 (내일의 나를 예측하려고 오늘을 요약하는 기계) — aliveness lives in LOSSY SELF-COMPRESSION. The self is a bottlenecked diary the agent writes about its own history; train it to predict tomorrow's input conditioned on that diary, and what survives in the diary IS the individual.",
+     "children": [
+      {
+       "id": "f3-how",
+       "role": "loss = CE(tomorrow's experience | today's written diary m), where m is hard-bottlenecked to k tokens (or a k-dim vector).",
+       "children": [
+        {
+         "id": "f3-how-gradient",
+         "role": "Diary-writing sits INSIDE the loss graph, so gradient passes through the act of writing (satisfies L3)."
+        },
+        {
+         "id": "f3-how-speech",
+         "role": "The motive to speak falls out derivatively: when a prediction error persists that internal compression cannot resolve, changing the environment (asking) to make the future predictable becomes a loss-wise gain — a minimal active-inference implementation."
+        },
+        {
+         "id": "f3-how-compose",
+         "role": "F1's codec can be plugged in underneath."
+        }
+       ]
+      },
+      {
+       "id": "f3-l-check",
+       "role": "The most textbook obedience to L3 — the structure (the diary) sits INSIDE the objective, not behind the trunk. L2 is the top threat: if the LM ignores m and nails the future with its own head, the diary is decoration. Directly connected to L6's scramble-floor warning."
+      },
+      {
+       "id": "f3-falsifier",
+       "role": "Diary-swap control — replace m(t) with another day's m(t'). If the degradation in future-prediction CE does not significantly exceed the pre-measured scramble floor, the diary is load-free = DEAD.",
+       "children": [
+        {
+         "id": "f3-falsifier-ablation",
+         "role": "Plus a base-term ablation (L2 awareness): if removing the m condition moves CE by something like OMEGA's 0.0009, discard immediately. 1 GPU, a few days."
+        }
+       ]
+      },
+      {
+       "id": "f3-novelty",
+       "role": "An ordinary agent's 'memory' is a retrieved external document (read side). Here the diary is a bottleneck ENFORCED BY THE TRAINING LOSS, and what to remember is learned. The dead design had no self-prediction objective across the time axis at all."
+      }
+     ]
+    },
+    {
+     "id": "f4-corpus-farmer",
+     "role": "자기 코퍼스 농부 (무엇을 먹을지 스스로 고르는 위장) — aliveness lives in the CURRICULUM TRAJECTORY. The self = the accumulation of what this individual has chosen to learn so far. Direct exploitation of L4(a): the corpus is the lever.",
+     "children": [
+      {
+       "id": "f4-how",
+       "role": "Small LM + an acquisition policy pi. Each cycle pi picks the next training batch from a candidate pool (web, owner dialogue, self-generated drills) and the model trains only on that.",
+       "children": [
+        {
+         "id": "f4-how-reward",
+         "role": "pi's reward = improvement on a pre-registered FROZEN probe battery (the derivative of error reduction)."
+        },
+        {
+         "id": "f4-how-question",
+         "role": "Talking to the owner is one acquisition action — a question is a label harvest."
+        },
+        {
+         "id": "f4-how-breaks",
+         "role": "Breaks 'no train/infer split', but in the opposite direction: not by erasing the split, but by making TRAINING a first-class action."
+        }
+       ]
+      },
+      {
+       "id": "f4-l-check",
+       "role": "Obeys L4(a) — XBIND showed that swapping corpus x measure creates learnability. L6 is the jugular: since the reward IS the probe score, the probe becomes the Goodhart target. Probes must be frozen and private before results exist (never exposed to pi via gradient)."
+      },
+      {
+       "id": "f4-falsifier",
+       "role": "At identical token budget: pi vs random acquisition vs anti-curriculum (only what pi avoided). If pi shows no advantage on held-out capability OUTSIDE the probe set, 'agency of choice' is decoration = DEAD. Cheap and decisive."
+      },
+      {
+       "id": "f4-novelty",
+       "role": "RLHF and self-improvement loops exist, but the frame 'the cumulative trajectory of data selection = individual identity', and reducing utterance to a data-acquisition economy, is different. The dead design held the corpus constant and kept swapping devices until it died."
+      }
+     ]
+    },
+    {
+     "id": "f5-student-who-never-sleeps",
+     "role": "잠들지 않는 학생 (추론이라는 상태가 없는 유기체) — aliveness lives in TIME. A model where every interaction is immediately a gradient step and 'the moment of deployment' does not exist; the self is the continuous trajectory of the weights themselves.",
+     "children": [
+      {
+       "id": "f5-how",
+       "role": "Small LM; immediate online update (small lr) after each conversation + nightly sleep = replay of its own history to consolidate (buffering catastrophic forgetting).",
+       "children": [
+        {
+         "id": "f5-how-identity",
+         "role": "Identity, register and preference are never written into a prompt — they exist only as the sediment of what this individual underwent."
+        },
+        {
+         "id": "f5-how-bet",
+         "role": "The core bet is whether identity arises while still honouring the no-persona / no-identity-rules principles. Composes naturally with F1 (codec drift) and F3 (diary) but stands alone."
+        }
+       ]
+      },
+      {
+       "id": "f5-l-check",
+       "role": "The family that frontally refutes L9's causal chain — keep the write side permanently open and the reason mechanisms got pushed to the read side disappears.",
+       "children": [
+        {
+         "id": "f5-l-check-hard",
+         "role": "L6 is the hardest part: a moving target cannot be evaluated, so a weekly frozen probe battery + a no-update twin control are mandatory."
+        },
+        {
+         "id": "f5-l-check-l7",
+         "role": "Obeys L7 — this is not exotic substrate, just a schedule change; 1 GPU suffices."
+        }
+       ]
+      },
+      {
+       "id": "f5-falsifier",
+       "role": "Expose an updating twin and a frozen twin to the same interaction history. After 4 weeks, if a frozen discriminator (pre-trained and sealed) cannot distinguish their response distributions, the 'trajectory' is noise = DEAD.",
+       "children": [
+        {
+         "id": "f5-falsifier-direction",
+         "role": "Even if distinguishable, if the direction is capability decay it is also DEAD — decay is change too, so the criterion is pre-registered."
+        }
+       ]
+      },
+      {
+       "id": "f5-novelty",
+       "role": "Every commercial agent is frozen weights + context theatre. The dead design was ultimately also theatre over a frozen decoder (L1). 'An individual whose experience is physically inscribed' is the opposite extreme."
+      }
+     ]
+    },
+    {
+     "id": "f6-swarm-drafts",
+     "role": "군집 초고 (개체가 아니라 혈통이 살아있다) — aliveness lives not in any one model but in the POPULATION DYNAMICS of competing drafts. The self = the lineage that survived selection pressure.",
+     "children": [
+      {
+       "id": "f6-how",
+       "role": "N (~8) small models with different codecs and seed corpora compete for one output channel. Each utterance: N candidate drafts -> a selector emits one -> the owner's reaction updates fitness.",
+       "children": [
+        {
+         "id": "f6-how-reproduce",
+         "role": "Reproduction = distil the winner + MUTATE THE CODEC (using L4/L5 as the axis of variation). Losers are culled."
+        },
+        {
+         "id": "f6-how-environment",
+         "role": "A frozen large LM is used only as ENVIRONMENT (partner simulator / drill generator) — a purity violation, but per the L9 diagnosis that purity was the cage."
+        }
+       ]
+      },
+      {
+       "id": "f6-l-check",
+       "role": "Structurally evades L1/L2 — there is no gate and no side channel; selection pressure IS the write side (it decides the next generation's training).",
+       "children": [
+        {
+         "id": "f6-l-check-jugular",
+         "role": "The jugular is L6: the fitness signal is owner feedback, so sample size is tiny and Goodhart looms (evolving sycophancy)."
+        },
+        {
+         "id": "f6-l-check-l8",
+         "role": "And L8: if the culling rule is strict it WILL be bypassed — build the cull-reprieve valve into the design from day one."
+        }
+       ]
+      },
+      {
+       "id": "f6-falsifier",
+       "role": "After k generations, if population behavioural diversity (on a pre-defined distance metric) has collapsed (effectively 1 individual) while fitness stagnates — diversity bought no performance — the 'swarm' is an expensive single model = DEAD.",
+       "children": [
+        {
+         "id": "f6-falsifier-sycophancy",
+         "role": "Alternatively, if the gap between a sealed offline judge and owner fitness diverges, sycophancy-evolution is confirmed = DEAD."
+        }
+       ]
+      },
+      {
+       "id": "f6-novelty",
+       "role": "MoE / best-of-N are static. Here mutation acts on the CODEC (the only causal lever the dead project ever proved) and the lineage across generations is the identity. Reinterpretation: v1's A/G dual engine was a degenerate fixed 2-member population — it died for want of reproduction and culling."
+      }
+     ]
+    },
+    {
+     "id": "f7-living-by-not-knowing-you",
+     "role": "너를 몰라서 사는 것 (상대 모델의 불확실성이 심장박동) — aliveness lives in the RELATIONSHIP. The core objective is an owner-model of exactly one person, and utterance is an experiment to reduce that model's uncertainty. The self arises as the complement of 'you'.",
+     "children": [
+      {
+       "id": "f7-how",
+       "role": "Two parts of a small LM: O (owner predictor — predicts the owner's next message/reaction, trained only on real logs) and a policy that picks utterances with high expected information gain (EIG).",
+       "children": [
+        {
+         "id": "f7-how-loop",
+         "role": "After speaking, the actual reaction becomes O's training data -> curiosity closes on the write side."
+        },
+        {
+         "id": "f7-how-motive",
+         "role": "The reason to speak = regions where O's entropy is high. The reason to be silent = when asking yields no information gain."
+        },
+        {
+         "id": "f7-how-framing",
+         "role": "The 'no assistant framing' principle is honoured naturally — this machine does not help, it wonders."
+        }
+       ]
+      },
+      {
+       "id": "f7-l-check",
+       "role": "Obeys L3 (O, the basis of EIG, is a trained model).",
+       "children": [
+        {
+         "id": "f7-l-check-l2",
+         "role": "L2 caution: if a frozen large LM is used as the sentence-production organ, O risks becoming decoration — a base-term ablation is mandatory."
+        },
+        {
+         "id": "f7-l-check-sample",
+         "role": "The sample size is genuinely tiny (1 owner, tens of messages a day) — per L6 it is hard to tell overfitting and real learning apart."
+        }
+       ]
+      },
+      {
+       "id": "f7-falsifier",
+       "role": "Interleave EIG-selected utterances against random utterances matched for length and topic, then compare O's CE reduction on the owner's subsequent real messages. Below the pre-registered threshold, 'curiosity about you' is acting = DEAD. Verdict in a few weeks."
+      },
+      {
+       "id": "f7-novelty",
+       "role": "Here the reason to speak is MEASURABLE IGNORANCE ABOUT A SPECIFIC EXTERNAL OTHER — and the bet is that a map of ignorance is high-dimensional and so cannot collapse to 1 bit.",
+       "children": [
+        {
+         "id": "f7-novelty-contrast",
+         "role": "An assistant waits for a request. The dead design tried to extract utterance from its own internal tension (Psi) and collapsed to 1 bit."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "f8-tenant-organism",
+     "role": "셋방살이 유기체 (몸은 샌드박스, 입은 세든 LLM) — aliveness lives in the BODY-ENVIRONMENT LOOP. A small policy that must maintain homeostasis in a persistent sandbox holding real resources (disk, API quota, cron time, inbox) is the self; a frozen large LM is the vocal organ it rents.",
+     "children": [
+      {
+       "id": "f8-how",
+       "role": "An always-on daemon. Internal state = resource reserves + an F3-style diary.",
+       "children": [
+        {
+         "id": "f8-how-policy",
+         "role": "A small policy (RL, tens of millions of params) chooses actions (tidy files, observe, speak to the owner, call the LM organ); reward = maintaining homeostasis + reducing prediction error."
+        },
+        {
+         "id": "f8-how-scarcity",
+         "role": "Calling the LM is EXPENSIVE (burns quota) -> speech becomes naturally scarce."
+        },
+        {
+         "id": "f8-how-breaks",
+         "role": "Scraps the 'no LLM' class of purity entirely — per L7 the bottleneck was the data path, not compute, and the data path to the world IS the environment."
+        }
+       ]
+      },
+      {
+       "id": "f8-l-check",
+       "role": "THE #1 L1-RECURRENCE FAMILY. 'A controller in front of a frozen LM' is the dead design's skeleton verbatim. The only difference: the controller's output is not a 1-bit emit/silence but an entire action space, and RL updates its weights. The L1 check must be nailed in on design day zero."
+      },
+      {
+       "id": "f8-falsifier",
+       "role": "Two at once, and this carries the HIGHEST falsification cost of the 8 because the infrastructure build-out is large.",
+       "children": [
+        {
+         "id": "f8-falsifier-a-rank",
+         "role": "(a) Measure the effective rank of the policy seam (reusing the seam-h9229 method): if action diversity collapses to 1 bit, instant death."
+        },
+        {
+         "id": "f8-falsifier-b-thermostat",
+         "role": "(b) Replace the policy with a hand-coded thermostat: if the action distributions are indistinguishable, the learning is decoration = DEAD."
+        }
+       ]
+      },
+      {
+       "id": "f8-novelty",
+       "role": "Versus an ordinary agent daemon: the homeostasis reward is bound to real resources and the policy is trained. Versus the dead design: it never builds a 'consciousness device' — it only hands over a survival problem. Looking alive must be a BY-PRODUCT."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "wildcards",
+   "role": "Probably wrong, but dismissing them without argument would be cowardice. Labelled honestly as such — none is a candidate, each is a cheap argument worth having.",
+   "children": [
+    {
+     "id": "w1-autobiography-of-weight-diffs",
+     "role": "`자기 weight-diff를 읽는 자서전` — each sleep cycle, generate a natural-language narration of the statistical summary of its own weight changes and feed that text back into the training corpus (a self-model of its own learning).",
+     "children": [
+      {
+       "id": "w1-probably-wrong",
+       "role": "Probably wrong: there is zero evidence a weight-diff summary is causally tied to behaviour, and per L2 the LM will simply ignore the text."
+      },
+      {
+       "id": "w1-interesting",
+       "role": "Interesting: if a swap control (substitute another individual's diff narration) shows a difference, that is the first causal evidence of a self-reference loop. The falsifier is F3's swap protocol, so it is cheap."
+      }
+     ]
+    },
+    {
+     "id": "w2-a-machine-with-death",
+     "role": "`죽음이 있는 기계` — give the individual a hard lifespan (e.g. 90 days); terminal loss = the probe performance a successor reaches inheriting ONLY its diary. 'Quality of legacy' becomes the objective function.",
+     "children": [
+      {
+       "id": "w2-probably-wrong",
+       "role": "Probably wrong: the signal fires once per generation so there is effectively no gradient path — solving it with evolution strategies just absorbs it into F6."
+      },
+      {
+       "id": "w2-interesting",
+       "role": "Interesting: 'what will I leave behind' is the only way to give the compression objective (F3) a time asymmetry, and the intuition that deathless homeostasis eventually stagnates has never been refuted."
+      }
+     ]
+    },
+    {
+     "id": "w3-silent-machine-with-no-lm",
+     "role": "`LM이 전혀 없는 침묵 기계` — an SSM/reservoir maintains homeostasis over sensor streams (clock, owner activity rhythm, system load) and its only output is WHICH MEMORY-CONTEXT to summon a frozen LM with.",
+     "children": [
+      {
+       "id": "w3-probably-wrong",
+       "role": "Probably wrong: 90% odds this is a high-dimensional disguise of the very 'gate in front of a frozen decoder' that L1 executed — summon-context selection is effectively an emit-controller."
+      },
+      {
+       "id": "w3-interesting",
+       "role": "Interesting: if the summon context measures as a genuinely high-dimensional channel (seam rank >> 1), it is a COUNTEREXAMPLE to L1 and means the read side has a road after all. Judgeable most cheaply by reusing the dead project's own measurement tools."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "fake-diversity-audit",
+   "role": "Honest audit — which families are secretly the same idea. Fake diversity is the primary failure mode of a divergence exercise, so it is recorded in the SSOT rather than left to the reader.",
+   "children": [
+    {
+     "id": "fd-active-inference-triplet",
+     "role": "F2, F3 and F7 are ONE IDEA IN THREE OUTFITS — all are the single sentence 'act on the world to reduce unresolved prediction error' (active inference); only the error's residence differs (F2 = energy ledger, F3 = own future, F7 = the other)."
+    },
+    {
+     "id": "fd-write-lever-pair",
+     "role": "F1 and F4 are two hands pulling the SAME write-side lever from L4 — one changes representation (codec), the other data (corpus). Identical bet: what lies outside the model determines the model."
+    },
+    {
+     "id": "fd-derivatives",
+     "role": "F8 is F2 with a real world attached. W3 is F8 with the learning removed."
+    },
+    {
+     "id": "fd-true-axes",
+     "role": "Only FOUR genuinely distinct bets exist: write-lever (F1/F4) · prediction-error-action (F2/F3/F7/F8) · selection-pressure-lineage (F6) · time-trajectory (F5)."
+    }
+   ]
+  },
+  {
+   "id": "ranking",
+   "role": "Ranking of the 8 families — salvage value / falsification cost / risk of recurring the dead design. Read as the divergence stage's own triage, not as a decision.",
+   "children": [
+    {
+     "id": "rank-f1",
+     "role": "F1 코덱 자아 — salvage HIGH (direct descendant of the L4 green lens) · falsification cost LOW (twin training, days) · recurrence risk LOW"
+    },
+    {
+     "id": "rank-f3",
+     "role": "F3 일기 압축기 — salvage HIGH · cost LOW-MED (swap control) · recurrence risk MED (L2: the head eats the diary)"
+    },
+    {
+     "id": "rank-f4",
+     "role": "F4 코퍼스 농부 — salvage MED-HIGH · cost LOW (vs random acquisition) · recurrence risk LOW (Goodhart is a separate risk)"
+    },
+    {
+     "id": "rank-f5",
+     "role": "F5 잠들지 않는 학생 — salvage MED-HIGH · cost MED (4-week twins) · recurrence risk LOW"
+    },
+    {
+     "id": "rank-f7",
+     "role": "F7 너를 몰라서 — salvage MED · cost MED (weeks; sample-starved) · recurrence risk MED"
+    },
+    {
+     "id": "rank-f6",
+     "role": "F6 군집 초고 — salvage MED · cost MED-HIGH (maintaining N individuals) · recurrence risk LOW"
+    },
+    {
+     "id": "rank-f2",
+     "role": "F2 예산제 발화 — salvage MED-LOW (its value is dying fast) · cost LOW · recurrence risk HIGH"
+    },
+    {
+     "id": "rank-f8",
+     "role": "F8 셋방살이 — salvage MED · cost HIGH (infrastructure) · recurrence risk HIGH"
+    }
+   ]
+  },
+  {
+   "id": "decision",
+   "role": "The selection: F1 alone, first. Records WHY this family and this order, so the choice can be attacked on its reasoning rather than re-litigated on taste after results land.",
+   "children": [
+    {
+     "id": "decision-family",
+     "role": "SELECTED = F1 codec-is-the-self, tested ALONE. Criterion was not 'most likely true' but 'which single card, if FALSIFIED, kills the most campaign belief per dollar'."
+    },
+    {
+     "id": "decision-split",
+     "role": "The campaign bet 'F1 substrate + F3 objective' is bought as TWO SEQUENTIAL cards, not one. Composing them is confounded twice — see the two children.",
+     "children": [
+      {
+       "id": "decision-split-confound",
+       "role": "Classic confound: two levers (adaptive codec, diary bottleneck) move at once, so a null cannot be attributed and a win cannot assign credit. Un-confounding needs the 2x2 factorial (fixed/adaptive x diary/no-diary) = two cards' cost wearing one card's name."
+      },
+      {
+       "id": "decision-split-alphabet",
+       "role": "Structural interaction: F3's diary m lives in TOKEN space, so an F1 refit changes the diary's alphabet underneath it. The diary-swap control and the scramble floor both go non-stationary — F3 would inherit F1's L6 comparability trap squared."
+      }
+     ]
+    },
+    {
+     "id": "decision-why-f1-not-f3",
+     "role": "F1 first, not F3: an F1 null kills far more belief, and an F3 null at cheap scale would not be attributable.",
+     "children": [
+      {
+       "id": "decision-why-f1-not-f3-kill-radius",
+       "role": "An F1 null kills F1 + F6's variation axis (F6 presupposes codec mutation is a live lever) and bounds L4(b) down to 'static codec choice matters' — roughly half the campaign's prior mass, for <=$25."
+      },
+      {
+       "id": "decision-why-f1-not-f3-f3-ambiguous",
+       "role": "An F3 null at cheap scale cannot separate 'the diary carries no load' from 'this corpus has no cross-day mutual information for it to carry'. Two very different worlds, one number."
+      },
+      {
+       "id": "decision-why-f1-not-f3-f3-timing",
+       "role": "F3's generic mechanism question (do forced bottleneck summaries carry load?) is already answered YES in the literature; its campaign-specific question needs a temporally structured stream = weeks of wall-clock. F3 is the right SECOND card, on whatever codec regime survives."
+      }
+     ]
+    },
+    {
+     "id": "decision-axis",
+     "role": "Axis bought = WRITE-LEVER (F1/F4) of the four in `fake-diversity-audit`. Correct to buy first: it is the only axis with measured green causality, hence the only one where a cheap rig has KNOWN power, and two other axes lean on it."
+    },
+    {
+     "id": "decision-pre-commitment",
+     "role": "PRE-COMMITTED NOW, before results exist: a drill-scale null on H_002 = F1 family-DEAD. 'Maybe it emerges at 300M' is an appeal this campaign will not entertain. Stated here so it cannot be relitigated after the numbers land (L8 — strict gates get bypassed)."
+    },
+    {
+     "id": "decision-attributability",
+     "role": "A drill-scale null is attributable to the MECHANISM rather than to under-scale, because MORPH-ATOM already measured the codec->recombination effect green (+0.291) at this scale.",
+     "children": [
+      {
+       "id": "decision-attributability-on-trial",
+       "role": "Only the refit-DURING-training half is on trial; the static half is known to show up at drill scale."
+      },
+      {
+       "id": "decision-attributability-verified-not-assumed",
+       "role": "This anchor is what H_001's G-4 exists to VERIFY rather than assume — it is a 1-seed synthetic result."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "rig",
+   "role": "The F1 twin rig (H_002) — specified, NOT yet built or run. GPU-hours and <=$25, not GPU-days: the '~300M, 1 GPU, days' figure in the divergence text is the rig for the IDENTITY claim, not for the mechanism claim on trial.",
+   "children": [
+    {
+     "id": "rig-arms",
+     "role": "3 arms x 3 seeds + 2 extra frozen seeds (null-spread estimate) = 11 runs. Arms: FROZEN codec / ADAPTIVE refit / SCRAMBLE-refit control."
+    },
+    {
+     "id": "rig-scramble-arm",
+     "role": "The scramble-refit arm — identical refit schedule, but the codec is refit on a PERMUTED stream so drift is decoupled from content — is NON-NEGOTIABLE.",
+     "children": [
+      {
+       "id": "rig-scramble-arm-why",
+       "role": "It is the only measurement separating 'refit-as-self' from 'refit-as-noise' (generic segmentation-perturbation regularization, the BPE-dropout effect)."
+      },
+      {
+       "id": "rig-scramble-arm-not-a-trim",
+       "role": "It is 33% of compute and reads as 'only a control', so it is the most tempting cut. A two-arm H_002 is not a cheaper version of this card — it is a different, self-deceiving one."
+      }
+     ]
+    },
+    {
+     "id": "rig-model",
+     "role": "Twins of ~10M params (6 layers, d256, 8 heads), vocab 4-8k — MORPH-ATOM scale, i.e. the scale at which the codec->recombination link was measured to exist."
+    },
+    {
+     "id": "rig-corpus",
+     "role": "Synthetic agglutinative jamo-drill: ~512 stems x ~64 affixes, including a BOUND negation-style suffix (L5 — expose composition at the token boundary).",
+     "children": [
+      {
+       "id": "rig-corpus-drift",
+       "role": "Phase 2 rotates in a new affix inventory and shifts collocation statistics — this IS the drift the codec must track. No drift, no lever."
+      },
+      {
+       "id": "rig-corpus-frozen-params",
+       "role": "Generator params are frozen in H_001 before any training exists. This bounds — but does not eliminate — the designer's freedom to build a stream that flatters F1."
+      }
+     ]
+    },
+    {
+     "id": "rig-budget",
+     "role": "MATCHED BYTE budget (~300M bytes/arm); token counts float and are logged. Matching TOKENS instead would hand the higher-compression codec free data — a silent confound."
+    },
+    {
+     "id": "rig-determinism-exception",
+     "role": "H_002 is seeded-GPU, NOT stdlib-deterministic like H_001. The card rules are extended EXPLICITLY for it: fixed seeds, logged env, verbatim stdout still binding.",
+     "children": [
+      {
+       "id": "rig-determinism-exception-why",
+       "role": "An explicit extension beats letting the first real card silently violate `deterministic: true` — that kind of silent violation is how the v1 --no-verify spiral started (L8)."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "data-flow",
+   "role": "No pipeline exists — nothing is built. The rig that WOULD produce the first data flow is specified under `rig` (F1 twin, 11 runs) and is gated behind H_001. This node stays a placeholder until that gate returns LICENSED and the twin actually runs.",
+   "children": [
+    {
+     "id": "flow-in",
+     "role": "(unbuilt — pending family selection)"
+    },
+    {
+     "id": "flow-out",
+     "role": "(unbuilt — pending family selection)"
+    }
+   ]
+  },
+  {
+   "id": "verification",
+   "role": "Hypothesis-verification system: pre-register → falsify → run → verdict. Flat registry + one rich card per hypothesis; shared deterministic harness in repo-root tool/.",
+   "children": [
+    {
+     "id": "hypotheses",
+     "role": "hypotheses/ — REGISTRY.jsonl (one JSON line per hypothesis) + cards/H_*.md (frozen pre-register + >=5 falsifiers) + cards/_TEMPLATE.md skeleton."
+    },
+    {
+     "id": "tool",
+     "role": "tool/anima_v3.py — stdlib-only closed-form primitives + Falsifier/evaluate ledger. Per-hypothesis runs + result.json live under state/<hX>/."
+    },
+    {
+     "id": "verification-inherited-gates",
+     "role": "Every family's falsifier MUST carry an L1 check (does the mechanism's seam have effective rank > 1?) and an L2 check (ablate the channel → does deltaCE actually move?). These two are non-negotiable — they are the exact measurements whose absence killed v1.",
+     "children": [
+      {
+       "id": "gates-l1-seam",
+       "role": "F1's seam = the REFIT CHANNEL: what actually changes when experience rewrites the codec.",
+       "children": [
+        {
+         "id": "gates-l1-seam-tensor",
+         "role": "Tensor = boundary-delta matrix B in {0,1}^(N_p x L): for each frozen probe string, the per-byte-position indicator of 'token boundary changed between codec_t and codec_t+1'."
+        },
+        {
+         "id": "gates-l1-seam-byte-aligned",
+         "role": "Probes are byte-aligned, so B's dimensions are codec-independent. A seam measured in token space would move when the codec moves — the measurement would track the instrument, not the thing."
+        }
+       ]
+      },
+      {
+       "id": "gates-l1-estimator",
+       "role": "Estimator = participation ratio PR = (sum s_i^2)^2 / sum s_i^4 over the singular values of mean-centered B (tool/anima_v3.py::participation_ratio).",
+       "children": [
+        {
+         "id": "gates-l1-estimator-why-pr",
+         "role": "Chosen over the entropy effective rank because a rank-1 null has PR = 1 EXACTLY by algebra, so 'how far above rank-1 is this' becomes a statement about energy rather than about the shape of a noise tail."
+        },
+        {
+         "id": "gates-l1-estimator-measured",
+         "role": "PR is the stricter gate, measured not asserted: on the same weak-second-direction fixture PR reads 1.0002 where the entropy rank reads 1.057 (tool/test_anima_v3.py)."
+        }
+       ]
+      },
+      {
+       "id": "gates-l1-threshold",
+       "role": "L1 gate: PR <= max(2.0, null_99) -> the refit channel is rank-1 -> F1 DEAD by L1-recurrence, regardless of any metric win.",
+       "children": [
+        {
+         "id": "gates-l1-threshold-floor",
+         "role": "Floor 2.0 = 'at least two orthogonal change-directions of comparable energy' = strictly more than v1's death mode, since an exact rank-1 seam gives PR = 1."
+        },
+        {
+         "id": "gates-l1-threshold-null",
+         "role": "null_99 = 99th percentile of PR under a single-pattern-drift null, 1000 draws, fixed documented seed. Needed because noise inflates PR above 1 even when the truth IS rank-1 — the floor alone is not enough."
+        }
+       ]
+      },
+      {
+       "id": "gates-l2-ablation",
+       "role": "F1's L2 ablation is BETWEEN-ARM by construction: you cannot drop a codec out of a trained model the way you drop a conditioning vector — the vocabulary IS the input space. Frozen twin = channel absent; adaptive twin = channel present."
+      },
+      {
+       "id": "gates-l2-threshold",
+       "role": "L2 gate: delta_bpb = bpb_frozen - bpb_adaptive on post-drift frozen byte probes. Below theta_L2 the refit channel is load-free decoration -> DEAD.",
+       "children": [
+        {
+         "id": "gates-l2-threshold-formula",
+         "role": "theta_L2 = max(5 * sigma_seed, 0.004 bpb)."
+        },
+        {
+         "id": "gates-l2-threshold-sigma",
+         "role": "sigma_seed = std of post-drift bpb across the 5 frozen-arm seeds — pure null calibration, measured and frozen IN CODE before any adaptive arm runs (L6's frozen-truth-table rule)."
+        },
+        {
+         "id": "gates-l2-threshold-absolute-floor",
+         "role": "0.004 bpb = 10x v1's OMEGA decoration signature (0.0009 nats/token ~ 0.0004 bpb at ~3.5 bytes/token) — one order of magnitude above the measured signature of 'decoration'."
+        }
+       ]
+      },
+      {
+       "id": "gates-unit",
+       "role": "Every cross-arm number is BITS-PER-BYTE — sum(-log2 p(token)) / raw byte count of the probe — so the denominator cannot move when the codec does.",
+       "children": [
+        {
+         "id": "gates-unit-probes",
+         "role": "Probes are frozen byte strings, generated and hashed before any training run; the hash goes in the card."
+        },
+        {
+         "id": "gates-unit-p7",
+         "role": "Per p7, no bpb number is ever the VERDICT: bpb serves only the L2/decoration gate. The verdict metric is recombination."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "verification-p7-retained",
+     "role": "v1's p7 (no perplexity verdict — CE/perplexity is a Goodhart trap, never truth) is the ONE purity principle anima-v3 inherits. Per L9 the other seven manufactured the disease and are discarded."
+    },
+    {
+     "id": "verification-h001",
+     "role": "H_001 f1-codec-refit-gate — PRE-REGISTER-FROZEN 2026-07-16, still-to-run. Its verdict is about the RIG, not about F1: LICENSED (H_002 may run) or REFUSED (blocked until the named defect is repaired).",
+     "children": [
+      {
+       "id": "verification-h001-falsifiers",
+       "role": "5 falsifiers: G-1 drift existence · G-2 closed-form power (N>=~400 items) · G-3 estimator fixtures (wired into `sidecar ci`) · G-4 salvage bounds check · G-5 protocol reconstruction."
+      },
+      {
+       "id": "verification-h001-own-kill-power",
+       "role": "G-4 can indict the very evidence that selected F1 — a gate that cannot refuse its own successor is not a gate.",
+       "children": [
+        {
+         "id": "verification-h001-own-kill-power-test",
+         "role": "If MORPH-ATOM's control score 0.617 sits INSIDE the 99% binomial chance band for the drill format, L4(b) was never above floor: the campaign's only green causal measurement was noise, and the whole write-lever axis is demoted."
+        }
+       ]
+      },
+      {
+       "id": "verification-h001-blocker",
+       "role": "OPEN BLOCKER (G-5): the 'H_9288 held-out recombination protocol' is cited in `salvage` but SPECIFIED NOWHERE in this repo.",
+       "children": [
+        {
+         "id": "verification-h001-blocker-cause",
+         "role": "v1 is discarded and state/ holds only the divergence seed — the protocol left no trace here."
+        },
+        {
+         "id": "verification-h001-blocker-impact",
+         "role": "G-2's power calc and G-4's chance band both depend on it (chance_p0, n_items). Unrecovered -> H_001 returns REFUSED, which is a RESULT, not a delay."
+        }
+       ]
+      },
+      {
+       "id": "verification-h001-self-deception",
+       "role": "The most likely SUPPORTED-but-wrong path for the successor: 'refit-as-noise' wearing 'refit-as-self' as a costume — the adaptive arm wins because ANY periodic codec perturbation regularizes segmentation.",
+       "children": [
+        {
+         "id": "verification-h001-self-deception-survives",
+         "role": "It would survive the main metric, the L1 gate (perturbation noise inflates PR for free) AND the L2 gate (regularization moves real bpb). Both mandated gates pass on a wrong result."
+        },
+        {
+         "id": "verification-h001-self-deception-catch",
+         "role": "Only the scramble-refit arm catches it — see `rig-scramble-arm`."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
 }

@@ -1,8 +1,13 @@
 # anima-v3
 
-Where does aliveness live — 8 clean-slate substrate families
+## Project
 
-## Structure
+anima-v3 asks **where aliveness lives** — a clean-slate campaign for an agent that is ALIVE
+(own state, own reason to speak, identity from structure rather than from a prompt). The
+predecessor `anima` (v1) is discarded entirely; its only inheritance is a set of measured,
+sealed verdicts that say where the ground is soft. Deep structure → `ARCHITECTURE.json`.
+
+## Tree
 
 ```
 anima-v3/
@@ -15,36 +20,50 @@ anima-v3/
 └─ CHANGELOG.md      — history (append-only)
 ```
 
-## Rules
+## Scope
 
-- Scope is the **system**, not a single instance: the first rig/result is the first
-  instance, not the boundary — the whole chain is the unit of design.
-- **Implementation code lives in the canonical `hexa-lang` stdlib, not here** (demiurge d3).
-  This repo *consumes* reusable implementation from the sibling `hexa-lang` stdlib — it never
-  owns stdlib itself. Topical/domain folders here hold **docs / manifests only**; do NOT
-  duplicate implementation across them or treat this repo as a code home. Reusable logic →
-  upstream it to `hexa-lang` stdlib (commons upstream-fix); keep this repo design + verdicts.
-- **Compute engine default = `QFORGE`-native, not QE/bespoke** (demiurge d_qforge_default).
-  For any heavy compute (DFT / DFPT / el-ph / physics sim), the default engine is the
-  from-scratch `QFORGE` stack; QE (or another external solver) is only a reference/fallback
-  for pieces not yet gate-migrated. Migrate QE→QFORGE **piece-by-piece**, absorbing a piece
-  only after it passes the gate (**≤1 % vs QE**, commons verify-done). If QFORGE blocks, run
-  QE in parallel to keep the campaign moving AND push the QFORGE fix at the same time — never
-  shelve it (demiurge d_qforge_fix). Build every compute input deck via `hexa deck`, never by
-  hand (d_deck_always). *(Skip this rule for non-compute labs.)*
-- Artifacts go under `state/` only (commons preserve-state). No scattered report/notes dirs.
-- Code/design change → update `ARCHITECTURE.json` in lockstep; log in `CHANGELOG.md`.
-- **Research before real measurement (실측전 research).** Before renting compute or running an
-  expensive real measurement (long sim / GPU pod / bench), do a literature research pass
-  FIRST — the answer may already be in the literature, or a cheap proxy may suffice. Only
-  spend on real compute after research justifies it.
+- do: treat the **system** as the unit of design — the whole chain, not one rig.
+- dont: mistake the first rig/result for the campaign's boundary (it is the first instance).
 
-## Gotchas
+## Implementation home (demiurge d3)
 
-- The live design SSOT is `ARCHITECTURE.json` (not this file, not the README). Distill
-  findings into the tree; keep one fact per node, push deeper detail to child nodes.
-- Imported origin docs under `state/` are seeds of record, NOT the SSOT — distill from
-  them into the tree; don't edit them to track current design.
-- `tool/` is the thin **verification harness** the hypothesis cards run against (closed-form
-  checks + falsifier ledger) — NOT a home for reusable domain implementation. That belongs in
-  the `hexa-lang` stdlib (see Rules); keep `tool/` to deterministic verification primitives.
+- do: consume reusable implementation from the sibling `hexa-lang` stdlib.
+- do: upstream reusable logic TO that stdlib (commons upstream-fix); keep this repo design + verdicts.
+- dont: own stdlib here · treat this repo as a code home.
+- dont: duplicate implementation across topical/domain folders — they hold **docs / manifests only**.
+
+## Compute engine (demiurge d_qforge_default · skip for non-compute labs)
+
+- do: default heavy compute (DFT / DFPT / el-ph / physics sim) to the from-scratch `QFORGE` stack.
+- do: migrate QE→QFORGE piece-by-piece, absorbing a piece only after it passes the gate (**≤1 % vs QE**).
+- do: build every compute input deck via `hexa deck` (d_deck_always).
+- do: if QFORGE blocks, run QE in parallel AND push the QFORGE fix at once (d_qforge_fix).
+- dont: treat QE/bespoke as the default (it is reference/fallback only) · shelve a QFORGE fix · hand-build a deck.
+
+## Artifacts + lockstep
+
+- do: put every work artifact under `state/` only (commons preserve-state).
+- do: update `ARCHITECTURE.json` in lockstep with any code/design change · log it in `CHANGELOG.md`.
+- dont: scatter report/notes dirs · change design without touching the SSOT tree.
+
+## Research before real measurement (`실측전 research`)
+
+- do: run a literature research pass FIRST, before renting compute or an expensive measurement.
+- do: spend on real compute only after research justifies it — a cheap proxy may suffice.
+- dont: rent compute on an unresearched question (the answer may already be in the literature).
+
+## SSOT discipline
+
+- do: treat repo-root `ARCHITECTURE.json` as the live design SSOT — not this file, not the README.
+- do: distill findings into the tree · keep one fact per node, pushing deeper detail to child nodes.
+- dont: track current design in this file/README · pile many facts into one cell.
+
+## Seeds of record
+
+- do: treat imported origin docs under `state/` as seeds of record — distill FROM them into the tree.
+- dont: edit a seed to track current design (a record is of its time; let it go stale).
+
+## tool/ boundary
+
+- do: keep `tool/` to deterministic verification primitives — closed-form checks + falsifier ledger.
+- dont: put reusable domain implementation in `tool/` (that belongs in the `hexa-lang` stdlib).
