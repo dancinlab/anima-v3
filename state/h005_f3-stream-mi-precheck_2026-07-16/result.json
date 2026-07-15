@@ -1,0 +1,71 @@
+{
+ "streams": {
+  "hexa-lang": {
+   "days": 102,
+   "gzip": {
+    "ceiling": 0.3046875,
+    "shuffle": 0.30859375,
+    "over_floor": -0.00390625,
+    "dayspec": 0.26953125
+   },
+   "ppm": {
+    "ceiling": 1.0914299556517912,
+    "shuffle": 0.9487484871320202,
+    "over_floor": 0.14268146851977104,
+    "dayspec": 0.20298577277865704
+   },
+   "participation_ratio": 1.619065994281486,
+   "anchored": false,
+   "agree_sign": false
+  },
+  "anima": {
+   "days": 44,
+   "gzip": {
+    "ceiling": 0.359375,
+    "shuffle": 0.328125,
+    "over_floor": 0.03125,
+    "dayspec": 0.26953125
+   },
+   "ppm": {
+    "ceiling": 0.9614661808283849,
+    "shuffle": 0.7409389841138632,
+    "over_floor": 0.2205271967145217,
+    "dayspec": 0.14089053087137327
+   },
+   "participation_ratio": 1.3253337602089144,
+   "anchored": true,
+   "agree_sign": true
+  },
+  "sidecar": {
+   "days": 21,
+   "gzip": {
+    "ceiling": 0.2265625,
+    "shuffle": 0.29296875,
+    "over_floor": -0.06640625,
+    "dayspec": 0.03125
+   },
+   "ppm": {
+    "ceiling": 0.431130820931485,
+    "shuffle": 0.447382504948437,
+    "over_floor": -0.016251684016951984,
+    "dayspec": 0.0650090892393429
+   },
+   "participation_ratio": 1.8868508205521897,
+   "anchored": false,
+   "agree_sign": true
+  }
+ },
+ "liveness": {
+  "n_pairs": 29,
+  "ceiling_med": 7.7890625,
+  "ceiling_mean": 7.790140086206897,
+  "dayspec_med": 6.66015625,
+  "base_bpb_med": 7.89453125,
+  "participation_ratio": 1.9737695676832745
+ },
+ "any_stream_anchored": true,
+ "estimators_all_agree": false,
+ "liveness_ok": true,
+ "n_real_streams": 3,
+ "verdict": "PENDING(instrument) — gzip and ppm disagree on the sign of the over-floor lift; the effect is below both estimators' resolution. Needs the trained numpy-LM estimator to decide."
+}

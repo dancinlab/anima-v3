@@ -958,7 +958,13 @@
        "children": [
         {
          "id": "decision-f1-abstract",
-         "role": "Its restated verbal form ('codec compresses the credit-assignment span; refit maintains it') is parked as an ABSTRACT card (H_A001), not another rig."
+         "role": "Its restated verbal form is parked as ABSTRACT card H_A001 (f1-codec-credit-span) — a falsifiable prediction, no run, no verdict.",
+         "children": [
+          {
+           "id": "decision-f1-abstract-pred",
+           "role": "The prediction: refit beats frozen on GENERATION only where a productive process's parameter lives OUTSIDE any context window, gap not shrinking with model scale. Overlaps F3's structural escape."
+          }
+         ]
         }
        ]
       },
@@ -1551,6 +1557,53 @@
            "role": "What the record ever isolated was NOT atomicity — MORPH-ATOM's raw-utf8 control failed only because its binding span (~18 bytes) exceeded the small model's n-gram reach, not because atomicity per se helps."
           }
          ]
+        }
+       ]
+      }
+     ],
+     "type": "gate"
+    },
+    {
+     "id": "verification-h005",
+     "role": "H_005 f3-stream-mi-precheck — RUN 2026-07-16 · verdict PENDING(instrument), scientifically LEANING ANCHORED (F3 LIVE — the opposite of the F1 terminal). $0, no GPU.",
+     "children": [
+      {
+       "id": "verification-h005-result",
+       "role": "Two $0 estimators (gzip LZ + order-4 adaptive PPM) measured the oracle-diary ceiling vs a shuffle floor on 3 real developer git streams. Liveness (planted latent) = 7.79 bpb PASS.",
+       "children": [
+        {
+         "id": "h005-result-numbers",
+         "role": "Under the sensitive PPM: hexa-lang +0.143, anima +0.221 over-floor (day-specific cross-boundary lift), sidecar flat. gzip at its noise floor reads ~0 on hexa-lang."
+        }
+       ]
+      },
+      {
+       "id": "verification-h005-pending",
+       "role": "Formal verdict PENDING(instrument): the pre-registered P-4 (estimator sign-agreement) trips because gzip and PPM disagree on hexa-lang.",
+       "children": [
+        {
+         "id": "h005-pending-why",
+         "role": "That is gzip's RESOLUTION floor, not a real conflict — its 32KB LZ window is insensitive to a single day-specific long-range token in a large context, where PPM sees a clear positive lift. The scientific lean is ANCHORED."
+        }
+       ]
+      },
+      {
+       "id": "verification-h005-f3-live",
+       "role": "CONSEQUENCE: F3's premise is LIVE — a developer's stream plausibly carries a day-specific temporal self a diary could transport.",
+       "children": [
+        {
+         "id": "h005-f3-anchor",
+         "role": "That would license the F3 diary line with a pre-anchored delta_min = ceiling/2 (the campaign's first honestly-anchored effect size). The F3 twin escapes L11 STRUCTURALLY (bottleneck m sits outside the context window)."
+        }
+       ]
+      },
+      {
+       "id": "verification-h005-resume",
+       "role": "RESUME (live frontier): decide the estimator question.",
+       "children": [
+        {
+         "id": "h005-resume-forks",
+         "role": "(a) accept PPM as authoritative -> ANCHORED, design the F3 diary twin; or (b) run a small causal-LM tie-breaker to satisfy P-4 formally (mean-pooled nlm.py is the WRONG tool — can't represent a long-range token; needs a causal LM, a few $/an MPS hour). Either way F3 is not refuted."
         }
        ]
       }

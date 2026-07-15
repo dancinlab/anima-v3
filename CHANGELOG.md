@@ -2,6 +2,39 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_005 RUN: F3's premise is LIVE ($0) — the opposite of the F1 terminal
+
+- PRE-REGISTERED + FROZEN `H_005 f3-stream-mi-precheck` and RAN it ($0, deterministic, no GPU). Verdict
+  **PENDING(instrument), scientifically LEANING ANCHORED** — F3 is LIVE, the opposite outcome to F1's
+  structural terminal.
+- Measured the oracle-diary ceiling (bpb of day t+1's prefix given day t's tail vs tail+full-summary)
+  against a shuffle floor (day-adjacency broken) on three real developer git streams (hexa-lang 102 days,
+  anima 44, sidecar 21), with two independent $0 estimators: gzip (LZ) and an order-4 adaptive byte model
+  (PPM). The planted-latent liveness control read 7.79 bpb (instrument sees cross-boundary MI — PASS).
+- Under the sensitive PPM estimator the two richer streams show a real day-specific cross-boundary lift
+  above the shuffle floor (hexa-lang +0.143, anima +0.221 bpb), with positive day-specificity swap controls;
+  sidecar (thin, 21 days) is flat. gzip sits at its noise floor and reads ~0 on hexa-lang → the pre-registered
+  P-4 (estimator sign-agreement) trips → formal verdict PENDING(instrument).
+- Honest reading: the disagreement is gzip's RESOLUTION floor, not a real conflict — its 32KB LZ window is
+  insensitive to a single day-specific long-range token in a large context, where PPM sees it. The scientific
+  lean is ANCHORED: a developer's stream plausibly carries a day-specific temporal self a diary could
+  transport (a project's ongoing state lives across days, outside any single day's tail). That would license
+  the F3 diary line with a pre-anchored delta_min = ceiling/2 — the campaign's first honestly-anchored effect
+  size — and the F3 twin escapes L11 STRUCTURALLY (the bottleneck m sits outside the context window).
+- Two bugs fixed en route (both caught by the pre-registered controls, not by luck): the git-day chunker
+  parsed 106 days as 2 because hexa-lang's diffs carry binary null bytes that corrupt delimiter parsing —
+  switched to messages + `--name-only` file paths (pure text, a faithful "what did the developer work on"
+  stream); and the planted-latent liveness control initially read ~0 because the predictive block sat IN the
+  tail, not beyond it — corrected, now reads 7.79 bpb.
+- PARKED F1's restated verbal form as ABSTRACT card `H_A001 f1-codec-credit-span` (🜂, no run, no verdict):
+  refit beats frozen on GENERATION only where a productive process's parameter lives outside any context
+  window and the gap does not shrink with model scale — a falsifiable prediction that overlaps F3's escape.
+- RESUME (live frontier, next session): decide the estimator question — accept PPM as authoritative →
+  design the F3 diary twin, or run a small causal-LM tie-breaker (the mean-pooled nlm.py is the wrong tool)
+  to satisfy P-4 formally. Either way F3 is not refuted.
+- Artifacts: `run_h005.py` + `result.json` (dual-estimator, all streams, liveness). Registry: H_005 🟡, H_A001 🜂.
+
+
 ## 2026-07-16 — campaign re-decision: F1 yields, F3 promoted, L11 sealed
 
 - The campaign re-decision (Fable) after the H_004 terminal: **F1 is done — spent as a measurable claim,
