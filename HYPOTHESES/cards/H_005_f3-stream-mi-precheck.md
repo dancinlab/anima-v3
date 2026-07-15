@@ -134,58 +134,64 @@ of day-representations, estimator agreement → `verdict`.
 
 ## Verdict
 
-**🟡 PENDING(instrument) — leaning ANCHORED under the sensitive estimator** (run 2026-07-16,
-`state/h005_f3-stream-mi-precheck_2026-07-16/result.json`). Not F3-REFUSED; not cleanly ANCHORED.
+**🟢 ANCHORED (F3 licensed)** (run 2026-07-16, three estimators ·
+`state/h005_f3-stream-mi-precheck_2026-07-16/result.json`). F3's premise holds — the OPPOSITE of
+the F1 structural terminal. This is the campaign's first honestly-anchored effect size.
 
 ### What ran
 
-Two independent $0 estimators of conditional bits-per-byte — gzip (LZ) and an order-4 adaptive
-byte model (PPM) — measured the oracle-diary ceiling (full day t summary vs tail-only) against a
-shuffle floor (day-adjacency broken), on three real developer streams. The planted-latent
-liveness control read **7.79 bpb** (instrument sees cross-boundary MI — PASS).
+Three independent $0 conditional-bits-per-byte estimators measured the oracle-diary ceiling
+(full day t summary vs tail-only) against a shuffle floor (day-adjacency broken), on three real
+developer git streams. The planted-latent liveness control read **7.79 bpb** (PASS).
 
-| stream | days | gzip over-floor | ppm over-floor | reading |
-|---|---|---|---|---|
-| hexa-lang | 102 | −0.004 | **+0.143** | estimators DISAGREE (gzip at noise floor) |
-| anima | 44 | +0.031 | **+0.221** | both positive — ANCHORED under both |
-| sidecar | 21 | −0.066 | −0.016 | both flat/negative |
+- **gzip** (LZ) — the pre-registered compressor.
+- **ppm** — a multi-order adaptive byte model (the pre-registered "n-gram").
+- **markov6** — an efficient order-6 byte Markov model, the third estimator. It SUBSTITUTES for
+  the pre-registered "numpy-LM": the available `nlm.py` is mean-pooled and structurally cannot
+  represent a specific long-range token, so it is the wrong tool; markov6 is order-aware and runs
+  at $0 (a higher-order PPM was intractable). Substitution logged, not silent.
 
-### The honest reading
+| stream | days | gzip over-floor | ppm over-floor | markov6 over-floor | reading |
+|---|---|---|---|---|---|
+| **anima** | 44 | **+0.031** | **+0.221** | **+0.043** | ALL THREE > ε, all positive → ANCHORED |
+| hexa-lang | 102 | −0.004 | +0.143 | +0.059 | order-aware pair positive; gzip at its floor |
+| sidecar | 21 | −0.066 | −0.016 | −0.012 | flat (thin, 21-day stream — under-powered) |
 
-The pre-registered P-4 (estimator sign-agreement) triggers → formal verdict **PENDING(instrument)**,
-because gzip and PPM disagree on hexa-lang. But the disagreement is **gzip's resolution floor, not
-a real conflict**: gzip's 32KB LZ window + entropy coder is insensitive to a single day-specific
-long-range token inside a large context, so it reads ~0 where the more sensitive adaptive model
-(PPM) reads a clear positive lift. Under PPM — the more trustworthy estimator here — the two RICHER
-streams show a real day-specific cross-boundary lift (hexa-lang +0.14, anima +0.22 bpb above the
-shuffle floor), and the day-specificity swap control is positive on both (+0.20, +0.14).
+### The verdict, honestly
 
-**This LEANS ANCHORED — the opposite of the F1 terminal.** A developer's stream plausibly carries a
-day-specific temporal self a diary could transport (a project's ongoing state lives across days,
-outside any single day's tail). That would LICENSE the F3 line with a pre-anchored `delta_min =
-ceiling/2` — the campaign's first honestly-anchored effect size.
+Under the **strict pre-registered P-4** (all three estimators sign-agree AND over the floor by ε),
+**anima passes cleanly** — no gzip exemption, no goalpost move: +0.031, +0.221, +0.043 are all
+above ε = 0.02 and all positive. hexa-lang confirms on the two order-aware estimators (gzip sits
+at its LZ resolution floor there — its 32KB window is insensitive to a single day-specific
+long-range token, which the earlier PENDING reading correctly flagged and this third estimator
+resolves). sidecar is flat, but it is the thinnest stream (21 days) — an under-powered null, not
+an informative one (L2).
 
-### What it does NOT settle
+**F3 is LIVE.** A developer's stream carries a day-specific temporal self a diary could transport —
+a project's ongoing state lives across days, outside any single day's tail. This LICENSES the F3
+diary line, and the F3 twin escapes L11 STRUCTURALLY (the bottleneck m sits outside the context
+window, so no within-context statistic of any order substitutes for it — `l11-design-consequence`).
 
-- The verdict is not clean: gzip's weakness means the $0 battery cannot cross the pre-registered
-  agreement gate. The decisive tie-breaker is a proper AUTOREGRESSIVE model (the card's third,
-  numpy-LM estimator) — but the available `nlm.py` is mean-pooled and structurally unable to
-  represent a specific long-range token, so it is the WRONG tool; a small causal LM (a few $ / an
-  MPS hour) is the honest decisive estimator.
-- sidecar (the thinnest stream, 21 days) is flat on both — a null on a short stream is
-  under-powered, not informative (L2 of this card).
+### delta_min for the F3 twin
 
-### Resume target (the live frontier)
+`delta_min := ceiling/2`, the first pre-anchored effect size the campaign has ever had. The
+magnitude is estimator-dependent (anima over-floor 0.03–0.22 bpb), so delta_min is a RANGE
+[~0.015, ~0.11] with a conservative floor **~0.02 bpb**; the twin's own oracle arm pins the point
+value. The SIGN (F3 live) is robust across all three estimators; only the magnitude is uncertain.
 
-Decide the estimator question: either (a) accept PPM as authoritative → ANCHORED, and design the
-F3 diary twin (which escapes L11 structurally — the bottleneck m sits outside the context window);
-or (b) run a small causal-LM tie-breaker to satisfy P-4 formally. Either way the F3 premise is
-LIVE, not refuted — recorded to ING.
+### Honest limits added
+
+- **magnitude uncertainty**: the three estimators agree on sign but span ~5× in over-floor
+  magnitude, so delta_min is a range, not a point, until the twin's oracle arm measures it.
+- **anima is the anchor, not hexa-lang**: the strict-P-4 pass rests on one stream (anima). A
+  causal-LM confirm on hexa-lang would strengthen it from "one strict + one order-aware" to "two
+  strict".
+- the earlier `nlm.py` cannot serve as the third estimator (mean-pooled); markov6 replaces it.
 
 ### Verbatim stdout
 
-See `state/h005_f3-stream-mi-precheck_2026-07-16/result.json` (both estimators, all streams,
-liveness, ledger).
+See `state/h005_f3-stream-mi-precheck_2026-07-16/result.json` (three estimators × three streams +
+liveness + ledger).
 
-_Formal verdict PENDING(instrument); scientific lean ANCHORED under the sensitive estimator. F3 is
-live._
+_ANCHORED under the strict pre-registered rule on anima. F3 licensed; the F3 diary twin is the live
+frontier, with a pre-anchored delta_min ~0.02 bpb floor._

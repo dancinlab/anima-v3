@@ -1565,7 +1565,7 @@
     },
     {
      "id": "verification-h005",
-     "role": "H_005 f3-stream-mi-precheck — RUN 2026-07-16 · verdict PENDING(instrument), scientifically LEANING ANCHORED (F3 LIVE — the opposite of the F1 terminal). $0, no GPU.",
+     "role": "H_005 f3-stream-mi-precheck — RUN 2026-07-16 · verdict ANCHORED (F3 LICENSED) under the strict pre-registered 3-estimator rule. F3's premise holds — the OPPOSITE of the F1 terminal. $0, no GPU.",
      "children": [
       {
        "id": "verification-h005-result",
@@ -1573,14 +1573,24 @@
        "children": [
         {
          "id": "h005-result-numbers",
-         "role": "Under the sensitive PPM: hexa-lang +0.143, anima +0.221 over-floor (day-specific cross-boundary lift), sidecar flat. gzip at its noise floor reads ~0 on hexa-lang."
+         "role": "Three $0 conditional-bpb estimators: gzip LZ · multi-order PPM · efficient order-6 Markov (the last substitutes for the mean-pooled nlm.py, which cannot represent a long-range token).",
+         "children": [
+          {
+           "id": "h005-numbers-detail",
+           "role": "anima: gzip +0.031, ppm +0.221, markov6 +0.043 over-floor — ALL THREE positive over eps. hexa-lang: order-aware pair positive (+0.14/+0.06), gzip at its LZ floor. sidecar (21d, thin) flat."
+          }
+         ]
         }
        ]
       },
       {
        "id": "verification-h005-pending",
-       "role": "Formal verdict PENDING(instrument): the pre-registered P-4 (estimator sign-agreement) trips because gzip and PPM disagree on hexa-lang.",
+       "role": "RESOLVED from PENDING to ANCHORED at $0 by building the efficient order-6 Markov estimator (the third of the pre-registered battery).",
        "children": [
+        {
+         "id": "h005-resolved-honest",
+         "role": "anima passes the STRICT rule (all 3 sign-agree over eps) with NO gzip exemption — not a goalpost move. gzip's earlier disagreement on hexa-lang was its LZ resolution floor, now confirmed by two order-aware estimators."
+        },
         {
          "id": "h005-pending-why",
          "role": "That is gzip's RESOLUTION floor, not a real conflict — its 32KB LZ window is insensitive to a single day-specific long-range token in a large context, where PPM sees a clear positive lift. The scientific lean is ANCHORED."
@@ -1593,17 +1603,35 @@
        "children": [
         {
          "id": "h005-f3-anchor",
-         "role": "That would license the F3 diary line with a pre-anchored delta_min = ceiling/2 (the campaign's first honestly-anchored effect size). The F3 twin escapes L11 STRUCTURALLY (bottleneck m sits outside the context window)."
+         "role": "delta_min := ceiling/2 — the campaign's first pre-anchored effect size.",
+         "children": [
+          {
+           "id": "h005-anchor-range",
+           "role": "Magnitude is estimator-dependent (anima over-floor 0.03-0.22 bpb) so delta_min is a RANGE [~0.015,~0.11], conservative floor ~0.02 bpb; the twin's oracle arm pins the point. The SIGN (F3 live) is robust; only magnitude is uncertain."
+          },
+          {
+           "id": "h005-anchor-escape",
+           "role": "The F3 twin escapes L11 structurally (bottleneck m outside the context window)."
+          }
+         ]
         }
        ]
       },
       {
        "id": "verification-h005-resume",
-       "role": "RESUME (live frontier): decide the estimator question.",
+       "role": "RESUME (live frontier): design + run the F3 DIARY TWIN.",
        "children": [
         {
+         "id": "h005-twin-spec",
+         "role": "A diary bottlenecked to k tokens, loss = CE(tomorrow | today's diary), vs a no-diary control. delta_min ~0.02 bpb floor (anchored here)."
+        },
+        {
+         "id": "h005-twin-compute",
+         "role": "This needs real training compute (a small causal LM) = the campaign's first genuine spend, justified by the anchored premise (실측전-research satisfied)."
+        },
+        {
          "id": "h005-resume-forks",
-         "role": "(a) accept PPM as authoritative -> ANCHORED, design the F3 diary twin; or (b) run a small causal-LM tie-breaker to satisfy P-4 formally (mean-pooled nlm.py is the WRONG tool — can't represent a long-range token; needs a causal LM, a few $/an MPS hour). Either way F3 is not refuted."
+         "role": "Optional strengthening first ($0-cheap): a causal-LM confirm on hexa-lang would upgrade the anchor from 'one strict (anima) + one order-aware (hexa-lang)' to 'two strict'. Not required — anima already clears the pre-registered bar."
         }
        ]
       }

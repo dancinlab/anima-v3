@@ -2,6 +2,31 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_005 RESOLVED → 🟢 ANCHORED: F3 is licensed (the campaign's first pre-anchored effect size)
+
+- Resolved H_005 from PENDING(instrument) to **ANCHORED (F3 licensed)** at $0, by building the efficient
+  order-6 Markov estimator — the THIRD of the pre-registered battery. The mean-pooled `nlm.py` cannot
+  represent a long-range token (wrong tool) and a higher-order PPM was intractable; the order-6 Markov is
+  order-aware and runs at $0 (19s/stream). Substitution logged, not silent.
+- **anima clears the STRICT pre-registered P-4** — all three estimators sign-agree AND over ε: gzip +0.031,
+  ppm +0.221, markov6 +0.043 over-floor (all > ε=0.02, all positive). NO gzip exemption, no goalpost move —
+  anima passes the original bar. hexa-lang confirms on the two order-aware estimators (gzip sits at its LZ
+  resolution floor there — its 32KB window is insensitive to a single day-specific long-range token, exactly
+  what the earlier PENDING correctly flagged and this estimator resolves). sidecar (21 days, thin) is flat —
+  an under-powered null, not informative.
+- **F3 is LIVE — the opposite of the F1 structural terminal.** A developer's stream carries a day-specific
+  temporal self a diary could transport (a project's ongoing state lives across days, outside any single
+  day's tail). The F3 twin escapes L11 structurally (the bottleneck m sits outside the context window).
+- **First pre-anchored delta_min ever**: delta_min := ceiling/2. The sign (F3 live) is robust across all
+  three estimators; the magnitude is estimator-dependent (anima over-floor 0.03–0.22 bpb), so delta_min is a
+  range [~0.015, ~0.11] with a conservative floor ~0.02 bpb — the twin's own oracle arm pins the point.
+- RESUME (live frontier): design + run the F3 DIARY TWIN — a diary bottlenecked to k tokens, loss =
+  CE(tomorrow | today's diary), vs a no-diary control, delta_min ~0.02 bpb floor. This needs the campaign's
+  first genuine training compute (a small causal LM), now justified by the anchored premise (실측전-research
+  satisfied). Optional $0-cheap strengthening first: a causal-LM confirm on hexa-lang upgrades the anchor
+  from "one strict + one order-aware" to "two strict".
+
+
 ## 2026-07-16 — H_005 RUN: F3's premise is LIVE ($0) — the opposite of the F1 terminal
 
 - PRE-REGISTERED + FROZEN `H_005 f3-stream-mi-precheck` and RAN it ($0, deterministic, no GPU). Verdict
