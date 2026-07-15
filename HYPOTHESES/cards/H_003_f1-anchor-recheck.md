@@ -10,7 +10,7 @@ pre_register_frozen: true
 frozen_at: 2026-07-16
 deterministic: true
 llm: none
-genspec_sha256: 2016a4ee9df24820a46ff897b86d7508876f36daf8f1ecf38f4133ffdaed32ea
+genspec_sha256: fbcf0c8ad444d0f3c2fa5ad018d12ce8f33ad6bcf8e0f78eb26be5495527ce2b
 ---
 
 # H_003 — f1-anchor-recheck
@@ -69,11 +69,14 @@ Two independent claims, both falsifiable here:
 
 Pre-registered inputs, **frozen before any measurement**:
 
-- `genspec_sha256` = `2016a4ee9df24820a46ff897b86d7508876f36daf8f1ecf38f4133ffdaed32ea`
+- `genspec_sha256` = `fbcf0c8ad444d0f3c2fa5ad018d12ce8f33ad6bcf8e0f78eb26be5495527ce2b`
   — the spec is STORED, not regenerated; this hash is what bounds designer freedom
-  (`rig-corpus-frozen-params`).
-- `K` = **2048** BPE merges. Source: v1's G-0 audit selected K=2048 (vocab 2320) as the
-  minimum K passing its codec audit. Not tuned here.
+  (`rig-corpus-frozen-params`). (Re-frozen 2026-07-16 after the N-2 repair — the original
+  spec `2016a4ee…` gave rig = REFUSED; see the Verdict's repair note.)
+- `K` = **512** BPE merges. The original K=2048 (from v1's G-0 audit on a DIFFERENT alphabet)
+  could not produce the N-2 contrast at any value; the repair made atomicity frequency-earned,
+  and K=512 is the smallest that gives frozen 0/12 + refit 12/12. Not tuned to a score — swept
+  against the mechanism gate (N-2), which is a rig-validity gate, not the F1 verdict.
 - `bpe_sample_lines` = **20000** per phase.
 - `drift_floor` = **0.05** (5% of probe positions). Carried unchanged from H_001, where
   it was marked `?`. Frozen here BEFORE measuring so the measurement cannot pick it.
@@ -176,6 +179,57 @@ Measured outputs: `boundary_shift_rate`, `deficit_frozen`, `deficit_refit`,
 - **generator**: `src/generator/` · **harness**: `tool/anima_v3.py`
 
 ## Verdict
+
+**🟢 rig = LICENSED** (10/10 · repair re-run 2026-07-16, genspec `fbcf0c8…`, K=512 ·
+`state/h003_f1-anchor-recheck_2026-07-16/result.json`). The H_004 static-anchor pilot may fire.
+
+The first run (below) was REFUSED on the generator half; the two generator defects were then
+repaired and the card re-frozen on the repaired spec (the card's own verdict rule is "REFUSED
+until the named defect is repaired", and this is that repair — logged, not silently re-frozen).
+
+### The N-2 repair — three findings, each measured
+
+The wall was **not** "atomicity can't be induced synthetically". It was three concrete defects,
+found by direct experiment rather than argument:
+
+1. **Short affixes atomize by accident.** A 1-syllable NEG allomorph is 2–3 jamo; its individual
+   jamo recur so widely that the FROZEN codec fuses it without ever seeing it (measured: the novel
+   form `조` read single-token in the phase-1 codec). Fix: novel NEG allomorphs are now ≥2
+   syllables (≥6 jamo) — a run that long cannot be fused by coincidence, only earned by frequency.
+   This alone took frozen from 8/12 → **0/12**.
+2. **The polarity mark was fusing with the affix.** This was the real refit blocker, and it hid
+   behind the frequency question. The mark was glued directly to the affix (`…affix+NEG_MARK`), so
+   BPE fused `affix+mark` as one merge and the affix itself never became a single token — refit
+   stalled at 3–5/12 *no matter the frequency or K* (measured: unchanged at K=4096). Fix: the mark
+   is now a separate sentinel-delimited token. This took refit to **12/12**.
+3. **Novel allomorphs must be frequency-earned.** Even split, a novel affix at its natural
+   ~450/20k rate is below BPE's merge threshold against 64 competing affixes. Fix: phase-2
+   over-weights novel allomorphs (`NOVEL_NEG_SHARE_P2 = 0.80`) — which is not a thumb on the scale
+   but the drift itself (the phase-2 language actually *uses* its new negators heavily), and is
+   exactly v1's NAT-ATOM law that atomicity is earned by repetition.
+
+Result at K=512, real pipeline: frozen **0/12** (deficit 1.0), refit **12/12** (deficit 0.0),
+drift 0.1256, leak 0, co-occurrence 0.
+
+### The N-4 repair — it was never a corpus leak
+
+Confirmed the H_003 first-run reading: `leak_hits` was always 0. The co-occurrence count was a
+detector defect in two layers: (a) the audit re-parsed each word ambiguously; fixed by keying off
+the EMITTED polarity mark, since a NEG-marked word is ground truth. (b) A **duplicate function
+definition** left an old substring-based version shadowing the parse-based one — Python used the
+last definition, so the fix appeared not to take until the stale copy was removed. Both gone;
+co-occurrence is now 0 at 200k-line scan depth.
+
+### What LICENSED means
+
+The rig is valid: the anchor is real and replicated, the frozen/refit codecs give the opposite
+readings the twin needs, the drift moves the seam, the item pool clears the worst-case N, and
+nothing leaks. **F1 now has a substrate at drill scale** — the H_004 static-anchor pilot (oracle
+vs frozen, measures `Δ_pilot`, the hard upper bound on refit) may run.
+
+### Prior run (REFUSED, 8/10, genspec `2016a4ee…`)
+
+Kept for the record — the anchor half was already all green there; only the generator failed.
 
 **🔴 rig = REFUSED** (8/10 · run 2026-07-16 ·
 `state/h003_f1-anchor-recheck_2026-07-16/result.json`). H_004 pilot is BLOCKED. But the two

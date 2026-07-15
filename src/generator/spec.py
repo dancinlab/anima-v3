@@ -50,11 +50,22 @@ def _make_stems(rng: random.Random) -> list:
     return sorted(seen)
 
 
-def _make_affixes(rng: random.Random, n: int, cls: str, slot: int, taken: set) -> list:
-    """n distinct BOUND affixes of 1-2 syllables in class `cls`."""
+def _make_affixes(rng: random.Random, n: int, cls: str, slot: int, taken: set,
+                  syllables=(1, 1, 2)) -> list:
+    """n distinct BOUND affixes in class `cls`, each `syllables` long (a choice list).
+
+    `syllables` controls the length distribution. The NOVEL NEG allomorphs use
+    (2, 2) — >= 2 syllables (>= 6 jamo) — because a 1-syllable affix is only 2-3
+    jamo and its individual jamo recur so widely across unrelated words that the
+    FROZEN codec atomizes it by coincidence, destroying the N-2 contrast
+    (`rig-atomicity-not-induced`). Measured: shortening a novel affix to 2 jamo
+    lets the phase-1 codec read it single-token even though it never saw it. A
+    >= 6-jamo affix cannot be fused by accident — it must be earned by frequency,
+    which only the phase-2 refit sees.
+    """
     out = []
     while len(out) < n:
-        form = "".join(_syllable(rng) for _ in range(rng.choice([1, 1, 2])))
+        form = "".join(_syllable(rng) for _ in range(rng.choice(syllables)))
         if form in taken:
             continue
         taken.add(form)
@@ -82,7 +93,7 @@ def build_spec() -> dict:
     # table by construction, which is what makes the frozen arm a local C1 on
     # exactly the material the eval looks at (`rig-drift-wasting-asset`).
     carried = sorted(rng.sample(affixes_p1, N_CARRIED), key=lambda a: (a["cls"], a["form"]))
-    novel_neg = _make_affixes(rng, N_NOVEL_NEG, "NEG", 1, taken)
+    novel_neg = _make_affixes(rng, N_NOVEL_NEG, "NEG", 1, taken, syllables=(2, 2))
     affixes_p2 = sorted(carried + novel_neg, key=lambda a: (a["cls"], a["form"]))
 
     # Zipf collocation weights over stems; phase 2 reassigns P2_SHIFT of the mass.

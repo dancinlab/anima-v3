@@ -26,8 +26,8 @@ import audit as A
 from lang import render, parse, to_jamo, from_jamo
 
 # --- frozen inputs (must match the card frontmatter) --------------------------
-GENSPEC_SHA = "2016a4ee9df24820a46ff897b86d7508876f36daf8f1ecf38f4133ffdaed32ea"
-K = 2048
+GENSPEC_SHA = "fbcf0c8ad444d0f3c2fa5ad018d12ce8f33ad6bcf8e0f78eb26be5495527ce2b"
+K = 512
 BPE_SAMPLE_LINES = 20000
 DRIFT_FLOOR = 0.05
 N_REQUIRED_WORST = 1178

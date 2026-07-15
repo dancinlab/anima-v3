@@ -36,6 +36,17 @@ def _weighted_index(rng: random.Random, weights: list) -> int:
     return len(weights) - 1
 
 
+# Fraction of phase-2 NEG utterances that use a NOVEL allomorph (vs a carried one).
+# Measured requirement (H_003 N-2 repair): with 64 affixes competing for BPE merge
+# budget, a novel allomorph appearing at its natural ~450/20k rate never becomes a
+# top-K merge, so the REFIT codec fails to atomize it (stuck at 5/12 even at K=4096).
+# BPE fuses by frequency, so atomicity must be EARNED by repetition — which is v1's
+# NAT-ATOM law, not a thumb on the scale: the drift is the phase-2 language actually
+# USING its new negators heavily. At 0.80 every novel allomorph clears K=512 (12/12)
+# while the frozen phase-1 codec, never having seen them, stays blind (0/12).
+NOVEL_NEG_SHARE_P2 = 0.80
+
+
 def line(spec: dict, phase: int, rng: random.Random, allow_heldout_neg: bool = False) -> str:
     """One training line: a stem + one affix, plus its explicit polarity mark.
 
@@ -57,12 +68,30 @@ def line(spec: dict, phase: int, rng: random.Random, allow_heldout_neg: bool = F
         use_neg = False   # the invariant: no held-out stem ever meets a NEG affix
 
     if use_neg:
-        af = rng.choice(neg_forms(spec, phase))
+        af = _pick_neg(spec, phase, rng)
         mark = NEG_MARK
     else:
         af = rng.choice(plain_forms(spec, phase))
         mark = POS_MARK
-    return render(stem, [af]) + mark
+    # The polarity mark is a SEPARATE sentinel-delimited token, never glued to the
+    # affix. Gluing it (the original design) let BPE fuse `affix+mark` as one merge,
+    # so the affix itself never became a single token and the REFIT codec stalled at
+    # 3-5/12 on N-2 no matter the frequency. Splitting it restores 12/12 (H_003 N-2).
+    return render(stem, [af]) + SENTINEL + mark
+
+
+def _pick_neg(spec: dict, phase: int, rng: random.Random) -> str:
+    """Choose a NEG affix. In phase 2 the novel allomorphs are over-weighted so BPE
+    can actually fuse them (see NOVEL_NEG_SHARE_P2); phase 1 is uniform over its 4."""
+    negs = neg_forms(spec, phase)
+    if phase == 1:
+        return rng.choice(negs)
+    novel = set(spec["novel_neg_forms"])
+    novel_list = sorted(f for f in negs if f in novel)
+    carried_list = sorted(f for f in negs if f not in novel)
+    if novel_list and (not carried_list or rng.random() < NOVEL_NEG_SHARE_P2):
+        return rng.choice(novel_list)
+    return rng.choice(carried_list)
 
 
 def stream(spec: dict, phase: int, seed_offset: int = 0):

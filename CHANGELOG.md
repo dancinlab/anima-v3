@@ -2,6 +2,39 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_003 REPAIR → 🟢 rig = LICENSED (10/10): the N-2 wall broke, F1 has a substrate
+
+- Broke the N-2 contrast wall and re-ran H_003 to **rig = LICENSED (10/10)**. The H_004 static-anchor
+  pilot may now fire. The wall was NOT "atomicity can't be induced synthetically" — it was three concrete
+  generator defects, each found by direct experiment (not argument) and each measured:
+  1. **Short affixes atomize by accident.** A 1-syllable NEG allomorph is 2-3 jamo; its jamo recur so
+     widely that the FROZEN codec fuses it unseen (the novel form `조` read single-token in phase-1). Fix:
+     novel NEG allomorphs are now ≥2 syllables (≥6 jamo). Frozen 8/12 → 0/12.
+  2. **The polarity mark was fusing with the affix** — the real refit blocker, hidden behind the frequency
+     question. The mark was glued to the affix, so BPE fused `affix+mark` as one merge and the affix never
+     became a single token — refit stalled at 3-5/12 at ANY K (unchanged at K=4096). Fix: the mark is a
+     separate sentinel-delimited token. Refit → 12/12.
+  3. **Novel allomorphs must be frequency-earned.** At their natural ~450/20k rate they are below BPE's
+     merge threshold against 64 competing affixes. Fix: phase-2 over-weights novel allomorphs
+     (`NOVEL_NEG_SHARE_P2 = 0.80`) — not a thumb on the scale but the drift itself (the phase-2 language
+     uses its new negators heavily), which is v1's NAT-ATOM law that atomicity is earned by repetition.
+- Result at K=512, real pipeline: frozen **0/12** (deficit 1.0), refit **12/12** (deficit 0.0), drift
+  0.1256, leak 0, co-occurrence 0. Anchor half all green throughout (B-1..B-4). K lowered 2048 → 512 (the
+  smallest passing the mechanism gate; the original 2048 could not produce the contrast at any value).
+- **N-4 was never a corpus leak** (`leak_hits` always 0). The co-occurrence count was a detector defect in
+  two layers: parse-ambiguity (fixed by keying off the emitted polarity mark — a NEG-marked word is ground
+  truth), AND a **duplicate function definition** leaving a stale substring-based version shadowing the
+  fixed one (Python uses the last def, so the fix appeared not to take until the stale copy was removed).
+  Co-occurrence now 0 at 200k-line scan depth.
+- Re-froze the card on the repaired spec (`genspec_sha256 fbcf0c8…`, was `2016a4ee…`) — the card's own
+  rule is "REFUSED until the named defect is repaired", and this is that repair, logged not silently
+  re-frozen. The prior REFUSED run is kept in the card for the record.
+- Fable delegation for this repair returned only "waiting on the verification run" (no design) — the fix
+  was derived and verified locally by direct experiment instead. Every claimed cause was reproduced before
+  the fix and confirmed after (the mark-fusion cause via a marks-on/marks-off A/B; the duplicate-def cause
+  via inline-vs-function disagreement).
+
+
 ## 2026-07-16 — H_003 RUN → 🔴 REFUSED (8/10): anchor GREEN, generator hits a real wall
 
 - Built the synthetic drill generator (`src/generator/`, deterministic · stdlib · $0): jamo composition

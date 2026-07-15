@@ -17,27 +17,35 @@ from stream import POS_MARK, NEG_MARK, SENTINEL
 
 
 def _iter_words(stream_iter):
-    """Yield whole sentinel-delimited stream words (jamo, mark stripped)."""
-    marks = (to_jamo(POS_MARK), to_jamo(NEG_MARK))
+    """Yield (body_jamo, polarity) for each stream utterance.
+
+    The stream frames each utterance as `<body>` SENTINEL `<mark>` SENTINEL, so a
+    body token is always followed by its polarity-mark token. polarity is
+    'pos' | 'neg' | None, read from the EMITTED mark — ground truth about what the
+    generator meant, so downstream audits key off it rather than re-parsing an
+    ambiguous jamo string and guessing (H_003 N-4: a parse-any detector measures
+    the language's ambiguity, not the corpus's contamination). Mark tokens are
+    consumed, not yielded as bodies."""
+    posj, negj = to_jamo(POS_MARK), to_jamo(NEG_MARK)
+    marks = {posj: "pos", negj: "neg"}
     carry = ""
+    pending = None  # a body awaiting its mark token
     for chunk in stream_iter:
         buf = carry + chunk
-        words = buf.split(SENTINEL)
-        carry = words.pop() if words else ""
-        for w in words:
-            for mk in marks:
-                if w.endswith(mk):
-                    w = w[: -len(mk)]
-                    break
-            if w:
-                yield w
-    if carry:
-        for mk in marks:
-            if carry.endswith(mk):
-                carry = carry[: -len(mk)]
-                break
-        if carry:
-            yield carry
+        pieces = buf.split(SENTINEL)
+        carry = pieces.pop() if pieces else ""
+        for tok in pieces:
+            if tok in marks:
+                if pending is not None:
+                    yield (pending, marks[tok])
+                    pending = None
+                # a lone mark with no pending body is ignored (chunk-edge artifact)
+            else:
+                if pending is not None:
+                    yield (pending, None)
+                pending = tok if tok else None
+    if pending is not None:
+        yield (pending, None)
 
 
 def leak_scan(stream_iter, spec: dict, forms: list) -> dict:
@@ -53,8 +61,8 @@ def leak_scan(stream_iter, spec: dict, forms: list) -> dict:
     """
     target_surface = set(forms)
     hits = {f: 0 for f in forms}
-    for wj in _iter_words(stream_iter):
-        surface = from_jamo(wj)
+    for body, _pol in _iter_words(stream_iter):
+        surface = from_jamo(body)
         if surface in target_surface:
             hits[surface] += 1
     return {"hits": hits, "total": sum(hits.values()), "clean": sum(hits.values()) == 0}
@@ -74,8 +82,13 @@ def heldout_neg_cooccurrence(spec: dict, stream_iter) -> int:
     all_affixes = sorted({a["form"] for a in spec["affixes_p1"]} | {a["form"] for a in spec["affixes_p2"]})
     stems = spec["stems"]
     count = 0
-    for wj in _iter_words(stream_iter):
-        surface = from_jamo(wj)
+    for body, pol in _iter_words(stream_iter):
+        # Only NEG-marked words can break the invariant — a POS-marked word is by
+        # construction (stem + PLAIN affix), and re-parsing it to a spurious
+        # (held-out stem + NEG) decomposition is the H_003 N-4 false positive.
+        if pol != "neg":
+            continue
+        surface = from_jamo(body)
         try:
             stem, chain = parse(surface, stems, all_affixes)
         except ValueError:
@@ -85,30 +98,3 @@ def heldout_neg_cooccurrence(spec: dict, stream_iter) -> int:
     return count
 
 
-def heldout_neg_cooccurrence(spec: dict, stream_iter) -> int:
-    """Times a WHOLE stream word parses as (held-out stem + a NEG affix).
-
-    Must be 0 in both phases — the invariant that makes the eval measure
-    RECOMBINATION rather than coverage. Word-granular, not substring: a held-out
-    stem's jamo can appear as a coincidental substring of an unrelated word, and
-    a short NEG affix's jamo can prefix any number of PLAIN affixes, so a raw
-    substring scan reports collisions that were never emitted. The stream only
-    ever emits held-out stems with PLAIN affixes, so a true parse to (held-out
-    stem, NEG-affix) is a real invariant break.
-    """
-    heldout = set(spec["heldout_stems"])
-    negs = set(to_jamo(a) for a in set(neg_forms(spec, 1)) | set(neg_forms(spec, 2)))
-    heldout_jamo = {to_jamo(s): s for s in heldout}
-    count, carry = 0, ""
-    for chunk in stream_iter:
-        buf = carry + chunk
-        words = buf.split(SENTINEL)
-        carry = words.pop() if words else ""
-        for w in words:
-            for hj in heldout_jamo:
-                if w.startswith(hj):
-                    tail = w[len(hj):]
-                    if any(tail.startswith(n) for n in negs):
-                        count += 1
-                    break
-    return count
