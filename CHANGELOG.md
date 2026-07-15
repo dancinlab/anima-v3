@@ -2,6 +2,39 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_004 pre-registered; a $0 numpy pre-check BLOCKED the GPU run and reframed F1
+
+- PRE-REGISTERED + FROZEN `H_004 f1-static-anchor-pilot` (Fable design): the campaign's first
+  non-$0 measurement — Δ_pilot = F2(oracle codec) − F2(frozen codec) on held-out flips, the CEILING
+  of the codec effect (oracle ≥ refit by construction). Δ_pilot ≥ 0.20 licenses the H_002′ twin with
+  delta_min = Δ_pilot/2; below it the twin is REFUSED. 5 runs, 4.9M transformer, forced-choice mark
+  prediction, 7 falsifiers. Fable's compute finding: **no GPU needed** — ~4 PFLOP total, MPS overnight
+  at $0 (<$2 RTX-4090 fallback).
+- Built the pieces every training path needs: `src/generator/materialize.py` (encode phase streams +
+  eval items to token ids under a codec — establishes codec-fairness once), and a validated numpy
+  neural LM (`state/h004…/nlm.py`, gradient-checked to 4e-11, learns a periodic seq to loss 0.037).
+- **The $0 pre-check caught a rig-invalidating defect before any spend** (`run_proxy.py`, 55s):
+  **Δ_proxy = −0.048** — the FROZEN arm (F2=0.971) BEAT oracle (F2=0.923), both far above chance. The
+  expected oracle >> frozen did not appear. This is research-before-real-measurement working exactly as
+  intended — the defect surfaced in 55 seconds of CPU, not after a GPU run producing a misleading
+  Δ_pilot ≈ 0 that would have been misread as "F1 refuted".
+- Root cause, verified two ways independent of the weak model: the 12 novel NEG allomorphs come from a
+  DISJOINT inventory, so under the frozen codec they fragment into 27 tokens that are ALL neg-exclusive;
+  the LAST token alone separates NEG from PLAIN with 0 overlap. So the held-out flip is solvable by
+  FRAGMENT-LOOKUP — no recombination, no atomicity — at ANY scale. Δ_pilot ≈ 0 would be a RIG DEFECT
+  (frozen control too strong), not evidence about F1.
+- **This reframes F1 itself.** MORPH-ATOM measured codec vs RAW utf-8; raw utf-8 failed (C1=0.617)
+  because bytes are MAXIMALLY shared — no sub-unit carries class. A frozen BPE that only FRAGMENTS the
+  morpheme but keeps fragments class-exclusive recombines fine. So the lever L4(b) measured may be
+  REPRESENTATION-NON-SHARING, not single-token ATOMICITY — which would demote F1's central thesis to a
+  special case, and means a refit organ may buy little over a good static codec. Handed to a Fable
+  reframing analysis (Q1-Q5: is F1 reframed · is the rig fixable · does the kill logic change · was
+  MORPH-ATOM mislabeled · is F1-first still right).
+- Recorded in the SSOT (`verification-h004`, `rig-pilot-frozen-control-invalid`) and the H_004 card's
+  verdict (PRE-CHECK BLOCKED). The torch/MPS run is blocked pending the rig fix + reframing verdict; the
+  card is repaired-in-place when they land (as H_003 was). Registry: H_004 = ⚪ blocked-on-rig-defect.
+
+
 ## 2026-07-16 — H_003 REPAIR → 🟢 rig = LICENSED (10/10): the N-2 wall broke, F1 has a substrate
 
 - Broke the N-2 contrast wall and re-ran H_003 to **rig = LICENSED (10/10)**. The H_004 static-anchor

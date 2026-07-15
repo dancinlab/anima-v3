@@ -16,7 +16,10 @@ the H_003 gate measures and the H_004 pilot would train on.
 - `stream.py` — `stream`/`stream_sample`/`probes`/`eval_items`.
 - `codec.py` — `fit_bpe_jamo`/`Codec.boundaries`/`boundary_delta_matrix`/
   `boundary_shift_rate`/`atomicity_audit`.
-- `audit.py` — `leak_scan`/`heldout_neg_cooccurrence`.
+- `audit.py` — `leak_scan`/`heldout_neg_cooccurrence` (parse-based, mark-keyed).
+- `materialize.py` — `vocab`/`encode_ids`/`stream_ids`/`eval_encoded`: encode phase streams
+  and eval items to token ids under a given codec, so codec-fairness (each arm scored under
+  its OWN tokenization) is established once for every training path.
 
 ## Rules
 

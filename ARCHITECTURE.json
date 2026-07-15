@@ -1035,6 +1035,22 @@
       {
        "id": "rig-pilot-kill-power",
        "role": "PRE-COMMIT: if delta_pilot < 0.20 (so delta_min < 0.10, N > 1178/arm) the $25 drill twin is REFUSED — the ceiling is too low to detect the refit increment underneath it at this budget."
+      },
+      {
+       "id": "rig-pilot-frozen-control-invalid",
+       "role": "BLOCKER (H_004 $0 proxy): the FROZEN arm is NOT a valid no-atomicity control — its fragments of the novel allomorphs are class-exclusive (27/27 neg-only), so it solves the held-out flip by fragment-lookup without atomicity. A valid control needs class-AMBIGUOUS fragments. See `verification-h004`.",
+       "children": [
+        {
+         "id": "rig-pilot-lever-question",
+         "role": "The deeper question this raises: is F1's lever ATOMICITY (single-token) or REPRESENTATION-NON-SHARING (sub-units not shared across classes)?",
+         "children": [
+          {
+           "id": "rig-pilot-lever-implication",
+           "role": "A frozen BPE already achieves representation-non-sharing, so a refit organ may buy little over a good static codec — which sharpens, and may pre-empt, Delta_pilot's whole question."
+          }
+         ]
+        }
+       ]
       }
      ]
     },
@@ -1329,6 +1345,54 @@
       }
      ],
      "type": "gate"
+    },
+    {
+     "id": "verification-h004",
+     "role": "H_004 f1-static-anchor-pilot — PRE-REGISTER-FROZEN 2026-07-16 (genspec fbcf0c8, K=512). The seeded torch/MPS pilot is BLOCKED: a $0 numpy pre-check caught a rig-invalidating defect before any spend.",
+     "children": [
+      {
+       "id": "verification-h004-proxy-finding",
+       "role": "PRE-CHECK (run_proxy.py · numpy · 55s · $0): Delta_proxy = -0.048 — FROZEN F2=0.971 BEAT oracle F2=0.923, both far above chance. The expected oracle >> frozen did not appear. This is the research-before-measurement rule paying off: the defect was caught in 55s of CPU, not after a GPU run."
+      },
+      {
+       "id": "verification-h004-defect",
+       "role": "ROOT CAUSE (structural, model-independent): the frozen arm solves the held-out flip by FRAGMENT-LOOKUP, not recombination.",
+       "children": [
+        {
+         "id": "h004-defect-exclusive",
+         "role": "The 12 novel NEG allomorphs come from a DISJOINT inventory, so under the frozen codec they fragment into 27 tokens that are ALL neg-exclusive."
+        },
+        {
+         "id": "h004-defect-lastok",
+         "role": "The LAST token alone separates NEG from PLAIN with 0 overlap. So Delta_pilot ~ 0 is a RIG DEFECT (frozen control too strong), not evidence about F1 — at any scale."
+        }
+       ]
+      },
+      {
+       "id": "verification-h004-reframes-f1",
+       "role": "REFRAMES F1's lever (open, handed to Fable): the lever L4(b) measured may be REPRESENTATION-NON-SHARING, not single-token ATOMICITY.",
+       "children": [
+        {
+         "id": "h004-reframe-morphatom",
+         "role": "MORPH-ATOM measured codec vs RAW utf-8. Raw utf-8 failed (C1=0.617) because bytes are MAXIMALLY shared — no sub-unit carries class."
+        },
+        {
+         "id": "h004-reframe-consequence",
+         "role": "A frozen BPE that only FRAGMENTS the morpheme but keeps fragments class-exclusive recombines fine. That would demote F1's central atomicity thesis to a special case. Unresolved."
+        }
+       ]
+      },
+      {
+       "id": "verification-h004-fix-question",
+       "role": "The rig is fixable only if novel allomorphs can be built whose FRAGMENTS are class-AMBIGUOUS (shared with plain material) so only whole-token atomicity carries the NEG class.",
+       "children": [
+        {
+         "id": "h004-fix-open",
+         "role": "OPEN: whether BPE's frequency-driven merging always recovers a class-exclusive fragment anyway. If it does, the synthetic-atomicity approach may be unable to isolate the lever at all."
+        }
+       ]
+      }
+     ]
     }
    ]
   }
