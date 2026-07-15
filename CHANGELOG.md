@@ -2,6 +2,35 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_006 RUN → 🔴 F3-BOUNDED-REFUSED: the diary twin cancelled at $0 (distributed MI)
+
+- Fable designed the F3 diary twin (H_007) and — crucially — a $0 precursor that GATES its ~12h training
+  spend: `H_006 f3-bounded-oracle`. Pre-registered, ran it, verdict **F3-BOUNDED-REFUSED**: the twin is
+  CANCELLED before it cost anything. Research-before-real-measurement working a third time.
+- Per day-pair, each line of day t was scored by marginal gzip lift; the hindsight top lines up to budget
+  k were taken; ceiling(k) measured with markov6 (ppm confirm) vs the H_005 shuffle floor. Line-structured
+  planted liveness PASSED (0.366). 144 oracle extracts emitted.
+- **A hindsight k≤4096-byte text extract retains only ~4% of anima's +0.27 full-day ceiling** (over-floor
+  +0.012 markov6 / +0.019 ppm at k=4096, both < ε=0.02; hexa-lang likewise below ε). The day-specific MI is
+  DISTRIBUTED uniformly across the whole day (median 83 KB) — 5% of the bytes carries ~4% of the ceiling —
+  not localizable into a small diary. A hindsight top-lines selector is a LOWER bound on any bounded diary,
+  and it captures almost nothing.
+- **Honest scope**: KILLS F3's PRIMARY formulation — a k-TOKEN readable-text diary (F3.how: "m hard-
+  bottlenecked to k tokens"). Does NOT cleanly kill a CONTINUOUS learned bottleneck (the k-dim-vector
+  variant, a higher bound not directly measured) — but the distributed-MI finding is a real headwind, and
+  the twin as Fable designed it is undermined regardless (its oracle arm = these text extracts, now
+  near-floor, so it could not anchor a meaningful delta_min).
+- The F3 DIARY line is SPENT at $0 — the third campaign line terminated by cheap structural analysis (after
+  F1's terminal and the write-lever axis). Recorded convergence law `cr-distributed-mi-not-bottleneckable`:
+  an anchored UNBOUNDED MI does not imply a BOUNDED diary can capture it; always gate the bottlenecked
+  mechanism with a $0 bounded-extract precursor before training.
+- Bugs fixed en route (caught by controls): H_005's planted stream has no newlines so the line extractor
+  couldn't test it → added a line-structured planted liveness (PASS 0.366); and the per-k re-ranking
+  slowdown → rank lines once per pair, reuse across estimators.
+- Two artifacts also saved: `NOTE_diary-size-precursor.md` (the $0 pre-check that motivated H_006) and
+  `DESIGN_fable_twin.md` (the full H_007 twin design, now cancelled). Registry: H_006 🔴.
+
+
 ## 2026-07-16 — H_005 RESOLVED → 🟢 ANCHORED: F3 is licensed (the campaign's first pre-anchored effect size)
 
 - Resolved H_005 from PENDING(instrument) to **ANCHORED (F3 licensed)** at $0, by building the efficient

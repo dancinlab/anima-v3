@@ -1637,6 +1637,43 @@
       }
      ],
      "type": "gate"
+    },
+    {
+     "id": "verification-h006",
+     "role": "H_006 f3-bounded-oracle — RUN 2026-07-16 · verdict F3-BOUNDED-REFUSED (text/token diary), twin CANCELLED at $0. The precursor killed the ~12h training twin before it cost anything.",
+     "children": [
+      {
+       "id": "verification-h006-finding",
+       "role": "A hindsight top-lines text extract of k<=4096 bytes retains only ~4% of anima's +0.27 full-day ceiling.",
+       "children": [
+        {
+         "id": "h006-finding-numbers",
+         "role": "over-floor +0.012 markov6 / +0.019 ppm at k=4096, both < eps=0.02. The day-MI is DISTRIBUTED across the whole day (median 83 KB), not localizable (5% of bytes ~ 4% of ceiling, uniform). Line-structured liveness PASSED (0.366)."
+        }
+       ]
+      },
+      {
+       "id": "verification-h006-scope",
+       "role": "KILLS F3's PRIMARY formulation — a k-TOKEN readable-text diary (F3.how: 'm hard-bottlenecked to k tokens').",
+       "children": [
+        {
+         "id": "h006-scope-residue",
+         "role": "DOES NOT cleanly kill a CONTINUOUS learned bottleneck (the k-dim-vector variant), a higher bound not directly measured — but the distributed-MI finding is a real headwind, and the twin as designed is undermined anyway (its oracle arm = these text extracts, now near-floor)."
+        }
+       ]
+      },
+      {
+       "id": "verification-h006-consequence",
+       "role": "The F3 DIARY line — readable-token form (refuted) + twin-as-designed (oracle near-floor) — is SPENT at $0.",
+       "children": [
+        {
+         "id": "h006-consequence-next",
+         "role": "The third campaign line terminated by cheap structural analysis (after F1's terminal and the write-lever axis). Residue: a high-capacity continuous bottleneck beating a distributed-MI wall — no cheap test settles it, headwind documented. Next = campaign re-decision, not another F3 rig."
+        }
+       ]
+      }
+     ],
+     "type": "gate"
     }
    ]
   },
@@ -1659,6 +1696,22 @@
         {
          "id": "cr-atom-lesson",
          "role": "LESSON: a synthetic drill can never prove 'atomicity helps' against a transformer that binds n-grams; the honest F1 question is GENERATION / long-range credit / continual-interference, not receptive flip classification. Reached at $0 by a guard battery, pre-empting a GPU run."
+        }
+       ]
+      },
+      {
+       "id": "cr-distributed-mi-not-bottleneckable",
+       "role": "cr-distributed-mi-not-bottleneckable (H_006, 2026-07-16): an anchored UNBOUNDED mutual information (H_005) does NOT imply a BOUNDED diary can capture it.",
+       "children": [
+        {
+         "id": "cr-distributed-detail",
+         "role": "anima's day-MI is distributed uniformly across ~83 KB, so a hindsight k<=4096 extract (a lower bound on any bounded diary) retains ~4%.",
+         "children": [
+          {
+           "id": "cr-distributed-lesson",
+           "role": "LESSON: after anchoring an unbounded ceiling, ALWAYS gate the bottlenecked mechanism with a $0 bounded-extract precursor before training — a distributed signal is real but un-compressible into the proposed bottleneck. Killed the F3 twin's ~12h spend at $0."
+          }
+         ]
         }
        ]
       }
