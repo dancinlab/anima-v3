@@ -315,3 +315,37 @@ FALSIFIER LEDGER
   is not "Fable erred" but that **a falsifier written against an unrecovered metric encodes
   a guess about that metric**, and this card froze `chance_p0` as `?` without noticing that
   G-4's *logic*, not just its parameter, depended on the answer.
+
+### Corrections to this card, logged not silently edited (2026-07-16, post-verdict)
+
+The verdict above stands unchanged; these correct **factual errors in it** found by reading the
+recovered v1 record further. They are logged here rather than edited in place, because a frozen
+card that quietly rewrites its own limits is worth nothing.
+
+- **L8 above is WRONG on "1 seed".** A CEMENT replication exists (2026-07-14, pod 44701951,
+  seed 7): M = 0.9167 vs C1 = 0.5750, **Δ = +0.3417** against the original run's +0.291, with
+  M's replication deviation of just **0.009** and every arm's V1 liveness PASS. The anchor is
+  *stronger* than this card recorded — two seeds, replicated, mechanism probed by a C2 arm.
+  The replication also **reinforces** the G-4 reading above: the replicate control C1 = 0.5750
+  sits inside the chance band more comfortably than 0.6167 did. A control at chance is the
+  expected reading, twice over.
+- **`rig-model`'s scale premise was FALSE, and this card repeated it.** "10M = MORPH-ATOM
+  scale, the scale at which the link was measured" is contradicted by the v1 verdict header:
+  `anima-py 303M CLMConvMoE d3784 L4 Emax4`, CPT warm-start from a pretrained base with
+  reinit-embed surgery. **Nothing was ever measured at 10M-from-scratch.** This card read that
+  header during G-5 and did not connect it — so `decision-attributability`, the stated reason
+  F1 was selected first, rested on a claim its own source document refutes.
+- **`delta_min` = 0.15 has no valid lineage.** "Half of 0.291" transfers a number across three
+  unbridged gaps: contrast (raw-vs-codec ≠ frozen-vs-adaptive), substrate (303M ≠ 10M), corpus
+  (real Korean NSMC + drill ≠ fully synthetic). With it unanchored, a null at N sized for 0.15
+  is **not attributable**. The REFUSED verdict was more correct than its own stated reasons.
+- **The harness bug this card's G-3 certified as absent.** `binom_pmf` computed
+  `math.comb(n,k)` as an exact int and multiplied it by a float → **OverflowError at n ≳ 1100**,
+  so `chance_band(1178, …)` crashed — exactly the floor of the re-derived operating point. G-3
+  passed because its fixtures only ever exercised n=120, the regime that happened to be in use.
+  **A positive control that only probes the regime you already trust certifies nothing.** Fixed
+  in log space via `lgamma`; fixtures now pin n ∈ {1100, 1178, 2000, 5000}. The H_001 verdict
+  was re-run under the fixed estimator and is byte-identical — the bug never touched it.
+- **New salvage law recorded**: `l10-codec-swap-costs-the-embedding` — a codec change makes the
+  existing embedding an *actively wrong prior*, worse than random init. The divergence pass
+  missed it and it is the sharpest live threat to F1, the selected family.

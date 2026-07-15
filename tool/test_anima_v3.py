@@ -176,6 +176,34 @@ def main() -> int:
     _results.append(ok)
     print(f"{'PASS' if ok else 'FAIL'}  {'chance_band tightens as n grows':<52} n=480 tighter than n=120")
 
+    # REGRESSION — the instrument must not die in the regime the campaign measures in.
+    # The naive `math.comb(n,k) * p**k` form raises OverflowError at n >~ 1100, which is
+    # exactly where a properly-powered panel lives (H_001's re-derived N > 1178). The
+    # original fixtures only probed n=120 — the regime that happened to be in use — so
+    # they certified an instrument that was blind where it mattered (salvage l6).
+    print("\n=== binomial at panel scale (regression: overflow at n>~1100) ===")
+    for big_n in (1100, 1178, 2000, 5000):
+        try:
+            v = binom_pmf(big_n // 2, big_n, 0.5)
+            ok = 0.0 < v < 1.0
+        except Exception as e:
+            ok, v = False, f"RAISED {type(e).__name__}"
+        _results.append(ok)
+        print(f"{'PASS' if ok else 'FAIL'}  {f'binom_pmf(n/2, {big_n}, 0.5) is finite':<52} got={v}")
+    # Total mass must still be 1 at panel scale.
+    check("binom_cdf(n, 2000, 0.5) = 1 (total mass)", binom_cdf(2000, 2000, 0.5), 1.0, tol=1e-9)
+    # Symmetry survives log-space at scale.
+    check("binom symmetry at n=1178", binom_cdf(500, 1178, 0.5), binom_sf(678, 1178, 0.5), tol=1e-12)
+    # The band must exist and tighten at panel scale.
+    lo_b, hi_b = chance_band(1178, 0.5, 0.99)
+    ok = lo_b < 0.5 < hi_b and (hi_b - 0.5) < (chance_band(120, 0.5, 0.99)[1] - 0.5)
+    _results.append(ok)
+    print(f"{'PASS' if ok else 'FAIL'}  {'chance_band(1178) exists and is tighter':<52} got=({lo_b:.4f},{hi_b:.4f})")
+    # Degenerate rates must not blow up in log space.
+    check("binom_pmf(0, 10, 0.0) = 1 (degenerate p)", binom_pmf(0, 10, 0.0), 1.0)
+    check("binom_pmf(10, 10, 1.0) = 1 (degenerate p)", binom_pmf(10, 10, 1.0), 1.0)
+    check("binom_pmf(3, 10, 0.0) = 0 (degenerate p)", binom_pmf(3, 10, 0.0), 0.0)
+
     print("\n=== normal quantile + power ===")
     check("normal_quantile(0.5) = 0", normal_quantile(0.5), 0.0, tol=1e-9)
     check("normal_quantile(0.975) = 1.959964", normal_quantile(0.975), 1.959964, tol=1e-5)

@@ -241,27 +241,53 @@ def bits_per_byte(ce_nats_per_token: float, n_tokens: int, n_bytes: int) -> floa
 # --- closed-form power + chance bands (G-2 / G-4) ------------------------------
 
 def binom_pmf(k: int, n: int, p: float) -> float:
-    """Exact binomial probability mass P(X = k) for n trials at rate p."""
+    """Binomial probability mass P(X = k) for n trials at rate p.
+
+    Computed in LOG SPACE via lgamma. The obvious form —
+    `math.comb(n, k) * p**k * (1-p)**(n-k)` — raises OverflowError once
+    `math.comb` exceeds the float range (n >~ 1100), which is precisely the
+    regime a properly-powered panel lives in. An instrument that dies exactly
+    where the campaign needs to measure is a blind instrument (salvage l6).
+    """
     if not (0 <= k <= n):
         raise ValueError(f"k must be in [0, n]: k={k}, n={n}")
     if not (0.0 <= p <= 1.0):
         raise ValueError(f"p must be in [0,1]: {p}")
-    return math.comb(n, k) * (p ** k) * ((1.0 - p) ** (n - k))
+    # Degenerate rates: the mass sits entirely on one outcome.
+    if p == 0.0:
+        return 1.0 if k == 0 else 0.0
+    if p == 1.0:
+        return 1.0 if k == n else 0.0
+    log_comb = math.lgamma(n + 1) - math.lgamma(k + 1) - math.lgamma(n - k + 1)
+    log_pmf = log_comb + k * math.log(p) + (n - k) * math.log1p(-p)
+    if log_pmf < -745.0:  # below the smallest positive double; exp() would be 0.0 anyway
+        return 0.0
+    return math.exp(log_pmf)
+
+
+def _binom_masses(n: int, p: float) -> list:
+    """All n+1 point masses, computed once. Callers that need both tails should
+    reuse this rather than recomputing lgamma per term."""
+    return [binom_pmf(i, n, p) for i in range(n + 1)]
 
 
 def binom_sf(k: int, n: int, p: float) -> float:
-    """Exact upper tail P(X >= k). Summed directly — no normal approximation.
+    """Upper tail P(X >= k). Summed term-by-term — no normal approximation.
 
     The approximation is what makes a razor-thin verdict unfalsifiable: near the
     band edge the normal and exact answers straddle the threshold, and then the
     verdict is a property of the estimator rather than of the data.
     """
-    return sum(binom_pmf(i, n, p) for i in range(k, n + 1))
+    if not (0 <= k <= n):
+        raise ValueError(f"k must be in [0, n]: k={k}, n={n}")
+    return math.fsum(binom_pmf(i, n, p) for i in range(k, n + 1))
 
 
 def binom_cdf(k: int, n: int, p: float) -> float:
-    """Exact lower tail P(X <= k)."""
-    return sum(binom_pmf(i, n, p) for i in range(0, k + 1))
+    """Lower tail P(X <= k)."""
+    if not (0 <= k <= n):
+        raise ValueError(f"k must be in [0, n]: k={k}, n={n}")
+    return math.fsum(binom_pmf(i, n, p) for i in range(0, k + 1))
 
 
 def binom_two_sided_p(k: int, n: int, p: float) -> float:
@@ -287,11 +313,19 @@ def chance_band(n: int, p0: float = 0.5, conf: float = 0.99) -> tuple:
     if not (0.0 < conf < 1.0):
         raise ValueError(f"conf must be in (0,1): {conf}")
     alpha = 1.0 - conf
-    lo = 0
-    while lo <= n and binom_cdf(lo, n, p0) < alpha / 2.0:
+    masses = _binom_masses(n, p0)  # one pass; the naive form recomputes a tail per candidate
+
+    lo, acc = 0, 0.0
+    while lo <= n:
+        acc += masses[lo]
+        if acc >= alpha / 2.0:
+            break
         lo += 1
-    hi = n
-    while hi >= 0 and binom_sf(hi, n, p0) < alpha / 2.0:
+    hi, acc = n, 0.0
+    while hi >= 0:
+        acc += masses[hi]
+        if acc >= alpha / 2.0:
+            break
         hi -= 1
     return (lo / n, hi / n)
 

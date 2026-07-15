@@ -34,9 +34,9 @@
   "chance_p0": 0.5,
   "C1_inside_band": true,
   "M_inside_band": false,
-  "C1_two_sided_p": 0.013376326728236734,
-  "M_two_sided_p": 1.938132755385024e-21,
-  "C3_two_sided_p": 1.917329051435738e-22,
+  "C1_two_sided_p": 0.013376326728236463,
+  "M_two_sided_p": 1.9381327553850672e-21,
+  "C3_two_sided_p": 1.9173290514357787e-22,
   "delta_M_C1": 0.29166666666666663,
   "n_required": 444,
   "power_operating_point": [

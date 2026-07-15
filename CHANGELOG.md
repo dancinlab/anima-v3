@@ -2,6 +2,66 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — repair pass: three false premises corrected, a blind instrument fixed, a new salvage law
+
+- **Corrected a FALSE PREMISE that the F1 selection rested on.** `rig-model` and H_001 both claimed 10M is
+  "MORPH-ATOM scale, the scale at which the codec→recombination link was measured". The v1 verdict header
+  reads `anima-py 303M CLMConvMoE d3784 L4 Emax4` — **nothing was ever measured at 10M-from-scratch**.
+  H_001 read that header during G-5 and failed to connect it. `decision-attributability` is marked
+  SUPERSEDED: its argument was false twice (wrong scale; and it anchored delta_min on the static half it
+  had just declared common-mode).
+- **`delta_min` = 0.15 has no valid lineage.** "Half of 0.291" transfers a number across three unbridged
+  gaps: contrast (raw-vs-codec ≠ frozen-vs-adaptive), substrate (303M ≠ 10M), corpus (real Korean NSMC ≠
+  synthetic). A null at N sized for 0.15 is therefore NOT attributable — H_001's REFUSED verdict was more
+  correct than its own stated reasons.
+- **An internal objection ("the static effect cancels between the arms, so the refit effect has no anchor
+  anywhere") was itself REFUTED, and the refutation is recorded**: drift breaks the symmetry. The frozen
+  codec's atomicity is a WASTING ASSET — phase-2's new affixes are absent from the phase-1 merge table, so
+  on the drifted region the frozen arm IS a local C1 and the adaptive arm IS a local M. The costs
+  (swap/retention/interference) are unanchored, and that is fine: they are what the twin ASKS, not a power
+  assumption.
+- **The rig has NO LIVENESS ARM** — a defect, not a gap. v1's precedent is direct: the S1 4-pod fire's
+  C3 = 0.50 correctly converted four apparently-null arms into "four instrumentation bugs", which were then
+  found. Fix recorded: a shared-ID collapse arm (C3′), rule F2(C3′) ≥ 0.90 else the run is INVALID not FAIL.
+  The twin grows 11 → 12 runs.
+- **Fixed a blind instrument, and the positive control that certified it.** `binom_pmf` computed
+  `math.comb(n,k)` as an exact int and multiplied by a float → **OverflowError at n ≳ 1100**, so
+  `chance_band(1178, …)` crashed — exactly the floor of the re-derived operating point. G-3 passed because
+  its fixtures only ever exercised n=120, the regime already in use. **A positive control that only probes
+  the regime you already trust certifies nothing.** Fixed in log space via `lgamma`; `chance_band` also made
+  single-pass (it was O(n²) and unusable at panel scale). Fixtures 46 → 56, pinning n ∈ {1100, 1178, 2000,
+  5000} and the degenerate rates. H_001 re-run under the fixed estimator: **byte-identical verdict** — the
+  bug never touched it (verdict-integrity).
+- **NEW SALVAGE LAW `l10-codec-swap-costs-the-embedding`**, recovered from the v1 record and missed by the
+  divergence pass: a codec change makes the existing embedding an *actively wrong prior*, measurably worse
+  than random init — gradient must first DESTROY the old alphabet's structure. 8k CPT across a swap bought
+  discrimination but zero semantics (drill loss 0.009 with F1 = 0.50 = pure memorization); even the
+  answer-handed C3 arm went dead. The fix that worked was reinit-embed surgery + ~20-25k gate-terminated
+  steps. It is the sharpest live threat to F1 and it contradicts the design's ZeTT-based comfort.
+- **Corrected the anchor: it is STRONGER than H_001 recorded, not weaker.** A CEMENT replication exists
+  (2026-07-14, seed 7): M = 0.9167 vs C1 = 0.5750, **Δ = +0.3417** (original +0.291), M's replication
+  deviation **0.009**, all arms V1 liveness PASS. H_001's "1 seed" limit was wrong. The replicate control
+  0.5750 also sits inside the chance band — reinforcing that a control at chance is the expected reading.
+  The C2 arm split the mechanism: the held-out stem **deleted from the CPT corpus** still scored 0.9167,
+  so atomicity is a **structural slot, not a pretrained address** — the best reason to expect a 303M→10M
+  transfer.
+- **F1-first RE-DERIVED and SURVIVES**: the anchor defect is a rig disease, not an F1 disease, and F4 has the
+  same disease with less immunity (equally unanchored effect, static v1-substrate evidence, plus the Goodhart
+  probe-battery burden l6 flags as the jugular). F3 unchanged as the second card.
+- **Revised sequence recorded** (≤ $35 total, each step with named kill-power): H_003 `f1-anchor-recheck`
+  ($0, deterministic — bounds + generator + G-1 drift + G-2 emittability) → H_004 `f1-static-anchor-pilot`
+  (≤$10, 5 runs — measures Δ_pilot = the hard upper bound on what refit can deliver, since oracle ≥ refit by
+  construction; kill: Δ_pilot < 0.20 → the twin is REFUSED) → H_002′ (12 runs, delta_min = Δ_pilot/2). After
+  the pilot, **no number transfers from MORPH-ATOM at all** — it serves only as the existence proof of the
+  mechanism class.
+- Power table re-derived from p0 = 0.50: delta_min 0.10 → N=1178/arm · 0.15 → N=510 · 0.20 → N=277. The
+  fictitious 444 is retired. Compound rule pre-registered (pooled p < 0.01 AND median-over-seeds Δ ≥
+  delta_min) because the item-level binomial ignores seed-level variance.
+- Corrections logged onto the frozen H_001 card rather than edited into it — a frozen card that quietly
+  rewrites its own limits is worth nothing.
+- Seeds of record: `state/h002_f1-twin_2026-07-16/DESIGN_fable.md`,
+  `state/h001_f1-codec-refit-gate_2026-07-16/NOTE_refit-tax.md`.
+
 ## 2026-07-16 — H_001 RUN → 🔴 rig = REFUSED (2/5), and the card caught its own defect
 
 - RAN H_001's five falsifiers (`state/h001_f1-codec-refit-gate_2026-07-16/run_h001.py`,

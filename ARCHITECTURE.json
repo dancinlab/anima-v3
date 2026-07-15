@@ -116,7 +116,35 @@
       },
       {
        "id": "l4-lens-b-morph-atom",
-       "role": "(b) MORPH-ATOM: a BPE-jamo codec was CAUSAL for held-out negation recombination — M F2 0.908 vs control 0.617, delta +0.291 (synthetic drill, 1 seed)."
+       "role": "(b) MORPH-ATOM: a BPE-jamo codec was CAUSAL for held-out negation recombination. REPLICATED — not a single seed, contrary to what H_001's limits recorded.",
+       "children": [
+        {
+         "id": "l4-morph-atom-runs",
+         "role": "Run #3374 (seed 4302): M F2 = 0.908 vs C1 0.617, delta = +0.291. CEMENT replication (2026-07-14, seed 7): M 0.9167 vs C1 0.5750, delta = +0.3417. M's replication deviation = 0.009. All arms V1 liveness PASS."
+        },
+        {
+         "id": "l4-morph-atom-scale",
+         "role": "Measured at 303M with a warm trunk + reinit-embed surgery — NOT at drill/10M scale (`rig-model-scale-premise-false`)."
+        },
+        {
+         "id": "l4-morph-atom-amplifier",
+         "role": "v1's H_9290 NAT-ATOM law: atomicity is an AMPLIFIER, not a signal source — natural-distribution rescue FAILED. The effect exists only where a taught drill signal exists to amplify. Any rig whose stream lacks explicit flip supervision will read chance even in its oracle arm."
+        },
+        {
+         "id": "l4-morph-atom-slot-not-address",
+         "role": "The CEMENT C2 arm split the mechanism: atomicity is a STRUCTURAL SLOT, not a pretrained address.",
+         "children": [
+          {
+           "id": "l4-slot-evidence",
+           "role": "The held-out stem DELETED from the CPT corpus still scored 0.9167 = M — the model had never been pretrained on that address, yet the slot still carried it."
+          },
+          {
+           "id": "l4-slot-transfer",
+           "role": "This is the best available reason to expect the mechanism to survive a 303M -> 10M transfer `?` — settled by `rig-pilot`, not by argument."
+          }
+         ]
+        }
+       ]
       },
       {
        "id": "l4-lesson",
@@ -237,6 +265,42 @@
          "role": "p8 — no train/infer split."
         }
        ]
+      }
+     ]
+    },
+    {
+     "id": "l10-codec-swap-costs-the-embedding",
+     "role": "A codec change makes the EXISTING embedding an actively WRONG PRIOR — measurably worse than random init. Recovered 2026-07-16 from the v1 H_9288 lane; the divergence pass missed it.",
+     "children": [
+      {
+       "id": "l10-mechanism",
+       "role": "Gradient must first DESTROY the old alphabet's structure (and the readout statistics tuned to it) before it can build the new codec's. The old embedding is not merely under-adapted; it actively points the wrong way."
+      },
+      {
+       "id": "l10-evidence",
+       "role": "8k CPT steps across a codec swap bought DISCRIMINATION but zero semantics.",
+       "children": [
+        {
+         "id": "l10-evidence-memorization",
+         "role": "drill loss 0.009 (the grid was memorized) with F1 = 0.50 (held-out generalization nil) = pure sequence-lookup mode."
+        },
+        {
+         "id": "l10-evidence-c3-dead",
+         "role": "Even C3 — the arm handed the answer as a shared token — went DEAD: the signature of an input representation with no usable geometry."
+        }
+       ]
+      },
+      {
+       "id": "l10-price",
+       "role": "The fix that worked was reinit-embed checkpoint surgery (throw away embed.weight + readout entirely, keep the trunk warm) plus a CPT budget raised to ~20-25k steps, gate-terminated. The campaign's only green causal measurement (l4(b) = 0.908) exists ONLY on that surgery ckpt."
+      },
+      {
+       "id": "l10-threatens-f1",
+       "role": "This is the sharpest live threat to F1, the SELECTED family: F1's mechanism is a codec refit as a periodic ORGAN, so it pays this destroy-and-rebuild tax on EVERY refit. On a matched byte budget the adaptive arm is handicapped by construction — see `rig-swap-cost-is-measured`."
+      },
+      {
+       "id": "l10-vs-literature",
+       "role": "It also contradicts the design's literature-based comfort: ZeTT's ~1-3% swap cost assumes hypernetwork embeddings at 7B. Plain warm-start across a codec change at 303M measured WORSE than random init. The campaign's own evidence trail is the more pessimistic — and the more relevant — anchor."
       }
      ]
     }
@@ -776,15 +840,57 @@
     },
     {
      "id": "decision-attributability",
-     "role": "A drill-scale null is attributable to the MECHANISM rather than to under-scale, because MORPH-ATOM already measured the codec->recombination effect green (+0.291) at this scale.",
+     "role": "SUPERSEDED 2026-07-16 — this node's argument was false twice, and it was the reason F1 was picked first. Attributability is repairable but is NOT currently established.",
      "children": [
       {
-       "id": "decision-attributability-on-trial",
-       "role": "Only the refit-DURING-training half is on trial; the static half is known to show up at drill scale."
+       "id": "decision-attributability-error-scale",
+       "role": "It claimed MORPH-ATOM measured the effect 'at this scale'. It measured at 303M with a warm trunk, not 10M from scratch — so even the STATIC half is unanchored at rig scale."
       },
       {
-       "id": "decision-attributability-verified-not-assumed",
-       "role": "This anchor is what H_001's G-4 exists to VERIFY rather than assume — it is a 1-seed synthetic result."
+       "id": "decision-attributability-error-contrast",
+       "role": "It claimed 'only the refit half is on trial; the static half is known'. But delta_min = 0.15 was then anchored on the static half anyway (half of +0.291).",
+       "children": [
+        {
+         "id": "decision-attributability-three-gaps",
+         "role": "That transfers a number across three unbridged gaps: contrast (raw-vs-codec != frozen-vs-adaptive), substrate (303M != 10M), corpus (real Korean NSMC != fully synthetic)."
+        }
+       ]
+      },
+      {
+       "id": "decision-attributability-consequence",
+       "role": "With delta_min unanchored, a null at N sized for 0.15 is NOT attributable — it is ambiguous among {refit increment in (0, 0.15) · static effect absent at 10M-from-scratch · costs cancel benefit · drift too mild}. H_001's REFUSED verdict was more correct than its own stated reasons."
+      },
+      {
+       "id": "decision-attributability-repair",
+       "role": "Repairable: the quantity the power calc actually needs is the CEILING of the refit effect, and the ceiling is measurable cheaply in-rig — see `rig-pilot`."
+      }
+     ]
+    },
+    {
+     "id": "decision-f1-first-survives",
+     "role": "RE-DERIVED 2026-07-16: F1-first SURVIVES, on new grounds — the anchor defect is a RIG disease, not an F1 disease.",
+     "children": [
+      {
+       "id": "decision-f1-vs-f4",
+       "role": "F4 has the same disease with less immunity — switching is not better.",
+       "children": [
+        {
+         "id": "decision-f4-same-gap",
+         "role": "F4's effect size is equally unanchored, and its green evidence (XBIND, l4(a)) is also a static existence result at v1 substrate."
+        },
+        {
+         "id": "decision-f4-worse-burden",
+         "role": "F4 adds the Goodhart burden (a frozen private probe battery) that l6 flags as the jugular — swapping a repairable anchor gap for the same gap plus a harder measurement problem."
+        }
+       ]
+      },
+      {
+       "id": "decision-f1-kill-radius-stronger",
+       "role": "The kill-radius argument STRENGTHENED: the recovered record shows l4(b) is better evidence than the selection assumed — replicated on an independent seed at +0.342, all-arms liveness PASS, and the C2 arm showing slot-not-address (`l4-morph-atom-slot-not-address`)."
+      },
+      {
+       "id": "decision-f1-liveness-additive",
+       "role": "The liveness hole is real but ADDITIVE — one extra run, not a redesign."
       }
      ]
     }
@@ -814,7 +920,13 @@
     },
     {
      "id": "rig-model",
-     "role": "Twins of ~10M params (6 layers, d256, 8 heads), vocab 4-8k — MORPH-ATOM scale, i.e. the scale at which the codec->recombination link was measured to exist."
+     "role": "Twins of ~10M params (6 layers, d256, 8 heads), vocab 4-8k. NOTE the premise this node used to assert is FALSE — see child.",
+     "children": [
+      {
+       "id": "rig-model-scale-premise-false",
+       "role": "CORRECTED 2026-07-16: this node claimed 10M is 'MORPH-ATOM scale, the scale at which the link was measured'. The v1 verdict header reads `anima-py 303M CLMConvMoE d3784 L4 Emax4`, CPT warm-start from a pretrained base with reinit-embed surgery. Nothing was EVER measured at 10M-from-scratch."
+      }
+     ]
     },
     {
      "id": "rig-corpus",
@@ -841,6 +953,110 @@
       {
        "id": "rig-determinism-exception-why",
        "role": "An explicit extension beats letting the first real card silently violate `deterministic: true` — that kind of silent violation is how the v1 --no-verify spiral started (L8)."
+      }
+     ]
+    },
+    {
+     "id": "rig-swap-cost-is-measured",
+     "role": "F-6 (swap cost) is NOT a hypothetical to be measured by H_002 — v1 already measured it, and it is severe (see `l10-codec-swap-costs-the-embedding`). The design treated it as an open question bounded from above by ZeTT; the campaign's own record says otherwise.",
+     "children": [
+      {
+       "id": "rig-swap-cost-implication",
+       "role": "Every refit in the adaptive arm costs an embedding reinit plus ~20-25k steps just to recover the alphabet, before any semantics.",
+       "children": [
+        {
+         "id": "rig-swap-cost-budget-confound",
+         "role": "With k refits on a MATCHED BYTE BUDGET, the adaptive arm spends k x that on recovery while the frozen arm spends none — so the contrast confounds 'refit is useless' with 'refit was never given the budget to pay for itself'."
+        }
+       ]
+      },
+      {
+       "id": "rig-swap-cost-open",
+       "role": "OPEN: whether an F1 rig can be built where the refit tax is payable at all — e.g. hypernetwork/ZeTT-style embeddings, refit-as-vocabulary-extension rather than replacement, or a budget that credits the adaptive arm its recovery steps. Unresolved; feeds the successor card."
+      }
+     ]
+    },
+    {
+     "id": "rig-drift-breaks-symmetry",
+     "role": "Why the static effect does NOT cancel between the twin's arms (correcting an internal objection that it would): the frozen codec's atomicity is a WASTING ASSET.",
+     "children": [
+      {
+       "id": "rig-drift-wasting-asset",
+       "role": "Phase-2's new affixes are absent from the phase-1 merge table, so the frozen arm encodes them as misaligned fragments. On the drifted region the frozen arm IS a local C1 and the adaptive arm IS a local M — the MORPH-ATOM contrast, re-created exactly where the eval looks."
+      },
+      {
+       "id": "rig-drift-decomposition",
+       "role": "E[delta(adaptive - frozen)] ~ delta_static@rig x atomicity_deficit(frozen, eval morphemes) - swap/retention cost - continual-training interference."
+      },
+      {
+       "id": "rig-drift-costs-are-the-question",
+       "role": "The cost terms are unanchored, and that is FINE: they are what the twin ASKS, not a power assumption. So H_002's framing is not 'refit buys an increment on a shared effect' but 'refit MAINTAINS atomicity under drift at acceptable cost, and maintained atomicity causes recombination (anchored)'."
+      },
+      {
+       "id": "rig-drift-deficit-asserted",
+       "role": "atomicity_deficit must be ASSERTED, not assumed: a deterministic $0 pre-check encodes the phase-2 allomorphs with the frozen merge table and requires the not-single-token-aligned fraction = 1.0. If the phase-1 codec accidentally atomizes phase-2 forms there is no contrast and the run must not fire."
+      }
+     ]
+    },
+    {
+     "id": "rig-liveness-arm-missing",
+     "role": "The rig as specified has NO LIVENESS ARM — a defect, not a gap. v1's precedent is direct: the S1 4-pod fire's C3 = 0.50 correctly converted four apparently-null arms into 'four instrumentation bugs', which were then found.",
+     "children": [
+      {
+       "id": "rig-liveness-c3-prime",
+       "role": "Fix: a SHARED-ID COLLAPSE arm (C3') — frozen codec plus a deterministic post-encode remap sending every NEG-class allomorph of BOTH phases to one reserved token id. A phase-2 novel allomorph then literally IS the drilled phase-1 token: identity handed, held-out transfer trivial."
+      },
+      {
+       "id": "rig-liveness-rule",
+       "role": "Rule: F2(C3') >= 0.90 else the entire run is INVALID, not FAIL. One seed suffices (a validity check, not an effect estimate); re-run whenever eval code changes. H_002 therefore grows 11 -> 12 runs."
+      },
+      {
+       "id": "rig-liveness-rejected",
+       "role": "Rejected candidates: the ORACLE arm hands the MECHANISM, not the answer (it is the effect ceiling, and it lives in the pilot); the scramble arm is a negative control; drilled-item F1 sanity catches memorization only."
+      }
+     ]
+    },
+    {
+     "id": "rig-pilot",
+     "role": "GATE BEFORE THE TWIN — a static oracle-vs-frozen pilot at rig scale (5 runs) that anchors delta_min in-rig and doubles as the liveness check. After it, NO number transfers from MORPH-ATOM at all: MORPH-ATOM serves only as the existence proof of the mechanism class.",
+     "children": [
+      {
+       "id": "rig-pilot-arms",
+       "role": "ORACLE = codec fit on a phase-1+phase-2 sample, frozen. FROZEN = codec fit on phase-1 only, frozen. Both trained STATICALLY on the identical full stream (no refit organ, no continual dynamics), matched byte budget, 2 seeds each. Plus one shared-ID liveness run (1 seed) = 5 runs."
+      },
+      {
+       "id": "rig-pilot-measures",
+       "role": "delta_pilot = F2(oracle) - F2(frozen) on post-drift new-affix held-out flips = delta_static@rig = the HARD UPPER BOUND on what refit can deliver (refit <= oracle by construction: oracle has phase-2 atomicity from step 0 and pays zero swap cost). Closes the scale, corpus and contrast gaps at once."
+      },
+      {
+       "id": "rig-pilot-derives",
+       "role": "Frozen before H_002: delta_min := delta_pilot / 2 (the same halving hedge, now against a same-substrate measurement); N := two_proportion_n(0.5, 0.5 + delta_min); F-1's kill restated as 'refit recovers < half the measured oracle headroom -> mechanism dead' — anchored and attributable."
+      },
+      {
+       "id": "rig-pilot-kill-power",
+       "role": "PRE-COMMIT: if delta_pilot < 0.20 (so delta_min < 0.10, N > 1178/arm) the $25 drill twin is REFUSED — the ceiling is too low to detect the refit increment underneath it at this budget."
+      }
+     ]
+    },
+    {
+     "id": "rig-sequence",
+     "role": "REVISED SEQUENCE — three cards, each with named kill-power, total <= $35. Replaces 'H_001 then the 11-run twin'.",
+     "children": [
+      {
+       "id": "rig-sequence-h003",
+       "role": "H_003 f1-anchor-recheck — deterministic, $0: B-1/B-2/B-3 bounds on the recovered anchor + the harness overflow fix + large-n fixtures + the generator BUILT + G-1 drift measured + G-2 emittability counted + invariants green."
+      },
+      {
+       "id": "rig-sequence-h004",
+       "role": "H_004 f1-static-anchor-pilot — seeded-GPU (explicit determinism exception per `rig-determinism-exception`), <= $10: 5 runs (oracle x2, frozen x2, shared-ID x1). Outputs delta_pilot, sigma_seed(F2), liveness."
+      },
+      {
+       "id": "rig-sequence-h004-kills",
+       "role": "H_004 pre-committed kills: delta_pilot < 0.20 -> the cheap twin is REFUSED; oracle INSIDE the chance band -> the drill-scale premise is dead -> campaign re-decision (NOT a silent switch to F4)."
+      },
+      {
+       "id": "rig-sequence-h002",
+       "role": "H_002' — 12 runs (frozen/adaptive/scramble x3 seeds + 2 frozen + 1 shared-ID liveness), delta_min = delta_pilot/2, N from the re-derived table, F-1 restated as 'refit recovers < half of oracle headroom -> dead', compound seed rule, INVALID != FAIL wired via C3'."
       }
      ]
     }
@@ -951,6 +1167,20 @@
         {
          "id": "gates-unit-p7",
          "role": "Per p7, no bpb number is ever the VERDICT: bpb serves only the L2/decoration gate. The verdict metric is recombination."
+        },
+        {
+         "id": "gates-power-table",
+         "role": "Re-derived operating point from p0 = 0.50 (alpha=0.01, power=0.99): delta_min 0.10 -> N=1178/arm · 0.15 -> N=510 · 0.20 -> N=277. The fictitious 444 is retired. Binding N = N(delta_pilot/2) once `rig-pilot` runs.",
+         "children": [
+          {
+           "id": "gates-power-compound-rule",
+           "role": "The item-level binomial ignores SEED-level variance. Pre-registered compound rule: pooled two-proportion p < 0.01 AND median-over-seeds delta >= delta_min. N is a lower bound if sigma_seed on F2 is material `?` — settled for free by the pilot's 2x2 seeds."
+          },
+          {
+           "id": "gates-power-quote-counts",
+           "role": "Quote EXACT COUNTS, never rates: C1 = 74/120 sat exactly on the band edge, and N=510 sits on a rounding boundary (raw formula ~509.999). The run script's printed value is binding."
+          }
+         ]
         }
        ]
       }
