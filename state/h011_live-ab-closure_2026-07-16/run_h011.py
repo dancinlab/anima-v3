@@ -31,10 +31,9 @@ import sys
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _ROOT = os.path.abspath(os.path.join(_HERE, "..", ".."))
 sys.path.insert(0, os.path.join(_ROOT, "tool"))
-sys.path.insert(0, os.path.join(_ROOT, "state", "h009_f3-continuous-oracle_2026-07-16"))
 sys.path.insert(0, _HERE)
 
-from run_h009 import features, _sqdist              # certified machinery reused
+from anima_v3 import features, sqdist as _sqdist     # certified primitives (promoted to tool/)
 import env as E
 
 KNN = 5
@@ -220,23 +219,119 @@ def certify(seed: int = 7, T: int = 600) -> dict:
     }
 
 
+# ---- LV-P: policy edge (does the brain READ its input?) ---------------------
+def lv_p(brain, digests: list, seed: int) -> dict:
+    """Contingency rate CR = P(action(true obs) != action(a marginal-matched WRONG obs)); the
+    replay control (same obs twice) is the brain's noise floor (0 for a greedy brain)."""
+    n = len(digests)
+    diff = same = 0
+    for i, d in enumerate(digests):
+        a_true = brain.act(d)
+        j = (i + n // 2) % n                              # a wrong (other-tick) observation
+        a_wrong = brain.act(digests[j])
+        diff += (a_true != a_wrong)
+        same += (a_true == brain.act(d))                  # replay: greedy -> identical
+    return {"CR": diff / n, "replay_agree": same / n, "n": n}
+
+
+# ---- stage B: the LLM brain in the live loop --------------------------------
+def stage_b(model_id: str, episodes: int, ticks: int, seed0: int = 7) -> dict:
+    from brain import Brain
+    brain = Brain(model_id)
+
+    def pol(s, t, past):
+        return brain.act(E.observe(s))
+
+    per = []
+    all_digests = []
+    for e in range(episodes):
+        seed = seed0 + e
+        ab = run_episode(pol, seed, ticks, null=False, ab=True)          # interventional -> LV-W
+        w = lv_w(ab)
+        c = lv_c(pol, seed, ticks, null=False)                          # contingent closed vs yoked ghosts
+        per.append({"seed": seed, "lv_w": w, "closure": c["closure_sign"], "blocks": c["blocks"]})
+        all_digests.extend(E.observe(E.step(E.initial_state(seed), "NOOP", seed, tk))
+                           for tk in range(0, ticks, max(1, ticks // 40)))
+    p = lv_p(brain, all_digests[:400], seed0)
+
+    ep_signs = [x["closure"] for x in per]
+    lvw_bf = sum(x["lv_w"]["sign_base_full"] for x in per) / len(per)
+    lvw_sf = sum(x["lv_w"]["sign_shuf_full"] for x in per) / len(per)
+    closure_mean = sum(ep_signs) / len(ep_signs)
+    closure_eps = sum(1 for s in ep_signs if s >= CLOSURE_SIGN)          # episodes clearing the gate
+    lv_w_pass = lvw_bf >= SIGN and lvw_sf >= SIGN
+    lv_c_pass = closure_mean >= CLOSURE_SIGN and closure_eps >= (len(ep_signs) * 4 + 4) // 5  # >=4/5 co-gate
+    lv_p_pass = p["CR"] >= 0.20 and p["replay_agree"] >= 0.98
+
+    if not lv_w_pass:
+        verdict = ("CHANNEL-MISSING/INSTRUMENT — the brain's executed actions do not predict the next "
+                   "observation (LV-W fail); the env channel that stage A certified did not carry through "
+                   "the brain run — treat as INSTRUMENT-INVALID, inspect the brain harness.")
+    elif lv_c_pass and lv_p_pass:
+        verdict = (f"CLOSED-LOOP-ANCHORED (rung 1) — the brain's CONTINGENCY (not its action marginal) "
+                   f"fingerprints its own next input: closure {closure_mean:.3f} >= {CLOSURE_SIGN} "
+                   f"({closure_eps}/{len(ep_signs)} episodes), it READS its input (CR {p['CR']:.3f}). "
+                   "Closed-loop causation exists + is measurable for THIS agent. NOT 'aliveness found' "
+                   "(rung 1; a thermostat passes) — but it certifies the interventional instrument and "
+                   "LICENSES the owner-loop RCT (the real exit H_010 priced).")
+    elif not lv_p_pass:
+        verdict = (f"CHANNEL-ONLY — the brain acts with effects but does NOT read its input "
+                   f"(CR {p['CR']:.3f} < 0.20): an open-loop emitter, not closed-loop.")
+    else:
+        verdict = (f"LOOP-REFUSED (localized to THIS agent) — the brain reads its input (CR {p['CR']:.3f}) "
+                   f"but its contingency leaves no fingerprint above the yoked floor (closure "
+                   f"{closure_mean:.3f} < {CLOSURE_SIGN}, {closure_eps}/{len(ep_signs)} episodes) — in a "
+                   "world built to reward closure. A terminal-grade negative for Qwen2.5-3B greedy/"
+                   "memoryless; pre-registered escalations (bigger brain, memory, richer env) remain.")
+    return {"model": model_id, "episodes": episodes, "ticks": ticks, "per_episode": per,
+            "lv_w": {"sign_base_full": lvw_bf, "sign_shuf_full": lvw_sf, "pass": bool(lv_w_pass)},
+            "lv_c": {"closure_mean": closure_mean, "episodes_pass": closure_eps, "pass": bool(lv_c_pass)},
+            "lv_p": {**p, "pass": bool(lv_p_pass)}, "brain_calls": brain.calls, "verdict": verdict}
+
+
 def main() -> int:
+    args = sys.argv[1:]
+    stage = "A"
+    model = "Qwen/Qwen2.5-3B-Instruct"
+    episodes, ticks = 5, 800
+    for i, a in enumerate(args):
+        if a == "--stage" and i + 1 < len(args):
+            stage = args[i + 1].upper()
+        elif a == "--model" and i + 1 < len(args):
+            model = args[i + 1]
+        elif a == "--episodes" and i + 1 < len(args):
+            episodes = int(args[i + 1])
+        elif a == "--ticks" and i + 1 < len(args):
+            ticks = int(args[i + 1])
+
     print("=" * 78)
-    print("H_011 live-ab-closure · STAGE A — certify the interventional instrument (NO LLM, $0)")
+    if stage == "B":
+        print(f"H_011 live-ab-closure · STAGE B — the LLM brain in the live loop ({model})")
+        print("=" * 78)
+        E.assert_disjoint()
+        r = stage_b(model, episodes, ticks)
+        print(f"  LV-W: {json.dumps(r['lv_w'], ensure_ascii=False)}")
+        print(f"  LV-C: {json.dumps(r['lv_c'], ensure_ascii=False)}")
+        print(f"  LV-P: {json.dumps(r['lv_p'], ensure_ascii=False)}")
+        print(f"  brain_calls={r['brain_calls']}")
+        print("\n  VERDICT:", r["verdict"])
+        out = "result_stageB.json"
+    else:
+        print("H_011 live-ab-closure · STAGE A — certify the interventional instrument (NO LLM, $0)")
+        print("=" * 78)
+        E.assert_disjoint()
+        print("  env disjoint-vocab (LV-E precondition): OK")
+        r = certify()
+        for k in ("P-LIVE", "P-OPEN", "P-DEAD"):
+            print(f"  {k}: {json.dumps(r[k], ensure_ascii=False)}")
+        r["verdict"] = ("STAGE-A CERTIFIED — the instrument separates CHANNEL from CLOSURE: P-LIVE anchors, "
+                        "P-OPEN is channel-only, P-DEAD refuses. Stage B (summer LLM) may fire."
+                        if r["certified"] else
+                        "STAGE-A INSTRUMENT-INVALID — a plant did not land as required; fix before any LLM run.")
+        print("\n  VERDICT:", r["verdict"])
+        out = "result_stageA.json"
     print("=" * 78)
-    E.assert_disjoint()
-    print("  env disjoint-vocab (LV-E precondition): OK")
-    r = certify()
-    for k in ("P-LIVE", "P-OPEN", "P-DEAD"):
-        print(f"  {k}: {json.dumps(r[k], ensure_ascii=False)}")
-    verdict = ("STAGE-A CERTIFIED — the instrument separates CHANNEL from CLOSURE: P-LIVE anchors, "
-               "P-OPEN is channel-only, P-DEAD refuses. Stage B (summer LLM) may fire."
-               if r["certified"] else
-               "STAGE-A INSTRUMENT-INVALID — a plant did not land as required; fix before any LLM run.")
-    r["verdict"] = verdict
-    print("\n  VERDICT:", verdict)
-    print("=" * 78)
-    with open(os.path.join(_HERE, "result_stageA.json"), "w") as f:
+    with open(os.path.join(_HERE, out), "w") as f:
         json.dump(r, f, ensure_ascii=False, indent=1)
         f.write("\n")
     return 0

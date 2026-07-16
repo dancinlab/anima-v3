@@ -470,3 +470,44 @@ def evaluate(metrics: dict, falsifiers: list) -> dict:
         "n_total": len(results),
         "all_pass": n_pass == len(results),
     }
+
+
+# --- hashed n-gram feature map + distances (promoted from H_009/H_010 · 3rd use in H_011) ---
+# A closed-form, salt-free feature map: FNV-1a hashes char n-grams into a fixed bucket
+# vector, log1p-weights, L2-normalizes. Deterministic and process-stable (unlike Python
+# hash()), so two runs on two machines produce identical features. The estimator that turns
+# these into a gate (shift-null LOO k-NN, sign tests) lives in each card's run script.
+
+def fnv1a(b: bytes) -> int:
+    """FNV-1a 32-bit hash of a byte string (process-stable — the whole point vs hash())."""
+    h = 0x811C9DC5
+    for byte in b:
+        h ^= byte
+        h = (h * 0x01000193) & 0xFFFFFFFF
+    return h
+
+
+def features(day: bytes, dim: int = 256, log_weight: bool = True) -> list:
+    """Char n-gram (n in {1,2,3}) counts -> `dim` FNV-1a buckets -> log1p -> L2-normalized."""
+    counts = [0] * dim
+    n = len(day)
+    for size in (1, 2, 3):
+        for i in range(n - size + 1):
+            counts[fnv1a(day[i:i + size]) % dim] += 1
+    vec = [math.log1p(c) if log_weight else float(c) for c in counts]
+    norm = math.sqrt(sum(x * x for x in vec))
+    return [x / norm for x in vec] if norm > 0 else vec
+
+
+def sqdist(a: list, b: list) -> float:
+    """Squared Euclidean distance between two equal-length vectors."""
+    return sum((a[i] - b[i]) ** 2 for i in range(len(a)))
+
+
+def median(xs: list) -> float:
+    """Median of a list (0.0 on empty)."""
+    s = sorted(xs)
+    n = len(s)
+    if n == 0:
+        return 0.0
+    return s[n // 2] if n % 2 else 0.5 * (s[n // 2 - 1] + s[n // 2])
