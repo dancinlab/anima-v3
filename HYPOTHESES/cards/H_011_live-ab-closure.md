@@ -166,8 +166,16 @@ no-channel verdict (below).
 > control) and by itself rejects a dead env (null-env closure = chance, cf. P-DEAD), so it stands ALONE as the
 > valid anchor. `convergence run-h011-py-1` (cogate-metric-regime-blindness — a recurrence of H_009's
 > instrument-regime lesson: a co-gate certified only in one regime silently mismeasures the one the subject
-> occupies). **Residual:** repair LV-W (restrict to non-collision ticks / action-conditioned MI) so it
-> co-gates validly at low entropy.
+> occupies).
+>
+> **Repair attempted — PARTIAL (`lv_w` `*_r`).** I added a regime-robust LV-W restricted to INFORMATIVE ticks
+> (the A/B intervention actually changed the action, so obs⊥action). It correctly keeps the dead null env
+> REFUSED (base_full_r 0.241) — no false channel — but it does **NOT rescue the mid3bal/7B regime** (mid3bal
+> base_full_r 0.446 still < 0.55). So the 7B's one-step channel is **genuinely weak** there (diffuse/delayed
+> effects), not merely a collision artifact — LV-C (the block timescale) captures the same causation LV-W
+> misses at the one-step timescale. **LV-W stays QUARANTINED; LV-C is valid AND sufficient** (it alone rejects
+> P-DEAD). A fuller low-entropy channel test (block/multi-step, i.e. what LV-C already is) is future work but
+> does not gate this verdict.
 
 So on the VALID instrument the 7B demonstrates **rung-1 closed-loop CONTINGENCY** — NOT "aliveness found"
 (a thermostat clears rung 1), but it is the campaign's first positive on the certified anchor, and it

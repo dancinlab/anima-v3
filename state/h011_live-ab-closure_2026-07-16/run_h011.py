@@ -83,7 +83,7 @@ def run_episode(policy, seed: int, T: int, null: bool = False, ab: bool = True) 
     s = E.initial_state(seed)
     past = []
     obs_traj, fobs, fexec, fwrong, ftarget = [], [], [], [], []
-    exec_tape = []
+    exec_tape, informative = [], []
     for t in range(T):
         obs = E.observe(s)
         a_true = policy(s, t, past)
@@ -92,6 +92,11 @@ def run_episode(policy, seed: int, T: int, null: bool = False, ab: bool = True) 
             a_exec = win[E._hash(seed, t, "shuf") % len(win)]
         else:
             a_exec = a_true
+        # an INFORMATIVE tick = the A/B intervention actually changed the action (a_exec != a_true).
+        # On these, obs and action are DECOUPLED, so the action channel is measurable free of the
+        # policy's obs->action coupling; restricting LV-W to them powers it in the low-entropy regime
+        # (h011-lvw-underpowered / convergence run-h011-py-1) while a null env still refuses.
+        informative.append(a_exec != a_true)
         a_wrong = _marg_wrong(a_exec, seed, t)
         s2 = E.step(s, a_exec, seed, t, null=null)
         obs2 = E.observe(s2)
@@ -105,7 +110,7 @@ def run_episode(policy, seed: int, T: int, null: bool = False, ab: bool = True) 
         s = s2
     obs_traj.append(E.observe(s))
     return {"n": T, "fobs": fobs, "fexec": fexec, "fwrong": fwrong, "ftarget": ftarget,
-            "obs_traj": obs_traj, "tape": exec_tape}
+            "obs_traj": obs_traj, "tape": exec_tape, "informative": informative}
 
 
 # ---- LV-W: does the executed action predict the next observation? -----------
@@ -136,8 +141,22 @@ def _sign(ea, eb):
     return sum(1 for a, b in zip(ea, eb) if a > b) / len(ea)
 
 
+def _sign_sub(ea, eb, mask):
+    """Sign over the masked query subset (0.5 if the subset is empty)."""
+    idx = [k for k in range(len(ea)) if mask[k]]
+    if not idx:
+        return 0.5
+    return sum(1 for k in idx if ea[k] > eb[k]) / len(idx)
+
+
 def lv_w(ep: dict) -> dict:
-    """Arms BASE/FULL/SHUF (target = feat(next obs)); FULL must beat BASE and SHUF."""
+    """Arms BASE/FULL/SHUF (target = feat(next obs)); FULL must beat BASE and SHUF.
+
+    Also emits the REGIME-ROBUST *_r variant restricted to INFORMATIVE ticks (the A/B intervention
+    actually changed the action). On those ticks obs and action are decoupled, so a low-entropy policy
+    no longer pins the metric (h011-lvw-underpowered): base_full_r rises above chance iff a real
+    action->next-obs channel exists, and a null env still refuses. Existing keys are unchanged (the
+    certified stage-A path reads only sign_base_full/sign_shuf_full)."""
     n = ep["n"]
     dObs = _distmat(ep["fobs"])
     dAct = _distmat(ep["fexec"])
@@ -147,7 +166,10 @@ def lv_w(ep: dict) -> dict:
     err_base = _knn_err(tgt, cand_of, lambda i: dObs[i])
     err_full = _knn_err(tgt, cand_of, lambda i: [dObs[i][j] + dAct[i][j] for j in range(n)])
     err_shuf = _knn_err(tgt, cand_of, lambda i: [dObs[i][j] + dWrong[i][j] for j in range(n)])
-    return {"sign_base_full": _sign(err_base, err_full), "sign_shuf_full": _sign(err_shuf, err_full)}
+    inf = ep.get("informative", [True] * n)
+    return {"sign_base_full": _sign(err_base, err_full), "sign_shuf_full": _sign(err_shuf, err_full),
+            "sign_base_full_r": _sign_sub(err_base, err_full, inf),
+            "sign_shuf_full_r": _sign_sub(err_shuf, err_full, inf), "n_informative": sum(inf)}
 
 
 # ---- LV-C: closure vs marginal-matched yoked ghosts -------------------------

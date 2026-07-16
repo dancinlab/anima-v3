@@ -112,26 +112,33 @@ def _collision_rate(policy, seed: int, T: int) -> dict:
 
 
 def sweep(seed0: int = 7, episodes: int = 5, T: int = 800) -> dict:
+    # each entry: (name, policy, null_env). The P-DEAD control (policy_live in a NULL env) MUST still
+    # refuse the REPAIRED LV-W (_r) — the repair's validity test: it recovers live low-entropy channels
+    # WITHOUT manufacturing a false channel where none exists.
+    entries = [(n, p, False) for n, p in POLICIES] + [("P-DEAD(null)", R.policy_live, True)]
     rows = []
-    for name, pol in POLICIES:
-        w_bf, w_sf, clo, ents, colls, ndist = [], [], [], [], [], []
+    for name, pol, nullenv in entries:
+        w_bf, w_sf, w_bfr, w_sfr, clo, ents, colls, ndist = [], [], [], [], [], [], [], []
         for e in range(episodes):
             seed = seed0 + e
-            ab = R.run_episode(pol, seed, T, null=False, ab=True)
+            ab = R.run_episode(pol, seed, T, null=nullenv, ab=True)
             w = R.lv_w(ab)
-            c = R.lv_c(pol, seed, T, null=False)
+            c = R.lv_c(pol, seed, T, null=nullenv)
             w_bf.append(w["sign_base_full"]); w_sf.append(w["sign_shuf_full"])
+            w_bfr.append(w["sign_base_full_r"]); w_sfr.append(w["sign_shuf_full_r"])
             clo.append(c["closure_sign"])
             ents.append(_entropy(ab["tape"])); ndist.append(len(set(ab["tape"])))
             colls.append(_collision_rate(pol, seed, T)["collision_rate"])
         m = lambda xs: sum(xs) / len(xs)
-        bf, sf, cl = m(w_bf), m(w_sf), m(clo)
+        bf, sf, bfr, sfr, cl = m(w_bf), m(w_sf), m(w_bfr), m(w_sfr), m(clo)
         lv_w_pass = bf >= R.SIGN and sf >= R.SIGN
+        lv_w_pass_r = bfr >= R.SIGN and sfr >= R.SIGN
         lv_c_pass = cl >= R.CLOSURE_SIGN and sum(1 for x in clo if x >= R.CLOSURE_SIGN) >= (episodes * 4 + 4) // 5
         rows.append({"policy": name, "distinct_actions": round(m(ndist), 1),
                      "action_entropy_bits": round(m(ents), 3), "shuffle_collision_rate": round(m(colls), 3),
                      "lv_w_base_full": round(bf, 3), "lv_w_shuf_full": round(sf, 3), "lv_w_pass": lv_w_pass,
-                     "lv_c_closure": round(cl, 3), "lv_c_pass": lv_c_pass})
+                     "lv_w_base_full_r": round(bfr, 3), "lv_w_shuf_full_r": round(sfr, 3),
+                     "lv_w_pass_r": lv_w_pass_r, "lv_c_closure": round(cl, 3), "lv_c_pass": lv_c_pass})
     return {"seed0": seed0, "episodes": episodes, "ticks": T, "SIGN": R.SIGN,
             "CLOSURE_SIGN": R.CLOSURE_SIGN, "rows": rows,
             "ref_7b": {"lv_w_base_full": 0.353, "lv_w_shuf_full": 0.489, "lv_w_pass": False,
@@ -146,23 +153,23 @@ if __name__ == "__main__":
     print("=" * 92)
     print("H_011 tiebreak — LV-W validity vs action entropy (known-LIVE contingent plants, $0 no-GPU)")
     print("=" * 92)
-    hdr = f"{'policy':16s} {'#act':>5s} {'H(bits)':>8s} {'collide':>8s} {'W_bf':>7s} {'W_sf':>7s} {'W?':>4s} {'clo':>6s} {'C?':>4s}"
+    hdr = (f"{'policy':16s} {'#act':>5s} {'H(bits)':>8s} {'W_bf':>7s} {'W_sf':>7s} {'W?':>3s}  "
+           f"{'W_bfR':>7s} {'W_sfR':>7s} {'WR?':>4s} {'clo':>6s} {'C?':>3s}")
     print(hdr); print("-" * 92)
     for x in r["rows"]:
         print(f"{x['policy']:16s} {x['distinct_actions']:5.1f} {x['action_entropy_bits']:8.3f} "
-              f"{x['shuffle_collision_rate']:8.3f} {x['lv_w_base_full']:7.3f} {x['lv_w_shuf_full']:7.3f} "
-              f"{('P' if x['lv_w_pass'] else 'F'):>4s} {x['lv_c_closure']:6.3f} {('P' if x['lv_c_pass'] else 'F'):>4s}")
+              f"{x['lv_w_base_full']:7.3f} {x['lv_w_shuf_full']:7.3f} {('P' if x['lv_w_pass'] else 'F'):>3s}  "
+              f"{x['lv_w_base_full_r']:7.3f} {x['lv_w_shuf_full_r']:7.3f} {('P' if x['lv_w_pass_r'] else 'F'):>4s} "
+              f"{x['lv_c_closure']:6.3f} {('P' if x['lv_c_pass'] else 'F'):>3s}")
     q = r["ref_7b"]
-    print(f"{'-- Qwen7B(ref)':16s} {'?':>5s} {'?':>8s} {'?':>8s} {q['lv_w_base_full']:7.3f} "
-          f"{q['lv_w_shuf_full']:7.3f} {'F':>4s} {q['lv_c_closure']:6.3f} {'P':>4s}")
+    print(f"{'-- Qwen7B(ref)':16s} {'?':>5s} {'?':>8s} {q['lv_w_base_full']:7.3f} "
+          f"{q['lv_w_shuf_full']:7.3f} {'F':>3s}  {'?':>7s} {'?':>7s} {'?':>4s} {q['lv_c_closure']:6.3f} {'P':>3s}")
     print("=" * 92)
     # interpretation — over ALL known-live plants (not just the "lowent*" named ones)
     ctrl = next(x for x in r["rows"] if x["policy"] == "live8_control")
     plants = [x for x in r["rows"] if x["policy"] != "live8_control"]
     reproduced = [x for x in plants if (not x["lv_w_pass"]) and x["lv_c_pass"]]   # the 7B signature
     r["reproduced_7b_signature"] = [x["policy"] for x in reproduced]
-    with open(os.path.join(_HERE, "result_tiebreak_lvw.json"), "w") as f:
-        json.dump(r, f, ensure_ascii=False, indent=1); f.write("\n")
     print("\nINTERPRETATION:")
     print(f"  control live8: LV-W {'PASS' if ctrl['lv_w_pass'] else 'FAIL'} / LV-C "
           f"{'PASS' if ctrl['lv_c_pass'] else 'FAIL'}  (must be PASS/PASS to reproduce stage A)")
@@ -174,3 +181,30 @@ if __name__ == "__main__":
     else:
         print("  NO known-live plant reproduced LV-W FAIL + LV-C PASS.")
         print("  => LV-W fail is NOT explained by entropy alone; the 7B's LV-W FAIL may be real (H1).")
+    # REPAIR validity — HONEST criterion: does the informative-tick restriction rescue the SPECIFIC
+    # plants that reproduced the 7B signature (LV-C pass but original LV-W FAIL)? Recovering plants that
+    # already passed the original LV-W proves nothing. And the dead null env MUST still refuse LV-W_r.
+    dead = next((x for x in r["rows"] if x["policy"].startswith("P-DEAD")), None)
+    target = reproduced                                     # mid3bal & co — the 7B-analog regime
+    target_rescued = [x["policy"] for x in target if x["lv_w_pass_r"]]
+    dead_refuses = (dead is not None and not dead["lv_w_pass_r"])
+    # a full fix = rescues EVERY signature-reproducing plant AND keeps the dead env refused
+    full_fix = bool(target) and all(x["lv_w_pass_r"] for x in target) and dead_refuses
+    r["repair"] = {"restriction": "informative ticks (a_exec != a_true)",
+                   "target_plants": [x["policy"] for x in target],
+                   "target_rescued_by_lv_w_r": target_rescued,
+                   "dead_still_refuses": dead_refuses,
+                   "dead_base_full_r": dead["lv_w_base_full_r"] if dead else None,
+                   "full_fix": full_fix}
+    print("\nREPAIR (LV-W restricted to informative ticks, *_r):")
+    print(f"  dead null env still REFUSES LV-W_r: {'YES' if dead_refuses else 'NO — FALSE CHANNEL!'} "
+          f"(base_full_r={dead['lv_w_base_full_r'] if dead else '?'})")
+    print(f"  7B-analog plants {[x['policy'] for x in target]} rescued by LV-W_r: {target_rescued or 'NONE'}")
+    if full_fix:
+        print("  => repaired LV-W is a FULL FIX: rescues the 7B regime AND keeps the dead env refused.")
+    else:
+        print("  => repaired LV-W is PARTIAL: it keeps the dead env refused but does NOT rescue the 7B-analog")
+        print("     regime (mid3bal). The one-step channel there is genuinely WEAK (diffuse/delayed effects),")
+        print("     not a collision artifact alone. LV-W stays QUARANTINED; LV-C remains the valid anchor.")
+    with open(os.path.join(_HERE, "result_tiebreak_lvw.json"), "w") as f:
+        json.dump(r, f, ensure_ascii=False, indent=1); f.write("\n")
