@@ -129,6 +129,27 @@ ANCHOR: an LLM-brained agent acting in a deterministic MICRO-TENANT world, with 
 
 ## Verdict
 
-_pre-register-frozen 2026-07-16 — awaiting the run. STAGE A (local, $0, no LLM) certifies the instrument
-first; STAGE B (summer LLM, $0) fires only on a clean stage-A. Fires the reframe-C live gate: CLOSED-LOOP-
-ANCHORED (rung 1 + licenses the owner-loop RCT) / CHANNEL-ONLY / LOOP-REFUSED / INSTRUMENT-INVALID._
+**Stage A (instrument): CERTIFIED** ($0, local, no LLM, first try) — P-LIVE anchors (channel 0.61/0.73,
+closure 0.75), P-OPEN is channel-only (closure 0.42 = contingency not marginal), P-DEAD refuses (channel
+0.20). The instrument separates CHANNEL from CLOSURE.
+
+**Stage B (Qwen2.5-3B-Instruct on summer, $0): LOOP-REFUSED (localized to this agent)** — 2026-07-16.
+The brain READS its input (LV-P CR = 0.410 ≥ 0.20 — its action depends on what it perceives) but its
+contingency leaves **no closure fingerprint above the yoked floor** (LV-C closure = 0.500 ≈ chance, only
+2/5 episodes clear 0.60). In the SAME env a scripted homeostatic policy (P-LIVE) anchored at 0.75, so the
+env can show closure — the LLM's contingency simply is not strong/consistent enough to. The agent sits
+BETWEEN P-OPEN (channel-only) and P-LIVE (anchored): reading input is NOT sufficient for closed-loop
+causation. A terminal-grade negative for Qwen2.5-3B greedy/memoryless in this micro-tenant.
+
+> **Instrument-integrity note (verdict-integrity).** The first stage-B run read CHANNEL-MISSING because a
+> RAW action-scoring brain collapsed to a CONSTANT action (COMPACT 40/40, CR=0.0) — dominated by each
+> action's model PRIOR, not the state. Fixed with CONTRASTIVE (PMI) scoring s(a|state) − s(a|neutral); the
+> re-run's CR=0.41 confirms the brain now genuinely reads its input. The env channel is stage-A-certified,
+> so a stage-B LV-W miss = brain-degeneracy (an open-loop signature), never an instrument fault
+> (`convergence brain-py-1`).
+
+**Pre-registered escalations remain** (the negative is localized, not the campaign terminal): a bigger
+brain (Qwen3-8B-4bit — bitsandbytes present on summer), persistent agent memory (rig #2), a richer env.
+The interventional INSTRUMENT is certified either way — it converts H_010's priced exit into the owner-loop
+RCT the moment any brain ANCHORS. Infra note: long summer runs use `sidecar pool on --bg` (detached; the
+orphan-fence group-kill was fixed upstream, dancinlab/sidecar #418).

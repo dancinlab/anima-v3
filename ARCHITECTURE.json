@@ -1883,7 +1883,7 @@
     {
      "id": "verification-h011",
      "type": "gate",
-     "role": "H_011 live-ab-closure — reframe C's LIVE interventional gate, PRE-REGISTERED 2026-07-16 (building). The paid loop H_010 priced, now $0 on the owner's pool (summer, idle RTX 5070). Randomized A/B ⇒ it can ANCHOR, not only refuse. Verdict pending stage-A-then-B run.",
+     "role": "H_011 live-ab-closure — reframe C live gate ($0, summer). Stage A instrument CERTIFIED; Stage B (Qwen2.5-3B) = LOOP-REFUSED (localized): the brain READS input (CR 0.41) but its contingency leaves no closure fingerprint (0.50≈chance) vs script 0.75. Instrument certified; escalations remain.",
      "children": [
       {
        "id": "h011-closure-gate",

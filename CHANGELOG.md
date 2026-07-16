@@ -2,6 +2,36 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_011 stage B → 🔴 LOOP-REFUSED (localized to Qwen2.5-3B): the first LIVE interventional result — reading input ≠ closing the loop
+
+- The instrument (stage A) was CERTIFIED first (P-LIVE anchor / P-OPEN channel-only / P-DEAD refuse). Stage
+  B put a real LLM (Qwen2.5-3B-Instruct) in the driver's seat of the micro-tenant loop, on summer, $0.
+- **VERDICT = LOOP-REFUSED (localized to this agent).** The brain **READS its input** — LV-P contingency
+  rate **CR = 0.410 ≥ 0.20** (its action depends on what it perceives) — **but its contingency leaves NO
+  closure fingerprint** above the marginal-matched yoked floor: **LV-C closure = 0.500 ≈ chance** (only 2/5
+  episodes clear 0.60). In the SAME env a 20-line scripted homeostatic policy (P-LIVE) anchored at 0.75, so
+  the env CAN show closure — the LLM's contingency simply is not strong/consistent enough. The agent sits
+  BETWEEN P-OPEN (channel-only) and P-LIVE (anchored): **reading input is NOT sufficient for closed-loop
+  causation.** A terminal-grade negative for Qwen2.5-3B greedy/memoryless in this rig.
+- **Verdict-integrity save.** The first stage-B run read CHANNEL-MISSING; diagnosed (suspect the instrument
+  first) as a DEGENERATE brain — RAW action-scoring collapsed to a constant action (COMPACT 40/40, CR=0.0),
+  dominated by each action's model PRIOR, not the state. Fixed with **CONTRASTIVE (PMI) scoring**
+  s(a|state) − s(a|neutral) (the state-free baseline, scored once, cancels the prior); the re-run's CR=0.41
+  confirms the brain now genuinely reads its input. The env channel is stage-A-certified, so a stage-B LV-W
+  miss = brain-degeneracy, never an instrument fault (`convergence brain-py-1`).
+- **The interventional INSTRUMENT is certified** — it converts H_010's priced exit into the owner-loop RCT
+  the moment any brain ANCHORS. Pre-registered escalations remain (the negative is LOCALIZED, not the
+  campaign terminal): Qwen3-8B-4bit (bitsandbytes present on summer), persistent agent memory (rig #2),
+  a richer env.
+- **Infra (upstream-fix, not worked around):** the first run died (exit 255) because `sidecar pool on`
+  reaps the remote process GROUP when the ssh session drops (orphan fence pool-ts-1) — fatal for a long
+  job. Fixed at the cause in dancinlab/sidecar: **`pool on --bg`** detaches the remote command (setsid, new
+  session) so it survives an ssh drop (PR #418, merged; the re-run dogfooded it).
+- SSOT: `verification-h011` + `h011-licenses` updated to the stage-B verdict; REGISTRY H_011 = 🔴 FALSIFIED
+  (localized); `convergence brain-py-1` (llm-policy-prior-collapse → contrastive PMI). tool/: `features` +
+  `sqdist`/`median` promoted (3rd use). Rig: `env.py` · `brain.py` · `run_h011.py` (stage A + B).
+
+
 ## 2026-07-16 — H_011 live-ab-closure PRE-REGISTERED: the owner's pool makes the paid live loop $0 → reframe C's first card that can ANCHOR
 
 - The owner asked "pool 에서 가능?" after H_010 priced the exit. `sidecar pool` has **summer** — an IDLE
