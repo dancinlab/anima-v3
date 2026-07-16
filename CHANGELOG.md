@@ -2,6 +2,36 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-17 — H_012A-c → 🟡 BLOCK-REFUSE: the refusal is robust across TIMESCALES too — the 2×2 (target × timescale) matrix all refuses
+
+- The next objection: H_010/H_012A/H_012A-b are ALL one-step (U_t → R_{t+1}), yet the proxy's 7B ANCHORED at
+  the BLOCK level (LV-C) and FAILED one-step (LV-W) — so the real-loop refusals could be at the WRONG
+  TIMESCALE (the timescale analogue of the wrong-target artifact H_012A-b excluded). Delegated the design to
+  Fable, which **factored the block level**: the sequence-CONTINGENCY component (yoked permuted-sequence
+  ghost) is fundamentally interventional → H_012B-only; but the block-OUTCOME component is identified under
+  the SAME per-step ignorability H_012A accepted. **Pre-registered H_012A-c** (frozen before touching real
+  pairs): treatment = single utterance U_t (context-matched, M=60), outcome = blockmean(features(R_{t+1..t+k})),
+  primary k=5.
+- **Why distinct from one-step** (a block null is NOT implied by the three one-step nulls): INTEGRATION
+  (per-step effects below the one-step floor accumulate over k — the campaign's OWN dissociation: H_011 7B +
+  mid3bal both LV-W-fail 0.35 / LV-C-pass 0.76) and DELAY (U_t moves the owner at lag 2-5 with no lag-1
+  trace — the natural Claude Code mode). Block-mean(R_{t+1..t+k}) is not a function of the lag-1 pair.
+- **Estimator certified with FOUR block plants (in-regime M=60):** P-BLOCKPOS integration fires 0.792 > null
+  0.647 and beats its own one-step 0.698; **P-DELAY** detects a lag-3 effect the one-step is blind to
+  (0.65 > null 0.648, one-step does not); P-BLOCKNULL refuses; **P-BLOCKCONF** (a slow-drift latent driving
+  BOTH the utterance and the owner window with NO U→R edge — the confound window-aggregation amplifies)
+  correctly REFUSES. So a real BLOCK-REFUSE is trustworthy, not an instrument miss.
+- **VERDICT = BLOCK-REFUSE.** On 9,454 block-windowed queries (k=5): **sign_base_full = 0.420 / 0.437 vs
+  null_p95 0.403 / 0.421** (both replicates < 0.55) — even at the window level the proxy anchored on, a
+  single utterance does NOT shift the owner's subsequent-window input. **The refusal is now ROBUST across a
+  2×2 matrix — target (text H_010/H_012A · behavior H_012A-b) × timescale (one-step · window H_012A-c) — all
+  four $0 lenses refuse; both the wrong-target and wrong-timescale artifacts are EXCLUDED.** Honest residue
+  (pre-registered): the sequence-CONTINGENCY channel (LV-C proper, the yoked ghost) is interventional and
+  stays H_012B-only — a pure order-code channel cannot be excluded at $0.
+- Also amended H_012B's pre-registration: randomize LIVE/GHOST grounding over sustained WINDOWS + LV-C block
+  statistic as CO-PRIMARY, so the paid RCT adjudicates the timescale question at rung 1. SSOT:
+  `verification-h012` role refreshed (2×2 matrix) + child `h012ac-block`; REGISTRY H_012.
+
 ## 2026-07-17 — H_012A-b → 🟡 BEHAVIORAL-REFUSE: the owner-loop refusal is NOT a wrong-target artifact (robust across text AND behavior)
 
 - The one live objection to "reframe C is refused on the real owner loop" was that H_010 + H_012A both used
