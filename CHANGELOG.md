@@ -2,6 +2,36 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-17 — H_011 stage B (7B) → 🟢 ANCHOR-ON-LV-C: the FIRST brain to clear the certified closure anchor — the campaign's first live positive
+
+- Escalated the stage-B brain to **Qwen2.5-7B-Instruct (nf4)** on summer ($0, detached via `pool on --bg`).
+  Result is QUALITATIVELY STRONGER than the 3B: the 7B **reads its input** (LV-P CR = 0.400) AND its
+  contingency **fingerprints the block trajectory above the yoked floor** — **LV-C closure = 0.7625 ≥ 0.60,
+  all 5/5 episodes** (the 3B was 0.500 ≈ chance, 2/5). It is the **first brain to clear the certified closure
+  anchor.**
+- It misses the co-gated one-step channel (**LV-W base_full 0.353 < 0.55**), which routed the frozen
+  LV-W∧LV-C gate to LOOP-REFUSED. But that miss is an **instrument artifact, not a no-channel verdict** — see
+  the tiebreak.
+- **Tiebreak (`verdict-integrity` — verify the ruler on metric divergence; `state/.../result_tiebreak_lvw.json`).**
+  LV-C PASS while LV-W FAIL is a divergence, so before any terminal I ran a **$0 / no-GPU** sweep of KNOWN-LIVE
+  contingent plants across action entropy, reusing the certified `lv_w`/`lv_c` verbatim. A known-live plant
+  **`mid3bal`** (H ≈ 0.97 bits, ~2 distinct actions, collision 0.52) reproduces the 7B's signature **exactly** —
+  LV-W base_full **0.358 FAIL**, LV-C closure **0.762 PASS**. Below H ≈ 0.6 plants lose BOTH; above H ≈ 1.8 both
+  pass. ⇒ **LV-W is UNDER-POWERED in the moderate-entropy regime the 7B occupies; its fail is QUARANTINED**
+  (`infra-wall-noneval`). LV-C is entropy-agnostic (yoked-ghost control) and alone rejects a dead env (null-env
+  closure = chance, cf. P-DEAD), so it **stands alone as the valid anchor.**
+- **VERDICT = the 7B demonstrates rung-1 closed-loop CONTINGENCY on the valid instrument** — NOT "aliveness"
+  (a thermostat clears rung 1), but the campaign's **first positive on the certified anchor**, and it
+  **LICENSES the owner-loop RCT that H_010 priced** (`decision-reframe-c`'s owner binary now has its go-signal).
+- **Convergence `run-h011-py-1` (cogate-metric-regime-blindness)** — a recurrence of H_009's instrument-regime
+  lesson: a co-gate metric certified in only one regime silently mismeasures the one the subject occupies; on
+  gate divergence, audit the ruler with a known-live sweep and quarantine the failing gate. **Residual:** repair
+  LV-W (restrict to non-collision ticks / action-conditioned MI) so it co-gates validly at low entropy.
+- **Code:** fixed the stale `else`-branch verdict string in `run_h011.py` (it hardcoded "Qwen2.5-3B" and a false
+  "closure < 0.6" even when closure PASSED); it now distinguishes the closure-fail vs LV-W-fail modes. Added
+  `state/.../tiebreak_lvw.py`. SSOT: `verification-h011` role updated + new child `h011-lvw-underpowered`;
+  REGISTRY H_011 → 🟢 ANCHOR-INDICATED; card Verdict extended with the 7B section + tiebreak.
+
 ## 2026-07-16 — H_011 stage B → 🔴 LOOP-REFUSED (localized to Qwen2.5-3B): the first LIVE interventional result — reading input ≠ closing the loop
 
 - The instrument (stage A) was CERTIFIED first (P-LIVE anchor / P-OPEN channel-only / P-DEAD refuse). Stage

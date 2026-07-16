@@ -1883,7 +1883,7 @@
     {
      "id": "verification-h011",
      "type": "gate",
-     "role": "H_011 live-ab-closure — reframe C live gate ($0, summer). Stage A instrument CERTIFIED; Stage B (Qwen2.5-3B) = LOOP-REFUSED (localized): the brain READS input (CR 0.41) but its contingency leaves no closure fingerprint (0.50≈chance) vs script 0.75. Instrument certified; escalations remain.",
+     "role": "H_011 live-ab-closure. Stage A CERTIFIED. Stage B: 3B LOOP-REFUSED (closure 0.50=chance); 7B(nf4) CLEARS the certified closure anchor (LV-C 0.76, 5/5 — 1st brain to). LV-W miss = instrument artifact (tiebreak plant mid3bal reproduces it). Rung-1 closed-loop -> LICENSES owner-loop RCT.",
      "children": [
       {
        "id": "h011-closure-gate",
@@ -1900,6 +1900,10 @@
       {
        "id": "h011-licenses",
        "role": "Branch: CLOSED-LOOP-ANCHORED = RUNG 1 only (closed-loop causation exists+measurable, NOT aliveness found) + certifies the instrument -> licenses the owner-loop RCT. Else CHANNEL-ONLY / LOOP-REFUSED(localized) / INSTRUMENT-INVALID. 실측전 research (empowerment/Ay-Polani/Watson/Jaques) justifies it."
+      },
+      {
+       "id": "h011-lvw-underpowered",
+       "role": "LV-W is UNDER-POWERED at moderate entropy: a known-live plant mid3bal (H~0.97, ~2 actions) reproduces the 7B signature — LV-W 0.358 FAIL while LV-C closure 0.762 PASS. A stage-B LV-W miss there is an instrument artifact QUARANTINED (infra-wall-noneval); LV-C (yoked) is the valid anchor."
       }
      ]
     }
@@ -1991,6 +1995,13 @@
     "value": "llm-policy-prior-collapse: scoring an LLM's log-prob over a fixed action set to pick a policy collapses to each action's MODEL PRIOR (Qwen2.5-3B emitted COMPACT for every state, LV-P CR=0.0) — the state barely moves the raw score. Fix = CONTRASTIVE / pointwise-MI scoring s(a|state) - s(a|neutral): the state-free baseline (scored once) cancels the prior, so the argmax ranks by how much the STATE shifts each action. Applies whenever an LLM is used as a discrete-action policy by scoring, not generating.",
     "threshold": "1",
     "source": "state/h011_live-ab-closure_2026-07-16/brain.py"
+   },
+   {
+    "id": "run-h011-py-1",
+    "source": "state/h011_live-ab-closure_2026-07-16/run_h011.py",
+    "lesson": "cogate-metric-regime-blindness: a co-gate metric (LV-W) certified in stage A ONLY with action-DIVERSE plants silently MISMEASURES the low/moderate-entropy regime a real LLM occupies — a known-live plant (mid3bal) also fails it while LV-C PASSES. Recurrence of H_009's instrument-regime lesson: an instrument is valid only inside its certified regime.",
+    "value": "On LV-C/LV-W divergence, suspect the ruler: run a $0 entropy-sweep of KNOWN-LIVE plants reusing the same metric; if one reproduces the target's fail-signature, QUARANTINE that gate (infra-wall-noneval), never fold it into the verdict. Certify each co-gate across the regime the subject actually occupies.",
+    "threshold": "metric divergence between two liveness gates on the SAME clean run"
    }
   ]
  }

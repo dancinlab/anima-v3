@@ -148,8 +148,32 @@ causation. A terminal-grade negative for Qwen2.5-3B greedy/memoryless in this mi
 > so a stage-B LV-W miss = brain-degeneracy (an open-loop signature), never an instrument fault
 > (`convergence brain-py-1`).
 
-**Pre-registered escalations remain** (the negative is localized, not the campaign terminal): a bigger
-brain (Qwen3-8B-4bit — bitsandbytes present on summer), persistent agent memory (rig #2), a richer env.
-The interventional INSTRUMENT is certified either way — it converts H_010's priced exit into the owner-loop
-RCT the moment any brain ANCHORS. Infra note: long summer runs use `sidecar pool on --bg` (detached; the
-orphan-fence group-kill was fixed upstream, dancinlab/sidecar #418).
+**Stage B (Qwen2.5-7B-Instruct, nf4, on summer, $0): ANCHOR-ON-LV-C (rung 1) — the FIRST brain to clear
+the certified closure anchor** — 2026-07-17. The 7B reads its input (LV-P CR = 0.400) AND its contingency
+**fingerprints the block trajectory above the yoked floor** — LV-C closure = **0.7625 ≥ 0.60, all 5/5
+episodes** (the 3B was 0.500 ≈ chance). It misses the co-gated one-step channel (LV-W base_full 0.353 <
+0.55), which routed the frozen gate to LOOP-REFUSED — but that miss is an **instrument artifact**, not a
+no-channel verdict (below).
+
+> **Tiebreak — LV-W is under-powered in this regime (`verdict-integrity`; `run_tiebreak → result_tiebreak_lvw.json`).**
+> LV-C PASS while LV-W FAIL is a metric divergence, so before any terminal I audited the *ruler*: a $0/no-GPU
+> sweep of KNOWN-LIVE contingent plants across action entropy, reusing the certified `lv_w`/`lv_c` verbatim.
+> A known-live plant **`mid3bal`** (H ≈ 0.97 bits, ~2 distinct actions, collision 0.52) reproduces the 7B's
+> signature **exactly** — LV-W base_full **0.358 FAIL**, LV-C closure **0.762 PASS**. Below H ≈ 0.6 plants
+> lose BOTH (lowent3/2); above H ≈ 1.8 both pass (lowent4/control). The 7B lives in the decoupling window.
+> ⇒ LV-W's fail there is an INSTRUMENT ARTIFACT (collision pins shuf_full ≈ 0.5; a degenerate action-distance
+> pushes base_full < 0.5), **QUARANTINED** (`infra-wall-noneval`). LV-C is entropy-agnostic (yoked-ghost
+> control) and by itself rejects a dead env (null-env closure = chance, cf. P-DEAD), so it stands ALONE as the
+> valid anchor. `convergence run-h011-py-1` (cogate-metric-regime-blindness — a recurrence of H_009's
+> instrument-regime lesson: a co-gate certified only in one regime silently mismeasures the one the subject
+> occupies). **Residual:** repair LV-W (restrict to non-collision ticks / action-conditioned MI) so it
+> co-gates validly at low entropy.
+
+So on the VALID instrument the 7B demonstrates **rung-1 closed-loop CONTINGENCY** — NOT "aliveness found"
+(a thermostat clears rung 1), but it is the campaign's first positive on the certified anchor, and it
+**LICENSES the owner-loop RCT that H_010 priced** (`decision-reframe-c`'s owner binary now has its go-signal).
+
+**Pre-registered escalations remain**: persistent agent memory (rig #2), a richer env, and — the real exit —
+the owner-loop RCT itself. The interventional INSTRUMENT is certified and now has a brain that anchors on it.
+Infra note: long summer runs use `sidecar pool on --bg` (detached; the orphan-fence group-kill was fixed
+upstream, dancinlab/sidecar #418).

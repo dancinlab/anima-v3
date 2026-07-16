@@ -280,11 +280,18 @@ def stage_b(model_id: str, episodes: int, ticks: int, seed0: int = 7, quant4: bo
                    "(rung 1; a thermostat passes) — but it certifies the interventional instrument and "
                    "LICENSES the owner-loop RCT (the real exit H_010 priced).")
     else:
-        verdict = (f"LOOP-REFUSED (localized to THIS agent) — the brain reads its input (CR {p['CR']:.3f}) "
-                   f"but its contingency leaves no fingerprint above the yoked floor (closure "
-                   f"{closure_mean:.3f} < {CLOSURE_SIGN}, {closure_eps}/{len(ep_signs)} episodes) — in a "
-                   "world built to reward closure. A terminal-grade negative for Qwen2.5-3B greedy/"
-                   "memoryless; pre-registered escalations (bigger brain, memory, richer env) remain.")
+        tag = model_id.split("/")[-1]
+        if not lv_c_pass:                                    # closure below the yoked floor (the 3B mode)
+            why = (f"its contingency leaves no closure fingerprint above the yoked floor (closure "
+                   f"{closure_mean:.3f} < {CLOSURE_SIGN}, {closure_eps}/{len(ep_signs)} episodes)")
+        else:                                                # closure CLEARS the floor but LV-W fails (the 7B mode)
+            why = (f"its contingency DOES fingerprint the block trajectory (closure {closure_mean:.3f} >= "
+                   f"{CLOSURE_SIGN}, {closure_eps}/{len(ep_signs)} episodes) YET the one-step action->next-obs "
+                   f"channel misses the co-gate (LV-W base_full {lvw_bf:.3f} < {SIGN}) — the executed action "
+                   "carries no clean one-step channel even as its ORDER shapes the trajectory")
+        verdict = (f"LOOP-REFUSED (localized to {tag}) — the brain reads its input (CR {p['CR']:.3f}) but "
+                   f"{why} — in a world built to reward closure. Fails the pre-registered LV-W AND LV-C "
+                   "anchor gate; pre-registered escalations (bigger brain, memory, richer env) remain.")
     return {"model": model_id, "episodes": episodes, "ticks": ticks, "per_episode": per,
             "lv_w": {"sign_base_full": lvw_bf, "sign_shuf_full": lvw_sf, "pass": bool(lv_w_pass)},
             "lv_c": {"closure_mean": closure_mean, "episodes_pass": closure_eps, "pass": bool(lv_c_pass)},
