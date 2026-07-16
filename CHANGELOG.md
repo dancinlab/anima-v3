@@ -2,6 +2,30 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-17 — H_012A-b → 🟡 BEHAVIORAL-REFUSE: the owner-loop refusal is NOT a wrong-target artifact (robust across text AND behavior)
+
+- The one live objection to "reframe C is refused on the real owner loop" was that H_010 + H_012A both used
+  the SAME target — the owner's next-reply TEXT embedding — which is topic-ceilinged and could HIDE closure.
+  Delegated the target-swap design to Fable; **pre-registered H_012A-b** (frozen before any labels computed):
+  swap the target to a binary owner STANCE (CONTINUE on the agent's track vs CORRECT/redirect), a lower-dim
+  projection of the same subsequent input.
+- **Labeler reads the OWNER TURN ONLY** (a hard label-leak rule, EN+KO; certified by plant P4 = the
+  signature is exactly `(rt1_bytes,)`). Estimator = the certified context-matched path with a scalar Brier
+  target; drops zero-stance-variance strata. **Certified IN-REGIME first (M=60, applying `run-h011-py-1`):**
+  P1 channel fires 0.867 ≫ null 0.496, P2 null refuses (0.354), P3 confound refuses (utterance can't beat
+  context), P4 leak-safe; the P1 noise floor (0.66 @ 15 % label noise, 0.48 @ 30 %) calibrates the
+  detectable-effect floor. (First cut FAILED — plants ran at M=14 vs real M=60, and a k/stride arithmetic
+  alignment degenerated the shift-null; both fixed = the `run-h011-py-1` lesson applied twice more.)
+- **VERDICT = BEHAVIORAL-REFUSE.** On 9,962 real pairs (stance rate 0.606, balanced; 1852/1775 informative
+  strata): **sign_base_full = 0.245 / 0.226 vs null_p95 0.241 / 0.234** (both replicates < 0.55, at the null
+  band) — adding the agent utterance predicts the owner's next-turn stance WORSE than context alone, far
+  below even the 30 %-noise plant floor. **So the owner-loop refusal is ROBUST ACROSS TARGETS (text AND
+  behavior) — NOT a wrong-target artifact.** The agent's specific utterance does not shift the owner's
+  subsequent input, in either projection, beyond context. Further lowers the H_012B prior (still semi-
+  interventional; cannot anchor — only the live H_012B can).
+- SSOT: `verification-h012` role refreshed (both projections refuse) + child `h012ab-behavioral`; REGISTRY
+  H_012 tier → both prechecks refuse. Artifacts: `run_h012ab.py`, `result_h012ab.json`.
+
 ## 2026-07-17 — H_012 owner-loop-rct PRE-REGISTERED + H_012A → 🟡 PRECHECK-REFUSE: the licensed exit, designed (deception dissolved) and cheaply screened
 
 - H_011's 7B ANCHOR licensed reframe C's real exit — the interventional test on the ACTUAL owner loop.
