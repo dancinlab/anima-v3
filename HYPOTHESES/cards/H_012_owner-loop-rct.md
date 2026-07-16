@@ -88,7 +88,45 @@ projection of the same subsequent input (a target-operationalization swap, NOT a
   (decode stochasticity is a local randomizer, not a deployed intervention) → FOUND is closure-CONSISTENT,
   cannot anchor; REFUSE is refusal on this projection, attenuated by labeler noise.
 
+## H_012A-c — block-OUTCOME target (pre-registered 2026-07-17, BEFORE touching real pairs)
+
+H_010 + H_012A + H_012A-b all test ONE-STEP (U_t → R_{t+1}). But the proxy's 7B ANCHORED at the BLOCK level
+(LV-C) and FAILED one-step (LV-W) — so the real-loop refusals may be at the WRONG TIMESCALE (the timescale
+analogue of the wrong-target artifact). The block level FACTORS: the sequence-contingency component (yoked
+permuted-sequence ghost) is fundamentally interventional → **H_012B-only**; but the block-OUTCOME component
+is identified under the SAME per-step ignorability H_012A accepted.
+
+- **Design (block-outcome, semi-interventional)**: treatment = a SINGLE utterance U_t (decode-stochastic
+  within context-matched strata, M=60, the H_012A machinery); outcome = **blockmean(features(R_{t+1..t+k}))**
+  (H_011's `_blockmeans` over the certified 256-dim features), primary **k=5** (k=3,8 sensitivity ONLY — no
+  gate-shopping). Statistic = sign(err_BASE > err_FULL) on the block-mean target + within-session shift-null
+  + disjoint-sample replication. Downstream utterances U_{t+1..} are MEDIATORS of U_t, so measuring the
+  TOTAL effect without conditioning on them is valid. Echo-strip each window reply against U_t.
+- **Why distinct from one-step (not implied by the three nulls)**: (i) INTEGRATION — per-step effects below
+  the one-step noise floor can accumulate over k turns into a block-mean shift (the campaign's OWN measured
+  dissociation: H_011 7B + mid3bal both LV-W-FAIL 0.35 with LV-C-PASS 0.76); (ii) DELAY — U_t can move the
+  owner at lag 2-5 with no lag-1 trace (read a plan, change course later — the natural Claude Code mode),
+  and block-mean(R_{t+1..t+k}) is not a function of the lag-1 pair. Aggregation is redundant ONLY under an
+  iid-effect assumption the proxy already falsified.
+- **Plants (all through the identical estimator; freeze thresholds + k-set first)**: P-BLOCKPOS (integration:
+  per-lag cipher BELOW the one-step floor, k=5 block clears — reproduces the LV-W-fail/LV-C-pass signature);
+  P-DELAY (effect at lag 3 only, zero at lag 1); P-BLOCKNULL (random utterance, owner window independent);
+  **P-BLOCKCONF** (the critical guard: a slow-drift latent drives BOTH the utterance sequence and the owner
+  window with NO U→R edge — must REFUSE; window aggregation AMPLIFIES slow-drift confounds, the block
+  analogue of topic-decoration, so this plant is what makes a FOUND believable).
+- **Gate**: primary k=5, sign_base_full ≥ 0.55 above the shift-null band, replicated → **BLOCK-CLOSURE-FOUND**
+  (the three refuses were the wrong timescale; single-utterance→windowed-input influence exists; re-prices
+  H_012B UP). Below → **BLOCK-REFUSE** (refusal robust across targets AND timescales). Honest limit (both):
+  semi-interventional (per-step decode ignorability; unobserved context leaks → cannot anchor) AND it tests
+  single-utterance→window, NOT sequence-contingency — LV-C proper (yoked ghost) stays H_012B-only, so even
+  BLOCK-REFUSE cannot exclude a pure order-code channel. That residue is H_012B's alone.
+
 ## H_012B — the consent-gated LIVE RCT (launch-pending-consent · NOT a terminal)
+
+> **Pre-registration amendment (2026-07-17, per the timescale analysis)**: randomize LIVE/GHOST grounding
+> over SUSTAINED WINDOWS (not per single turn), and pre-register the **LV-C block statistic as CO-PRIMARY**
+> alongside the one-step gate — so the live RCT adjudicates the timescale question at rung 1 rather than
+> inheriting the one-step-only blind spot into the paid test.
 
 - **Randomizes**: per eligible turn, coin C_t ∈ {LIVE, GHOST} at p=0.5, committed to an append-only local
   log BEFORE generation. Optional low-rate SELF-GHOST arm (true state, re-sampled seed) prices pure
@@ -169,6 +207,19 @@ labeler noise — the real 0.245 is far below it. **So the owner-loop refusal is
 it is ROBUST ACROSS both the text projection (H_010, H_012A) and the behavior projection (H_012A-b).** The
 agent's specific utterance does not shift the owner's subsequent input — text or behavior — beyond context.
 This further lowers the H_012B prior (still semi-interventional; cannot anchor).
+
+**H_012A-c (block-OUTCOME target, k=5, $0, semi-interventional): BLOCK-REFUSE** — 2026-07-17. Testing the
+TIMESCALE the proxy actually anchored on (window, not one-step): on 9,454 block-windowed queries a single
+utterance does NOT shift the owner's subsequent-window input statistics above the shift-null band —
+**sign_base_full = 0.420 / 0.437 vs null_p95 0.403 / 0.421** (both replicates < 0.55). The block estimator
+was certified with FOUR plants (P-BLOCKPOS integration fires 0.792 > null 0.647 and beats its own one-step
+0.698; P-DELAY detects a lag-3 effect the one-step is blind to; P-BLOCKNULL refuses; **P-BLOCKCONF**, the
+slow-drift confound that window-aggregation would amplify, correctly refuses) — so this REFUSE is
+trustworthy, not an instrument miss. **The refusal is now ROBUST across TARGETS (text, behavior) AND
+TIMESCALES (one-step, window)** — a 2×2 matrix of $0 lenses all refuse; both the wrong-target and the
+wrong-timescale artifacts are excluded. Honest residue (pre-registered): the sequence-CONTINGENCY channel
+(LV-C proper, the yoked ghost) is interventional and stays **H_012B-only** — a pure order-code channel,
+where only the utterance SEQUENCE's contingency carries signal, cannot be excluded at $0.
 
 **H_012B (live LIVE/GHOST grounding RCT): LAUNCH-PENDING-CONSENT** — designed, non-deceptive, ready. It
 requires the owner's explicit enrollment (a human gate the campaign cannot cross autonomously); the

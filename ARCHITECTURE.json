@@ -1914,7 +1914,7 @@
     {
      "id": "verification-h012",
      "type": "gate",
-     "role": "H_012 owner-loop-rct — reframe C's licensed EXIT. Interventional test on the REAL owner loop; deception dissolved by grounding randomization. H_012A (text) + H_012A-b (behavior) prechecks BOTH REFUSE -> refusal robust across targets. H_012B = consent-gated live RCT, launch-pending-consent.",
+     "role": "H_012 owner-loop-rct — reframe C's licensed EXIT on the REAL owner loop (deception dissolved by grounding randomization). A 2x2 $0 matrix REFUSES — target (text/behavior) x timescale (one-step/window) — refusal robust, not an artifact. H_012B (sequence-contingency) = launch-pending-consent.",
      "children": [
       {
        "id": "h012-grounding-randomization",
@@ -1931,6 +1931,10 @@
       {
        "id": "h012ab-behavioral",
        "role": "H_012A-b (behavioral-stance target, $0): target swapped from next-reply TEXT to the binary owner STANCE (owner-turn-only labeler). sign_base_full 0.245/0.226 (null 0.24) = BEHAVIORAL-REFUSE, certified in-regime (P1 0.867). Refusal ROBUST across text AND behavior -> not a wrong-target artifact."
+      },
+      {
+       "id": "h012ac-block",
+       "role": "H_012A-c (block-OUTCOME, k=5): tests the timescale the proxy anchored on (window). sign_base_full 0.420/0.437 (null 0.40) = BLOCK-REFUSE. Certified with 4 plants (P-BLOCKPOS/P-DELAY fire, null/confound refuse). Refusal robust across timescales; sequence-contingency (yoked ghost) H_012B-only."
       },
       {
        "id": "h012b-launch-pending",
