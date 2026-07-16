@@ -2,6 +2,29 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_007: the owner-substrate is real + $0-checkable; F7/F5 premise reads borderline weak-positive
+
+- Discovered a REAL owner-agent interaction stream on disk: `~/.claude/projects/*/*.jsonl`, ~51 MB of
+  genuine owner typing across 769 sessions (241 usable ≥ 6144 B). This materially changes the campaign's
+  resume: the remaining `fd-true-axes` families that live on the owner substrate (F7 curiosity, F5
+  trajectory, F8 owner-model) are NOT compute-blocked — they are $0-checkable here.
+- Pre-registered + ran `H_007 f7-owner-legibility` ($0): does the owner's message stream carry
+  predictable, HIGH-DIMENSIONAL cross-session structure (the premise F7/F5 need)? Privacy-preserving —
+  no owner content written to the repo, only aggregate bpb/rank numbers.
+- Verdict **PENDING / BORDERLINE-WEAK-POSITIVE**: cross-session legibility (markov6 over-floor) =
+  **+0.0207** (ε = 0.02) and owner-self participation ratio = **2.27** (floor 2.0) — both RIGHT AT
+  their pre-registered thresholds. The owner (terse directive commands) is a legible, more-than-one-bit
+  other, but barely — nowhere near anima's F3 signal (+0.22).
+- PENDING (not ANCHORED) because the markov6 liveness control read negative on the high-entropy synthetic
+  planted stream — diagnosed as an ESTIMATOR artifact (gzip liveness passes at +6.66; real text is
+  low-entropy where markov6 works), not an owner finding. The liveness must be rebuilt TEXT-like before
+  the markov6 owner number is fully trustworthy.
+- Resume: rebuild the liveness as a text-like planted stream + ppm confirm + a finer temporal grain
+  (per-day, not per-session-file); if the premise holds above threshold → F7/F5 LIVE (design the organ,
+  which needs a trained owner-model = real compute); if it collapses → the owner-substrate corner joins
+  the terminated pile.
+
+
 ## 2026-07-16 — H_006 RUN → 🔴 F3-BOUNDED-REFUSED: the diary twin cancelled at $0 (distributed MI)
 
 - Fable designed the F3 diary twin (H_007) and — crucially — a $0 precursor that GATES its ~12h training

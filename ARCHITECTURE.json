@@ -1674,6 +1674,41 @@
       }
      ],
      "type": "gate"
+    },
+    {
+     "id": "verification-h007",
+     "role": "H_007 f7-owner-legibility — RUN 2026-07-16 · verdict PENDING / BORDERLINE-WEAK-POSITIVE, $0. The remaining owner-substrate axes (F7/F5/F8) are NOT compute-blocked — a real owner stream exists on disk.",
+     "children": [
+      {
+       "id": "verification-h007-substrate",
+       "role": "DISCOVERED a real owner-agent transcript stream: ~/.claude/projects/*/*.jsonl, ~51 MB of genuine owner typing across 769 sessions (241 >= 6144B, usable).",
+       "children": [
+        {
+         "id": "h007-substrate-consequence",
+         "role": "Genuine typing filtered from tool_result/hook noise. The remaining fd-true-axes families that live on this substrate (F7/F5/F8) are $0-checkable, NOT compute-blocked."
+        }
+       ]
+      },
+      {
+       "id": "verification-h007-numbers",
+       "role": "The owner premise reads RIGHT AT both thresholds: cross-session legibility (markov6 over-floor) = +0.0207 (eps 0.02), owner-self participation ratio = 2.27 (floor 2.0). A WEAK positive — the owner is a legible, more-than-one-bit other, but barely (nowhere near anima's F3 +0.22)."
+      },
+      {
+       "id": "verification-h007-caveat",
+       "role": "PENDING not ANCHORED because the markov6 liveness control read negative on the high-entropy synthetic planted stream — an ESTIMATOR artifact.",
+       "children": [
+        {
+         "id": "h007-caveat-fix",
+         "role": "gzip liveness passes at +6.66; real text is low-entropy where markov6 works. The liveness must be rebuilt TEXT-like before the markov6 owner number is fully trustworthy."
+        }
+       ]
+      },
+      {
+       "id": "verification-h007-resume",
+       "role": "RESUME: rebuild liveness as a TEXT-like planted stream + ppm confirm + finer temporal grain (per-day not per-session). Holds above threshold -> F7/F5 premise LIVE, design the organ (needs a trained owner-model = real compute). Collapses -> the owner-substrate corner joins the terminated pile."
+      }
+     ],
+     "type": "gate"
     }
    ]
   },
