@@ -1952,5 +1952,16 @@
     }
    ]
   }
- ]
+ ],
+ "convergence": {
+  "records": [
+   {
+    "id": "run-h010-py-1",
+    "state": "pos-conv",
+    "value": "interventional-entry-asymmetry: observational logs make a $0 loop precheck REFUSE-capable ONLY — P(R|do(U)) is not identifiable from logs, so an interventional aliveness thesis can be $0-CLOSED but never $0-ANCHORED. Entering it costs money by construction (unlike every observational thesis, which was $0-decidable both ways). Applies whenever a claim is causal/do()-shaped but the substrate is a passive log.",
+    "threshold": "1",
+    "source": "state/h010_loop-granger-gate_2026-07-16/run_h010.py"
+   }
+  ]
+ }
 }
