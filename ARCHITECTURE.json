@@ -1914,7 +1914,7 @@
     {
      "id": "verification-h012",
      "type": "gate",
-     "role": "H_012 owner-loop-rct — reframe C's licensed EXIT (H_011 anchor licensed it): the interventional test on the REAL owner loop. Deception dissolved by grounding randomization. H_012A precheck = REFUSE (lowers prior); H_012B = consent-gated live RCT, launch-pending-consent.",
+     "role": "H_012 owner-loop-rct — reframe C's licensed EXIT. Interventional test on the REAL owner loop; deception dissolved by grounding randomization. H_012A (text) + H_012A-b (behavior) prechecks BOTH REFUSE -> refusal robust across targets. H_012B = consent-gated live RCT, launch-pending-consent.",
      "children": [
       {
        "id": "h012-grounding-randomization",
@@ -1927,6 +1927,10 @@
       {
        "id": "h012a-regime",
        "role": "verdict-integrity re-check (run-h011-py-1 recurrence): plants certified at M=12, real data M=60. Re-certified sign_base_full in-regime (channel 0.81 vs null 0.515; real 0.424 below null) -> REFUSE trustworthy. rank_full unreliable at M=60 (null plant rank 0/24); frozen AND-gate is robust."
+      },
+      {
+       "id": "h012ab-behavioral",
+       "role": "H_012A-b (behavioral-stance target, $0): target swapped from next-reply TEXT to the binary owner STANCE (owner-turn-only labeler). sign_base_full 0.245/0.226 (null 0.24) = BEHAVIORAL-REFUSE, certified in-regime (P1 0.867). Refusal ROBUST across text AND behavior -> not a wrong-target artifact."
       },
       {
        "id": "h012b-launch-pending",

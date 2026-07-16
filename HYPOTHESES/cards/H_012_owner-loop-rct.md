@@ -56,6 +56,38 @@ proxy. H_012 carries that interventional logic to the ACTUAL target — the one 
   H_012A can **REFUSE cheaply or upgrade prior odds, it CANNOT ANCHOR**. Only H_012B's real randomization
   can anchor.
 
+## H_012A-b — behavioral-stance target (pre-registered 2026-07-17, BEFORE any labels computed)
+
+H_010 + H_012A both REFUSED using the SAME target — the embedding of the owner's next-reply TEXT. Owners
+reply on-topic to anything relevant, so the text is topic-ceilinged and may HIDE closure. The causally
+meaningful "shift in subsequent input" may be BEHAVIORAL: does the owner CONTINUE on the agent's track vs
+CORRECT/redirect? H_012A-b swaps the target to that binary STANCE — a different, lower-dimensional
+projection of the same subsequent input (a target-operationalization swap, NOT a hypothesis change).
+
+- **Labeler (deterministic, owner-turn ONLY — a hard label-leak rule; EN+KO)**: (1) HARD-CORRECT =
+  `[Request interrupted by user]` / tool-permission-denied / abort; (2) CORRECT = negation/redirect cue in
+  the first clause (no·nope·actually·instead·wrong·stop·wait·undo·revert·"not what"·"I said"·"I meant";
+  KO 아니·아냐·그게 아니라·말고·다시·잘못·하지 마·틀렸); (3) CONTINUE = affirmative cue (yes·ok·sure·go
+  ahead·proceed·thanks·lgtm; KO 응·네·좋아·그래·진행·계속·고마워) or short turn ≤5 tokens w/o negation;
+  (4) default CONTINUE. The labeler NEVER reads the agent utterance (Fable's Jaccard rule is DROPPED to keep
+  P4 strict + avoid circularity); the residual noise ('no' answering the agent's yes/no question) is
+  conservative (attenuates toward null) and calibrated by P1.
+- **Estimator**: the certified context-matched path, target = binary stance, err = **Brier** ((pred−label)²,
+  smooth under imbalance), sign(err_BASE > err_FULL) with the within-session shift-null (preserves per-
+  session stance base rates). Drop strata with ZERO stance variance (report dropped + surviving N).
+  Secondary (twin-native): within a stratum, does utterance-distance predict stance DISAGREEMENT?
+- **Plants**: P1 positive (stance = fn(planted utterance token); must fire at full fidelity AND at 10/20/30%
+  injected label noise → calibrates the detectable-effect floor a REFUSE is quoted against); P2 null (stance
+  = seeded coin); P3 confound/echo (stance = fn(context only) → FULL must NOT beat BASE); P4 label-leak
+  (deterministic assert: labeler output invariant to replacing the agent utterance).
+- **Gate**: PRECHECK — P1-P4 pass, surviving informative strata ≥ N_min, global stance rate ∈ [5%,95%];
+  else **STANCE-UNIDENTIFIABLE**. MAIN — sign_base_full above the shift-null 95% band on BOTH replicates AND
+  the twin-native secondary agrees → **BEHAVIORAL-CLOSURE-FOUND** (the text refusals were wrong-target;
+  reframe C alive on the behavior channel). Both inside the null band → **BEHAVIORAL-REFUSE** (refusal robust
+  across targets; quotable only with the P1 noise-calibrated floor). Honest limit: still semi-interventional
+  (decode stochasticity is a local randomizer, not a deployed intervention) → FOUND is closure-CONSISTENT,
+  cannot anchor; REFUSE is refusal on this projection, attenuated by labeler noise.
+
 ## H_012B — the consent-gated LIVE RCT (launch-pending-consent · NOT a terminal)
 
 - **Randomizes**: per eligible turn, coin C_t ∈ {LIVE, GHOST} at p=0.5, committed to an append-only local
@@ -124,6 +156,19 @@ that the live H_012B RCT would anchor. It cannot itself anchor (unidentified).
 > significance), so the real data's rank_full=1 is a spurious artifact, NOT signal — but the pre-registered
 > AND-gate (`sign ≥ 0.55` AND `rank ≤ 2`) is robust: `sign` fails, so no false UPGRADE, and REFUSE rests on
 > `sign` alone. (Second sighting of the metric-regime lesson: H_011 LV-W, now H_012A rank_full.)
+
+**H_012A-b (behavioral-stance target, $0, semi-interventional): BEHAVIORAL-REFUSE** — 2026-07-17. Swapping
+the target from next-reply text to the binary owner STANCE (continue vs correct/redirect, labeled from the
+owner turn ONLY) does NOT rescue closure: on 9,962 real pairs (stance rate 0.606, balanced; 1852/1775
+informative context-matched strata) **sign_base_full = 0.245 / 0.226 vs null_p95 0.241 / 0.234** (both
+replicates < 0.55 and at the null band) — adding the agent utterance predicts the owner's next-turn stance
+WORSE than context alone. The estimator was certified IN-REGIME first (M=60, applying `run-h011-py-1`):
+P1 channel fires at 0.867 ≫ null 0.496, P2 null refuses, P3 confound refuses, P4 labeler is leak-safe, and
+the P1 noise floor (0.66 at 15 % label noise, 0.48 at 30 %) shows a real effect would survive substantial
+labeler noise — the real 0.245 is far below it. **So the owner-loop refusal is NOT a wrong-target artifact:
+it is ROBUST ACROSS both the text projection (H_010, H_012A) and the behavior projection (H_012A-b).** The
+agent's specific utterance does not shift the owner's subsequent input — text or behavior — beyond context.
+This further lowers the H_012B prior (still semi-interventional; cannot anchor).
 
 **H_012B (live LIVE/GHOST grounding RCT): LAUNCH-PENDING-CONSENT** — designed, non-deceptive, ready. It
 requires the owner's explicit enrollment (a human gate the campaign cannot cross autonomously); the
