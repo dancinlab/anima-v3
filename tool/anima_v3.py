@@ -120,6 +120,71 @@ def singular_values(vectors: list, center: bool = True) -> list:
     return [math.sqrt(max(0.0, ev)) for ev in eigenvalues]
 
 
+def _jacobi_eigen(matrix: list, tol: float = 1e-12, max_sweeps: int = 100) -> tuple:
+    """Eigenvalues AND eigenvectors of a real SYMMETRIC matrix via cyclic Jacobi.
+
+    Companion to `_jacobi_eigenvalues`: same deterministic stdlib method, but it
+    also accumulates the rotation matrix so the eigenvectors come out too. Returns
+    `(eigenvalues, eigenvectors)` sorted by eigenvalue DESCENDING, where
+    `eigenvectors[i]` is the unit eigenvector (as a row list) for `eigenvalues[i]`.
+    """
+    n = len(matrix)
+    for row in matrix:
+        if len(row) != n:
+            raise ValueError("matrix must be square")
+    a = [list(map(float, row)) for row in matrix]
+    for i in range(n):
+        for j in range(i + 1, n):
+            if abs(a[i][j] - a[j][i]) > 1e-9 * max(1.0, abs(a[i][j])):
+                raise ValueError("matrix must be symmetric")
+    v = [[1.0 if i == j else 0.0 for j in range(n)] for i in range(n)]  # accumulated rotations
+
+    for _ in range(max_sweeps):
+        off = sum(a[p][q] ** 2 for p in range(n) for q in range(n) if p != q)
+        if off <= tol:
+            break
+        for p in range(n - 1):
+            for q in range(p + 1, n):
+                if abs(a[p][q]) <= 1e-300:
+                    continue
+                theta = (a[q][q] - a[p][p]) / (2.0 * a[p][q])
+                sign = 1.0 if theta >= 0.0 else -1.0
+                t = sign / (abs(theta) + math.sqrt(theta * theta + 1.0))
+                c = 1.0 / math.sqrt(t * t + 1.0)
+                s = t * c
+                for k in range(n):
+                    akp, akq = a[k][p], a[k][q]
+                    a[k][p] = c * akp - s * akq
+                    a[k][q] = s * akp + c * akq
+                for k in range(n):
+                    apk, aqk = a[p][k], a[q][k]
+                    a[p][k] = c * apk - s * aqk
+                    a[q][k] = s * apk + c * aqk
+                for k in range(n):  # accumulate eigenvectors (rotate V's columns p,q)
+                    vkp, vkq = v[k][p], v[k][q]
+                    v[k][p] = c * vkp - s * vkq
+                    v[k][q] = s * vkp + c * vkq
+
+    pairs = sorted(range(n), key=lambda i: a[i][i], reverse=True)
+    eigenvalues = [a[i][i] for i in pairs]
+    eigenvectors = [[v[r][i] for r in range(n)] for i in pairs]  # column i -> row
+    return eigenvalues, eigenvectors
+
+
+def principal_axes(vectors: list, k: int, center: bool = True) -> list:
+    """Top-k principal axes (right singular vectors) of an observation set.
+
+    Rows of `vectors` are observations; the axes are the top-k eigenvectors of the
+    Gram/covariance matrix, i.e. the directions a k-dim linear code should project
+    onto to POOL the most variance. Returns up to k unit-norm axes (rows), fewer if
+    the feature width is < k. Deterministic, stdlib-only.
+    """
+    if k <= 0:
+        raise ValueError("k must be positive")
+    _evals, evecs = _jacobi_eigen(gram_matrix(vectors, center=center))
+    return evecs[: min(k, len(evecs))]
+
+
 # --- L1 gate: effective rank of the seam ---------------------------------------
 
 def participation_ratio(sv: list, eps: float = 1e-12) -> float:

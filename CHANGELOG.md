@@ -2,6 +2,32 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — Campaign re-decision post H_008: the $0 phase is a TRUE terminal, but ONE $0 card remains → (B) gated spend
+
+- Fable 5 re-decision (delegated) over the exhausted frontier. Verdict on the campaign SHAPE: the $0
+  OBSERVATIONAL phase is a genuine terminal (every branch's liveness PASSED text-like; the refusals are
+  STRUCTURAL — PR 1.75, direction +0.004, ppm −0.117 — not proxy-sensitivity failures), but sealing "no
+  aliveness premise survives, period" would launder 3 UNMEASURED residuals into a verdict.
+- Per-residual triage (belief-killed-or-earned per dollar): **F3 continuous-m ALIVE** (H_006 killed only
+  the byte-SELECTION text bound; a learned DENSE code POOLS distributed MI — a different operator class,
+  so the ~83KB-distributed-MI wall does not bound it); **F7/F5/F8 owner organ DEAD** by the frozen
+  F7-kill (both grains measured — relitigating is the L8 disease; reopen = a NEW substrate, not compute);
+  **F6 init-seed** killed by 실측전-research (deep-ensemble = known generic variance reduction); **F4
+  curriculum-order** weak+generic (training-efficiency, not identity).
+- **Decision = (B) gated spend** (complete+std champion): pre-register + run **H_009 f3-continuous-oracle**
+  ($0, deterministic) — a k=64 continuous SVD day-summary vs shuffle floor AND a topic-matched other-day
+  floor (folds in f5's last open $0 item as F3's decoration control). KILL over-floor ≤ 0.02 OR ≤
+  topic-floor + 0.02 → campaign terminal + fire (C). ANCHOR ≥ 25% of the +0.27 ceiling AND beats the
+  topic floor → licenses the ~10M continuous-m twin (~12h MPS / ≤$15 cloud).
+- **(C) reframe PRE-REGISTERED** as the refusal terminal (verdict-before-run avoided): the 8 families
+  shared a hidden premise — *aliveness = a static structural property of a passive existing stream,
+  detectable without the agent acting*. If H_009/twin refuses, the next thesis is INTERVENTIONAL: alive
+  iff the agent's own utterance measurably shifts the statistics of its subsequent INPUT stream above a
+  matched no-agent/scrambled floor on a real loop.
+- SSOT: added `decision.decision-redecide-h008` (+ 7 children: walls · f3-alive · f7-dead · f6f4-dead ·
+  pick · h009-spec · reframe).
+
+
 ## 2026-07-16 — H_008 frontier-fanout → 🧱 FRONTIER-EXHAUSTED: the $0 structural-analysis phase is COMPLETE
 
 - Fanned out (`/abg` → one Workflow, 4 isolated worktrees, GPU 0) the four live frontier families the

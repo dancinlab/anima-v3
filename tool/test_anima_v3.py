@@ -38,6 +38,7 @@ from anima_v3 import (
     gram_matrix,
     normal_quantile,
     participation_ratio,
+    principal_axes,
     singular_values,
     stable_rank,
     two_proportion_n,
@@ -132,6 +133,18 @@ def main() -> int:
     ok = pr < er
     _results.append(ok)
     print(f"{'PASS' if ok else 'FAIL'}  {'PR is stricter than erank on weak 2nd dir':<52} PR={pr:.4f} < erank={er:.4f}")
+
+    print("\n=== principal_axes — top-k eigenvectors (H_009 continuous summary) ===")
+    # Observations vary MORE along x (energy 8) than y (energy 2): the top axis must
+    # be (±1, 0) and the second (0, ±1), each unit-norm. Sign is free (eigenvector).
+    axes = principal_axes([[2.0, 0.0], [-2.0, 0.0], [0.0, 1.0], [0.0, -1.0]], k=2)
+    check("top axis is the x-direction |ax0.x|", abs(axes[0][0]), 1.0, tol=1e-6)
+    check("top axis has no y-component |ax0.y|", abs(axes[0][1]), 0.0, tol=1e-6)
+    check("2nd axis is the y-direction |ax1.y|", abs(axes[1][1]), 1.0, tol=1e-6)
+    check("axes are unit-norm (ax0)", math.hypot(axes[0][0], axes[0][1]), 1.0, tol=1e-6)
+    # k capped at feature width; requesting more axes than dims returns width axes.
+    axes3 = principal_axes([[2.0, 0.0], [-2.0, 0.0], [0.0, 1.0], [0.0, -1.0]], k=5)
+    check("k capped at feature width", float(len(axes3)), 2.0)
 
     print("\n=== bits-per-byte — codec-invariant unit (salvage L6) ===")
     check("bpb identity: ln2 nats/token, 1 token/byte", bits_per_byte(math.log(2), 100, 100), 1.0)
