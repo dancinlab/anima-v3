@@ -1,5 +1,6 @@
 ---
 id: H_007
+ssot: ARCHITECTURE.json → verification-h007 (superseded by verification-h008-f7; frozen verdict record, distil FROM here)
 slug: f7-owner-legibility
 title: Does the owner's real message stream carry predictable, HIGH-DIMENSIONAL cross-session structure — the premise F7 (curiosity/EIG) and F5 (trajectory) both need? If cross-session lift ≤ shuffle floor OR the owner-self collapses to effective rank ~1, the owner-substrate families are REFUSED for want of a high-dimensional other to model.
 domain: prediction-error-action axis (F7 living-by-not-knowing-you) + time-trajectory (F5) — the owner-interaction substrate
@@ -103,6 +104,17 @@ owner-self is 1-bit; F7's high-dimensionality claim dies = the v1 seam-h9229 fai
 - **substrate**: `~/.claude/projects/*/*.jsonl` (genuine owner messages)
 
 ## Verdict
+
+**🟡 PENDING / BORDERLINE-WEAK-POSITIVE → SUPERSEDED by H_008 (f7-owner-clean) = 🔴 REFUSED.** This
+card's single-grain borderline (below) was the last open premise on the owner substrate. The clean
+re-run under `H_008` — text-like liveness (the markov artifact fixed, liveness now PASSES) measured on
+BOTH grains — resolves it to a kill: the owner is **high-dimensional XOR legible, never both on the
+same grain** (per-session PR 2.29 but not legible; per-day legible markov3 +0.145 / markov8 +0.176 but
+PR 1.75 = the v1 one-bit seam). The F7/F5/F8 owner-substrate premise is **REFUSED**, not borderline.
+See `HYPOTHESES/cards/H_008_frontier-fanout.md` and `verification-h008-f7`.
+
+_Original single-grain borderline reading retained below as the record of its time (seed-of-record);
+the resolving verdict is H_008-f7._
 
 **🟡 PENDING / BORDERLINE-WEAK-POSITIVE** (run 2026-07-16 · $0). The owner-substrate exists and is
 rich, but its premise reads right at both thresholds — neither a clean anchor nor a clean kill.

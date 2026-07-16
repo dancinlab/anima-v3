@@ -1677,7 +1677,7 @@
     },
     {
      "id": "verification-h007",
-     "role": "H_007 f7-owner-legibility — RUN 2026-07-16 · verdict PENDING / BORDERLINE-WEAK-POSITIVE, $0. The remaining owner-substrate axes (F7/F5/F8) are NOT compute-blocked — a real owner stream exists on disk.",
+     "role": "H_007 f7-owner-legibility — RUN 2026-07-16, verdict borderline-PENDING (markov6 liveness artifact). SUPERSEDED by H_008 f7-owner-clean = REFUSED: the fixed text-like instrument shows legibility and high-dimensionality never co-occur on the same grain. The owner premise is REFUSED, not borderline.",
      "children": [
       {
        "id": "verification-h007-substrate",
@@ -1706,6 +1706,73 @@
       {
        "id": "verification-h007-resume",
        "role": "RESUME: rebuild liveness as a TEXT-like planted stream + ppm confirm + finer temporal grain (per-day not per-session). Holds above threshold -> F7/F5 premise LIVE, design the organ (needs a trained owner-model = real compute). Collapses -> the owner-substrate corner joins the terminated pile."
+      }
+     ],
+     "type": "gate"
+    },
+    {
+     "id": "verification-h008",
+     "role": "H_008 frontier-fanout — 4 parallel $0 probes (one Workflow, isolated worktrees) resolving the remaining campaign frontier 2026-07-16.",
+     "children": [
+      {
+       "id": "h008-net",
+       "role": "NET: the $0 structural-analysis phase is COMPLETE — every remaining family's cheaply-testable premise on the available substrates is REFUSED or borderline-leaning-refused."
+      },
+      {
+       "id": "verification-h008-f7",
+       "role": "f7-owner-clean = REFUSED (resolves + CORRECTS H_007's borderline). Legibility and high-dimensionality NEVER co-occur on the same grain -> F7/F5/F8 owner-substrate REFUSED (the v1 l1-one-bit-seam, re-found on the owner).",
+       "children": [
+        {
+         "id": "h008-f7-numbers",
+         "role": "Text-like liveness markov3 +0.224 / markov8 +0.476 PASS (H_007's markov6 blind-instrument artifact gone). Per-session (n=242) high-dim PR 2.29 but NOT legible (+0.007/+0.019 < eps); per-day (n=30) legible (+0.15/+0.18) but ONE-BIT PR 1.75."
+        }
+       ]
+      },
+      {
+       "id": "verification-h008-f5",
+       "role": "f5-trajectory = BORDERLINE. The recent past accumulates (monotone growth +0.106 gzip / +0.028 markov6 over the shuffle floor) BUT is TIME-SYMMETRIC (direction signal +0.004 <= eps).",
+       "children": [
+        {
+         "id": "h008-f5-detail",
+         "role": "F5 adds a recency WINDOW over F7's static legibility but NO directed arrow-of-time self. Open $0 disambiguation: a TOPIC-MATCHED far-session floor separates individual latent state from pure topical drift; if it collapses, F5 folds fully into F7."
+        }
+       ]
+      },
+      {
+       "id": "verification-h008-f6",
+       "role": "f6-shard-ensemble = BORDERLINE-leaning-REFUSED. Data-shard specialization (the only non-codec F6 axis with a $0 probe) gives a small (+0.05), NON-ROBUST (sign-flips across capacity), mostly oracle-min artifact benefit.",
+       "children": [
+        {
+         "id": "h008-f6-detail",
+         "role": "A matched-capacity MONOLITH wins in the tight 'small-model' regime by in-context domain adaptation (l11 superset argument concretized). Remaining untested F6 axis = init-seed deep ensemble, needs ~1 GPU-hour (compute, not $0)."
+        }
+       ]
+      },
+      {
+       "id": "verification-h008-f4",
+       "role": "f4-curriculum-headroom = REFUSED ($0 half). Corpus SELECTION is the l11 frequency tautology: a frozen n-gram retriever ties/beats the hindsight-oracle curriculum.",
+       "children": [
+        {
+         "id": "h008-f4-detail",
+         "role": "Raw headroom +0.211 markov6 but ~43% is order-0 marginal matching; the oracle edge over a frozen 6-gram retriever is decoration. Genuine-F4 residual (curriculum ORDER/dynamics) is DESIGN-ONLY — needs a small LM order-ablation (compute)."
+        }
+       ]
+      },
+      {
+       "id": "verification-h008-campaign",
+       "role": "CAMPAIGN RESULT: the $0 structural-analysis phase is COMPLETE (7 solo cards + 4 fan-out probes, GPU 0).",
+       "children": [
+        {
+         "id": "h008-campaign-detail",
+         "role": "Write-lever (F1/F4) terminated by l11; owner families (F7/F5/F8) REFUSED (owner not legible-AND-high-dim); F3 diary spent; F6 borderline-refused.",
+         "children": [
+          {
+           "id": "h008-campaign-residual",
+           "role": "Every remaining lever hits l11's tautology, collapses to one-bit, or needs a real training run whose premise is now known weak/refused — an unjustified spend."
+          }
+         ]
+        }
+       ]
       }
      ],
      "type": "gate"
@@ -1745,6 +1812,22 @@
           {
            "id": "cr-distributed-lesson",
            "role": "LESSON: after anchoring an unbounded ceiling, ALWAYS gate the bottlenecked mechanism with a $0 bounded-extract precursor before training — a distributed signal is real but un-compressible into the proposed bottleneck. Killed the F3 twin's ~12h spend at $0."
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "id": "cr-zero-cost-frontier-exhausted",
+       "role": "cr-zero-cost-frontier-exhausted (H_008, 2026-07-16): across 4 remaining families probed in parallel at $0, EVERY cheaply-testable 'where aliveness lives' premise on the available substrates fails.",
+       "children": [
+        {
+         "id": "cr-frontier-detail",
+         "role": "F7/F5/F8 owner (legible XOR high-dim, never both), F4 corpus (l11 tautology), F6 shard (non-robust artifact), F5 trajectory (undirected).",
+         "children": [
+          {
+           "id": "cr-frontier-lesson",
+           "role": "LESSON: the $0 phase reached its terminal; what remains is a compute-only residual per family whose premise the $0 phase already showed weak/refused. Spend compute ONLY where the $0 premise was at least borderline-live (F5 topic-matched floor is still $0; F6 init-seed is the cheapest compute test)."
           }
          ]
         }

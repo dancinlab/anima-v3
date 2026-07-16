@@ -2,6 +2,35 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_008 frontier-fanout → 🧱 FRONTIER-EXHAUSTED: the $0 structural-analysis phase is COMPLETE
+
+- Fanned out (`/abg` → one Workflow, 4 isolated worktrees, GPU 0) the four live frontier families the
+  F1/F3 terminals left, each a $0 premise-check with a text-like liveness control (the H_007 fix):
+- **f7 owner-clean → 🔴 REFUSED** — RESOLVES + CORRECTS H_007's borderline. With the liveness rebuilt
+  text-like (now PASSES: markov3 +0.224 / markov8 +0.476) and BOTH grains measured, the owner is
+  **legible XOR high-dimensional, never both on the same grain**: per-session PR **2.29** but not
+  legible; per-day legible (markov3 **+0.145**, markov8 **+0.176**) but PR **1.75** (one-bit). The
+  F7/F5/F8 owner-substrate premise is REFUSED — the v1 `l1-one-bit-seam` re-measured on the real owner.
+- **f5 trajectory → 🟡 F5-WEAK** — the recent past accumulates (growth **+0.106** > ε) but time is
+  SYMMETRIC (direction signal **+0.004** ≤ ε): a topical window / smooth drift, not a directed
+  arrow-of-time self. F5 adds a recency window over F7 but no directed trajectory.
+- **f6 shard-ensemble → 🟡 BORDERLINE-leaning-REFUSED** — shuffle-corrected shard specialization is
+  small and NON-ROBUST across capacity (4k **+0.048**, 16k **−0.086**, 64k **+0.050** — sign-flips);
+  the raw oracle lift +0.159 exceeds the perfectly-separable ceiling +0.029 = mostly oracle-min
+  artifact. The matched-capacity monolith in-context-adapts to the domain (the L11 superset argument).
+- **f4 curriculum-headroom → 🔴 REFUSED (L11)** — raw selection headroom is real (+0.211 bpb) but
+  decoration: markov6 (the selection estimator) says the oracle beats the frozen 6-gram retriever
+  +0.117, but the INDEPENDENT ppm says **−0.117** (retriever ties/beats). Corpus selection is the L11
+  frequency tautology in its corpus outfit — the F4 half of `fd-write-lever-pair`, exactly as warned.
+- **Campaign result**: the **$0 structural-analysis phase is COMPLETE** (7 solo cards + 4 fan-out
+  probes, GPU 0). Write-lever (F1/F4) terminated by L11 on both hands; owner families (F7/F5/F8)
+  REFUSED; F3 diary spent; F6 borderline-refused. Remaining residue is compute-bearing and
+  premise-weak — the honest next move is a campaign-level re-decision, not another $0 card.
+- SSOT: added `verification-h008` (gate + 4 branch children + campaign result) and the convergence
+  record `cr-zero-cost-frontier-exhausted`; corrected `verification-h007` to note it is superseded.
+  New card `HYPOTHESES/cards/H_008_frontier-fanout.md`; registry H_008 added, H_007 marked superseded.
+
+
 ## 2026-07-16 — H_007: the owner-substrate is real + $0-checkable; F7/F5 premise reads borderline weak-positive
 
 - Discovered a REAL owner-agent interaction stream on disk: `~/.claude/projects/*/*.jsonl`, ~51 MB of
