@@ -1984,6 +1984,13 @@
     "value": "interventional-entry-asymmetry: observational logs make a $0 loop precheck REFUSE-capable ONLY — P(R|do(U)) is not identifiable from logs, so an interventional aliveness thesis can be $0-CLOSED but never $0-ANCHORED. Entering it costs money by construction (unlike every observational thesis, which was $0-decidable both ways). Applies whenever a claim is causal/do()-shaped but the substrate is a passive log.",
     "threshold": "1",
     "source": "state/h010_loop-granger-gate_2026-07-16/run_h010.py"
+   },
+   {
+    "id": "brain-py-1",
+    "state": "pos-conv",
+    "value": "llm-policy-prior-collapse: scoring an LLM's log-prob over a fixed action set to pick a policy collapses to each action's MODEL PRIOR (Qwen2.5-3B emitted COMPACT for every state, LV-P CR=0.0) — the state barely moves the raw score. Fix = CONTRASTIVE / pointwise-MI scoring s(a|state) - s(a|neutral): the state-free baseline (scored once) cancels the prior, so the argmax ranks by how much the STATE shifts each action. Applies whenever an LLM is used as a discrete-action policy by scoring, not generating.",
+    "threshold": "1",
+    "source": "state/h011_live-ab-closure_2026-07-16/brain.py"
    }
   ]
  }
