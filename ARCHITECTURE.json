@@ -1912,6 +1912,14 @@
          ]
         }
        ]
+      },
+      {
+       "id": "cr-invalid-is-instrument-not-verdict",
+       "role": "cr-invalid-is-instrument-not-verdict (H_009, 2026-07-16): an INVALID is an instrument bug to FIX, not a verdict. Two hit: byte models can't read an abstract code; capture ratio ===1.0 at k>=n_train-1 (query residual cancels in the argmin). Cure: a shift-null floor cancels estimator variance."
+      },
+      {
+       "id": "cr-observational-premise-exhausted",
+       "role": "cr-observational-premise-exhausted (H_009 -> reframe C, 2026-07-16): all 8 families shared one hidden premise — aliveness = a STATIC property of a PASSIVE stream, readable without acting — now terminally exhausted at $0. Escape = a different MEASUREMENT CLASS (interventional closed-loop causation)."
       }
      ]
     }
