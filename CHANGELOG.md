@@ -2,6 +2,46 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_009 f3-continuous-oracle → 🔴 F3-CONTINUOUS-REFUSED (instrument CERTIFIED): the last F3 organ premise dies at $0 → reframe (C) FIRED
+
+- Ran the (B)-gate card. Verdict = **F3-CONTINUOUS-REFUSED** ($0, GPU 0). The continuous rank-k code
+  DOES capture the day→tomorrow ceiling (both streams clear the gate + the 0.25 anchor: anima
+  capture(8)=**1.007**, hexa **0.849**) and beats the topic floor ON AGGREGATE (cap−topic **+0.29** /
+  **+0.14** > ε_f) — **but the per-pair sign(err_topic > err_s) is ≈ 50%** (anima **23/43** < 28-needed;
+  hexa fully-certified **52/101** < 60-needed). C-2 fires: the s-over-topic advantage is concentrated in a
+  MINORITY of day-pairs = a *sometimes*-day-specific code, not a pervasive day-specific self (the L2
+  replacement-not-coupling distinction C-2 was frozen to draw — the topic-nearest OTHER day predicts
+  tomorrow as well as the day's own summary on ~half of days).
+- **Instrument integrity (two INVALIDs caught + fixed BEFORE any verdict — verdict-integrity).** (1) The
+  frozen byte-append path is decoder-blind (gzip/markov/ppm are literal byte models; an abstract
+  projection code reads capture≈0 regardless of truth) — Fable Q1 CONFIRMED, corrected to FEATURE space.
+  (2) The first feature-space instrument returned INVALID from two estimator defects Fable root-caused:
+  **A** — when k ≥ n_train−1 the top-k axes span the training subspace, so a test query's orthogonal
+  residual is a per-query constant that cancels in the k-NN argmin → err_s ≡ err_full → capture ≡ 1.0
+  MECHANICALLY (verified exact at k=32,64); **B** — a constant-mean denominator + K=3 + a 60/40 split made
+  err_full noisier than err_base (ceiling_strength < 0) → estimator variance, not substrate.
+- **H_009′ fix (Fable design, I implemented + ran):** shift-null LOO capture — capture(k) =
+  align_s(k)/align_full where align_X = median_shift err_X − err_X(aligned); the estimator's variance
+  penalty is identical in aligned and shifted runs, so it cancels. LOO over ALL pairs, K=5, valid-k only.
+- **Instrument CERTIFIED** (C-3′ liveness, 3 buried-delay-line arms, matched n): HIGH (planted-weak) PASS
+  both n; FAIL (iid noise) gate-fails both n; **LOW** (20 delay-taps of one logistic scalar buried under 8
+  higher-variance decoys — the orthogonal-plant negative control is UNBUILDABLE under Euclidean k-NN, and a
+  rank-truncation plant is too) reads capture(k≤8) ≤ 0.25 PASS at n=102. 5/6 falsifiers PASS. RESOLUTION
+  limit (measured, robust across constructions): LOW certifiable only at n≥~100 → **hexa-lang = PRIMARY**,
+  anima = REPLICATION; the REFUSED basis (per-pair sign) is magnitude-blind, hence resolution-independent.
+- **Twin NOT licensed.** Spending past a certified null is the forbidden "maybe the decoder finds it"
+  appeal (pre-commitment · L8). cr-distributed-lesson held: the $0 precursor killed the ~$15 twin.
+- **reframe (C) FIRED.** Both F3 operator classes are now dead at $0 (byte-selection H_006,
+  distributional-projection H_009), and every observational family (F1–F8) tested aliveness as a STATIC
+  property of a PASSIVE stream — that premise is terminally exhausted. **New ACTIVE thesis = INTERVENTIONAL
+  closed-loop causation**: alive iff the agent's own utterance shifts its SUBSEQUENT INPUT statistics above
+  a matched floor on a REAL loop. Both Fable delegations independently confirmed the REFUSED path.
+- SSOT: added `verification.verification-h009` (+5 children) + `decision.decision-reframe-c` (+3 children:
+  why · first-step · discipline); updated `decision-redecide-h008*` (pick/h009-spec/reframe → fired) and
+  `components-selection-status` (all 8 families resolved). REGISTRY: H_009 = 🔴 FALSIFIED. tool: no change
+  (used existing `principal_axes` / `singular_values`).
+
+
 ## 2026-07-16 — Campaign re-decision post H_008: the $0 phase is a TRUE terminal, but ONE $0 card remains → (B) gated spend
 
 - Fable 5 re-decision (delegated) over the exhausted frontier. Verdict on the campaign SHAPE: the $0

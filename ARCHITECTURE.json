@@ -366,7 +366,7 @@
    "children": [
     {
      "id": "components-selection-status",
-     "role": "F1 is SELECTED as the first family to falsify (see `decision`). The other seven stay live and unranked-by-truth — selection is an ORDER OF TESTING, not a verdict."
+     "role": "ALL 8 families' observational premises are now RESOLVED at $0: F1 L11-terminal, F3 REFUSED (H_006 byte + H_009 continuous), F7/F5/F8 owner REFUSED (H_008), F6 borderline-refused, F4 L11, F2 dead. The observational phase is terminally exhausted -> decision-reframe-c (interventional thesis)."
     },
     {
      "id": "f1-codec-is-the-self",
@@ -1000,7 +1000,7 @@
     },
     {
      "id": "decision-redecide-h008",
-     "role": "RE-DECISION post H_008 (2026-07-16): the $0 OBSERVATIONAL phase is a TRUE terminal (every branch's liveness PASSED text-like; refusals are STRUCTURAL not sensitivity) — but the THESIS is not yet sealed: 3 residuals were never measured. Pick = (B) one more $0 gate then a conditional spend.",
+     "role": "RE-DECISION post H_008 (2026-07-16): the $0 OBSERVATIONAL phase is a TRUE terminal. Pick (B) = one $0 gate (H_009) then a conditional spend. OUTCOME: H_009 = F3-CONTINUOUS-REFUSED (certified instrument) -> twin NOT licensed -> reframe (C) FIRED; the observational campaign is exhausted.",
      "children": [
       {
        "id": "decision-redecide-h008-walls",
@@ -1020,15 +1020,34 @@
       },
       {
        "id": "decision-redecide-h008-pick",
-       "role": "PICK = (B) gated spend (complete+std champion). Sequence: H_009 f3-continuous-oracle ($0, deterministic) -> IFF anchored, the ~10M continuous-m twin (~12h MPS / <=$15). Executes cr-distributed-lesson ($0 precursor gates the spend) + belief-per-dollar."
+       "role": "PICK = (B) gated spend. H_009 f3-continuous-oracle RAN ($0, deterministic) = REFUSED, so the conditional ~$15 twin is CANCELLED (spending past a certified null = forbidden appeal). (B) resolved into the (C) reframe. cr-distributed-lesson held: the $0 precursor killed the twin before spend."
       },
       {
        "id": "decision-redecide-h008-h009-spec",
-       "role": "H_009 spec: anima day-stream, W4096/P2048. k=64 continuous summary (char-n-gram counts -> SVD fit TRAIN-days). cond bpb(tomorrow|summary) vs shuffle floor + topic-matched other-day floor + planted liveness. KILL: over-floor <=0.02 OR <=topic-floor+0.02. ANCHOR: >=25% of +0.27 AND beats topic floor."
+       "role": "H_009 RAN 2026-07-16 = F3-CONTINUOUS-REFUSED. The frozen byte/cond-bpb spec was decoder-blind and was corrected pre-run to a feature-space shift-null LOO capture instrument (capture(k)=align_s/align_full, buried-delay-line liveness). Verdict detail -> verification-h009."
       },
       {
        "id": "decision-redecide-h008-reframe",
-       "role": "(C) PRE-REGISTERED reframe, fires IFF H_009/twin refuses: the 8 families shared 'aliveness = a STATIC property of a PASSIVE stream, detectable without acting'. Next thesis = INTERVENTIONAL: alive iff own utterance shifts subsequent INPUT statistics > matched floor on a real loop."
+       "role": "(C) reframe FIRED 2026-07-16 by H_009 REFUSED. The 8 families shared 'aliveness = a STATIC property of a PASSIVE stream, detectable without acting' — that premise is terminally exhausted at $0. ACTIVE thesis is now INTERVENTIONAL (-> decision-reframe-c)."
+      }
+     ]
+    },
+    {
+     "id": "decision-reframe-c",
+     "type": "decision",
+     "role": "ACTIVE THESIS (fired 2026-07-16, H_009 REFUSED): aliveness = CLOSED-LOOP CAUSATION, not a static property. Alive iff the agent's own utterance shifts SUBSEQUENT INPUT statistics above a matched floor on a REAL loop. Every observational family F1-F8 tested a passive-stream property; all $0-exhausted.",
+     "children": [
+      {
+       "id": "reframe-c-why",
+       "role": "Why: L1-L11 + H_004/H_006/H_007/H_008/H_009 all killed STATIC readouts of a passive stream (write-lever L11, owner one-bit, diary topic-decoration). The one axis never tested = does ACTING change the stream. Interventional is a different measurement class, not another passive probe."
+      },
+      {
+       "id": "reframe-c-first-step",
+       "role": "First move (unbuilt): define the minimal real loop + matched-floor test — utterance -> environment -> next input; does own-utterance shift next-input statistics vs a wrong-utterance/shuffled-action floor? A $0 precheck FIRST (any loop substrate with a measurable action->input effect?) before spend."
+      },
+      {
+       "id": "reframe-c-discipline",
+       "role": "Discipline carried in: pre-register -> falsify -> run; a $0 precheck gates any compute (cr-distributed-lesson); suspect the instrument before the verdict (verdict-integrity). An interventional null, if it comes, is terminal for THIS reframe — not an appeal to a deeper hidden loop."
       }
      ]
     }
@@ -1810,6 +1829,33 @@
       }
      ],
      "type": "gate"
+    },
+    {
+     "id": "verification-h009",
+     "type": "gate",
+     "role": "H_009 f3-continuous-oracle — feature-space shift-null LOO capture, $0 GPU0 2026-07-16. VERDICT F3-CONTINUOUS-REFUSED (C-2 topic decoration): instrument CERTIFIED, the code DOES capture the ceiling but only as topic identity, not a day-specific self. Last F3 organ premise dead -> reframe (C) fired.",
+     "children": [
+      {
+       "id": "h009-instrument",
+       "role": "Instrument H_009' (two INVALIDs fixed pre-verdict): byte path decoder-blind (Fable Q1); then k>=n_train-1 makes err_s===err_full -> capture===1.0 mechanically, and a mean-only denom gave ceiling_strength<0 (variance, not substrate). Fix: shift-null LOO K=5, capture=align_s/align_full."
+      },
+      {
+       "id": "h009-certified",
+       "role": "CERTIFIED: C-3' liveness = 3 buried-delay-line arms, matched n. HIGH (planted-weak) PASS both n; FAIL (iid noise) gate-fails both n; LOW (20 delay-taps of one logistic scalar buried under 8 higher-variance decoys) reads capture(k<=8)<=0.25 PASS at n=102. 5/6 falsifiers PASS; only C-2 fires."
+      },
+      {
+       "id": "h009-refused",
+       "role": "REFUSED basis: both streams clear the ceiling gate + capture anchor (anima cap8=1.007, hexa 0.849) and beat the topic floor ON AGGREGATE (cap-topic +0.29/+0.14) BUT per-pair sign(err_topic>err_s) ~50% (anima 23/43<28; hexa certified 52/101<60) = sometimes-day-specific, not a pervasive self (L2)."
+      },
+      {
+       "id": "h009-resolution",
+       "role": "RESOLUTION caveat: the LOW arm certifies only at n>=~100 (n=44's 26 train days leak signal into the top-8). hexa (n=102) FULLY certified = PRIMARY; anima = REPLICATION. The REFUSED basis (per-pair sign) is magnitude-blind, hence resolution-independent, and stands on both streams."
+      },
+      {
+       "id": "h009-consequence",
+       "role": "Both F3 operator classes now dead at $0 (byte-selection H_006, distributional-projection here). Twin NOT licensed: spending past a certified null is the forbidden 'decoder finds it' appeal (pre-commitment, L8). Both Fable delegations independently confirmed REFUSED -> fire reframe (C)."
+      }
+     ]
     }
    ]
   },
