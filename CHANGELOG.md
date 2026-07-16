@@ -2,6 +2,41 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_011 live-ab-closure PRE-REGISTERED: the owner's pool makes the paid live loop $0 → reframe C's first card that can ANCHOR
+
+- The owner asked "pool 에서 가능?" after H_010 priced the exit. `sidecar pool` has **summer** — an IDLE
+  NVIDIA RTX 5070 (11.7 GiB free), torch 2.11+cu130 CUDA verified working, python 3.12, 65 GB disk. So the
+  paid live A/B loop H_010 priced runs at **$0** on the owner's own hardware (a local model as the brain,
+  no cloud). The campaign's binary ("fund the live loop or declare the terminal") had its "fund" made free.
+- Delegated the design to Fable (`sidecar lab fable`); ran a 실측전 research pass (`sidecar research arxiv`)
+  that CONFIRMED + JUSTIFIED the build: **empowerment** (Salge/Polani — potential/capacity, continuous
+  estimation known-hard → discrete ≤8 actions), **counterfactual causal influence** (Jaques 2018 — the
+  loop-gain η), **yoked control** (Watson 1972 — the ghost arm, a 50-yr-old solved design), and the
+  transfer-entropy critique literature that INDEPENDENTLY predicts H_010's observational LOOP-REFUSED.
+- **H_011 pre-registered + frozen** (`HYPOTHESES/cards/H_011_live-ab-closure.md`). The key move: the anchor
+  gate is **CLOSURE, not "actions have effects"** (the echo/tautology trap). LV-C = Watson's yoked control
+  as an RCT — the agent's CONTINGENCY STRUCTURE (not its action marginal) must leave a distributional
+  fingerprint on its own input, measured against marginal-matched permuted-action GHOSTS. Because the
+  executed action is RANDOMIZED (true vs matched-shuffle), P(I|do(A)) is identified — so this card, unlike
+  every observational one, can **ANCHOR** (rung 1 = closed-loop causation exists + is measurable), not
+  only refuse.
+- Substrate = a deterministic MICRO-TENANT world (inbox queue · store · energy · hidden regime), 8 discrete
+  GBNF-forced actions, a text-digest observation where action names never appear (all influence via
+  dynamics). Brain (default) = local Qwen3-8B-Q4 via llama.cpp on summer, an exogenous logged action source
+  (verdict replays from the log). Estimator = the CERTIFIED H_009'/H_010 shift-null LOO k-NN reused. Arms
+  BASE/FULL/SHUF on randomized ticks. Falsifiers LV-W/C/P/E/N/L/R/G with yoked + open-loop (P-OPEN) + dead
+  (P-DEAD) controls and a scripted P-LIVE that must anchor.
+- **Stage gating (non-negotiable, the H_009 two-INVALID lesson): stage A** (`--plants-only`, NO LLM, LOCAL
+  $0) certifies the instrument FIRST; **stage B** (summer LLM, ~1.5 h, $0) fires only on a clean stage A.
+- An ANCHOR licenses RUNG 1 only (NOT "aliveness found" — a thermostat passes by design) + certifies the
+  interventional instrument, which converts H_010's priced exit into the **owner-loop RCT** (randomized
+  true-vs-matched-wrong agent utterance to the real owner) — the real target the campaign has circled.
+- SSOT: `verification.verification-h011` (+4) + `reframe-c-first-step` updated (build underway). REGISTRY:
+  H_011 = ⚪ PRE-REGISTERED. Design seed: `state/h011_.../DESIGN_fable.md`. Build (env.py · brain.py ·
+  run_h011.py · promote features+LOO-kNN into tool/) + stage-A local certification is the next arc; stage B
+  on summer needs the owner's go (installs llama.cpp + a ~5 GB model, ~1.5 h GPU).
+
+
 ## 2026-07-16 — H_010 loop-granger-gate → 🔴 LOOP-REFUSED (instrument CERTIFIED): reframe (C)'s $0 entry is closed; the exit is priced
 
 - reframe (C)'s FIRST card. The interventional thesis (fired by H_009) needed a real LOOP — the

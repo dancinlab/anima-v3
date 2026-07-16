@@ -1043,7 +1043,7 @@
       },
       {
        "id": "reframe-c-first-step",
-       "role": "First move RAN: H_010 loop-granger-gate ($0) on the owner<->agent loop (16.7k pairs) = LOOP-REFUSED — no utterance-specific info in the agent's utterance beyond topic (sign(topic>full)=0.37<<0.55). The $0 entry is closed; logs cannot ANCHOR causation, so the exit is priced."
+       "role": "H_010 (natural owner loop) = LOOP-REFUSED -> $0 entry closed. UNBLOCK: the owner's pool (summer, idle RTX 5070) makes the paid live loop $0. H_011 live-ab-closure PRE-REGISTERED (building): a randomized A/B micro-tenant loop that CAN anchor closed-loop causation (rung 1), stage-A-certified first."
       },
       {
        "id": "reframe-c-discipline",
@@ -1877,6 +1877,29 @@
       {
        "id": "h010-exit-priced",
        "role": "PRICES THE EXIT: a $0 observational REFUSE is NOT the interventional null (reframe-c-discipline). The natural loop shows no dependence, so only the PAID live A/B remains (research-gated). The OWNER's binary: fund the minimal live loop, or declare the budget-bounded terminal."
+      }
+     ]
+    },
+    {
+     "id": "verification-h011",
+     "type": "gate",
+     "role": "H_011 live-ab-closure — reframe C's LIVE interventional gate, PRE-REGISTERED 2026-07-16 (building). The paid loop H_010 priced, now $0 on the owner's pool (summer, idle RTX 5070). Randomized A/B ⇒ it can ANCHOR, not only refuse. Verdict pending stage-A-then-B run.",
+     "children": [
+      {
+       "id": "h011-closure-gate",
+       "role": "Anchor = CLOSURE, not 'actions have effects' (the echo/tautology trap). LV-C = Watson's 1972 YOKED control as an RCT: the agent's CONTINGENCY (not its action marginal) must fingerprint its own input vs marginal-matched permuted-action GHOSTS. Earnable AND failable = a real measurement."
+      },
+      {
+       "id": "h011-substrate",
+       "role": "MICRO-TENANT: deterministic in-process world (queue·store·energy·regime), 8 GBNF-forced actions, text-digest obs (action names absent ⇒ influence via dynamics only). Brain = local Qwen3-8B-Q4 on summer (exogenous logged actions). Statistic = certified H_010 shift-null LOO."
+      },
+      {
+       "id": "h011-staging",
+       "role": "STAGE GATING (H_009 two-INVALID lesson): stage A (--plants-only, NO LLM, local $0) certifies the instrument via P-LIVE(anchor)/P-OPEN(channel-only)/P-DEAD(refuse)/NULL-env/ghosts FIRST; stage B (summer LLM ~1.5h $0) fires ONLY on a clean stage A. B-before-A is the one forbidden outcome."
+      },
+      {
+       "id": "h011-licenses",
+       "role": "Branch: CLOSED-LOOP-ANCHORED = RUNG 1 only (closed-loop causation exists+measurable, NOT aliveness found) + certifies the instrument -> licenses the owner-loop RCT. Else CHANNEL-ONLY / LOOP-REFUSED(localized) / INSTRUMENT-INVALID. 실측전 research (empowerment/Ay-Polani/Watson/Jaques) justifies it."
       }
      ]
     }
