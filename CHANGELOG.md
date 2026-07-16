@@ -25,12 +25,18 @@ All notable changes to anima-v3. Append-only; newest on top.
   **LICENSES the owner-loop RCT that H_010 priced** (`decision-reframe-c`'s owner binary now has its go-signal).
 - **Convergence `run-h011-py-1` (cogate-metric-regime-blindness)** — a recurrence of H_009's instrument-regime
   lesson: a co-gate metric certified in only one regime silently mismeasures the one the subject occupies; on
-  gate divergence, audit the ruler with a known-live sweep and quarantine the failing gate. **Residual:** repair
-  LV-W (restrict to non-collision ticks / action-conditioned MI) so it co-gates validly at low entropy.
+  gate divergence, audit the ruler with a known-live sweep and quarantine the failing gate.
+- **LV-W repair attempted → PARTIAL** (`run_h011.lv_w` `*_r`, restricted to INFORMATIVE ticks where the A/B
+  intervention actually changed the action, so obs⊥action). It correctly keeps the dead null env REFUSED
+  (base_full_r 0.241 — no false channel) BUT does **not rescue the mid3bal/7B regime** (base_full_r 0.446 <
+  0.55). So the 7B's one-step channel is **genuinely weak** there (diffuse/delayed effects), not merely a
+  collision artifact — LV-C (the block timescale) captures the same causation LV-W misses one-step. **LV-W
+  stays QUARANTINED; LV-C is valid AND sufficient** (it alone rejects P-DEAD). SSOT node `h011-lvw-repair`.
 - **Code:** fixed the stale `else`-branch verdict string in `run_h011.py` (it hardcoded "Qwen2.5-3B" and a false
   "closure < 0.6" even when closure PASSED); it now distinguishes the closure-fail vs LV-W-fail modes. Added
-  `state/.../tiebreak_lvw.py`. SSOT: `verification-h011` role updated + new child `h011-lvw-underpowered`;
-  REGISTRY H_011 → 🟢 ANCHOR-INDICATED; card Verdict extended with the 7B section + tiebreak.
+  `state/.../tiebreak_lvw.py` (entropy sweep + repair validation) and the regime-robust `lv_w` `*_r` arm. SSOT:
+  `verification-h011` role + children `h011-lvw-underpowered`/`h011-lvw-repair`; REGISTRY H_011 → 🟢
+  ANCHOR-INDICATED; card Verdict extended with the 7B section + tiebreak + repair.
 
 ## 2026-07-16 — H_011 stage B → 🔴 LOOP-REFUSED (localized to Qwen2.5-3B): the first LIVE interventional result — reading input ≠ closing the loop
 

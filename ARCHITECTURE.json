@@ -1904,6 +1904,10 @@
       {
        "id": "h011-lvw-underpowered",
        "role": "LV-W is UNDER-POWERED at moderate entropy: a known-live plant mid3bal (H~0.97, ~2 actions) reproduces the 7B signature — LV-W 0.358 FAIL while LV-C closure 0.762 PASS. A stage-B LV-W miss there is an instrument artifact QUARANTINED (infra-wall-noneval); LV-C (yoked) is the valid anchor."
+      },
+      {
+       "id": "h011-lvw-repair",
+       "role": "LV-W repair (restrict to INFORMATIVE ticks) is PARTIAL: the dead null env stays REFUSED (base_full_r 0.241) but the mid3bal/7B regime is NOT rescued (0.446) — its one-step channel is WEAK (diffuse/delayed), which LV-C (block timescale) captures. LV-W quarantined; LV-C valid AND sufficient."
       }
      ]
     }
