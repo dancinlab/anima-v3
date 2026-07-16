@@ -2,6 +2,44 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-16 — H_010 loop-granger-gate → 🔴 LOOP-REFUSED (instrument CERTIFIED): reframe (C)'s $0 entry is closed; the exit is priced
+
+- reframe (C)'s FIRST card. The interventional thesis (fired by H_009) needed a real LOOP — the
+  owner<->agent conversation transcript, where the owner READ U_t and typed R_{t+1}, unlike the passive
+  streams the observational phase exhausted. **Substrate measured: 16.7k loop pairs / ~130 sessions**
+  (`~/.claude/projects/*/*.jsonl`, genuine-owner-typing filter) — ~160x H_009's pair count.
+- **ASYMMETRIC verdict semantics (Fable Q1, frozen).** P(R_{t+1}|do(U_t)) is NOT identifiable from
+  observational logs (context confounds every U->R), so no $0 result can ANCHOR causation — but causation
+  implies dependence (barring the forbidden faithfulness appeal), so its ABSENCE kills the $0 entry. A
+  REFUSE-capable SPEND GATE, exactly like H_004/H_006/H_009: **GATE-OPEN** licenses a paid live A/B build;
+  **LOOP-REFUSED** closes the $0 entry; **ECHO-ONLY** = copy channel; **INSTRUMENT-INVALID** = plant fail.
+- **VERDICT = LOOP-REFUSED** ($0, GPU 0, N=2000 + disjoint replication). On BOTH strides the true utterance
+  is the WORST predictor of the owner's next reply: **sign(err_TOPIC > err_FULL) = 0.366 / 0.346 << 0.55**
+  — a topic-matched WRONG utterance predicts R_{t+1} BETTER than the true one (63-65% of pairs); even
+  owner-state alone (BASE) beats FULL (sign_base_full 0.406/0.437). LC-1 + LC-2 fail; LC-3 shows the tiny
+  unstripped/stripped gap is no echo effect. The agent's specific utterance carries NO utterance-specific
+  predictive info about the owner's reply beyond the TOPIC — the owner replies on-topic to anything
+  relevant. The L2 replacement / F3 topic-decoration pattern, now measured on a REAL interactive loop.
+- **Instrument CERTIFIED** = the certified H_009' shift-null LOO k-NN reused (features, distRt+distU
+  precompute; the 4 arms BASE/FULL/TOPIC/XSESS are a distU first-axis remap), echo-stripped primary target,
+  within-session shift-null. C-5 three buried-signal plants PASS: **P-POS** gate-open 1.000, **P-NULL**
+  refuse 0.523, **P-ECHO** echo-only 0.656 -> 0.516. Each fixed a distinct plant defect found in
+  validation (Euclidean signal-dilution, action=sidx entanglement, recurring-quote clustering). **LC-4
+  (XSESS)** was demoted from a hard gate to a reported diagnostic (pre-freeze) — it is confounded by query
+  dimensionality (BASE 256 vs U-arms 512) and conversation-position correlation, and the 3-plant liveness
+  already supplies the leak protection.
+- **Consequence: the exit is PRICED, not the campaign terminated.** A $0 observational REFUSE is not the
+  interventional null (`reframe-c-discipline`); it removes the free entry and forces a binary the OWNER
+  must decide: **fund the minimal live A/B loop** (a sandboxed environment loop, true-action vs
+  shuffled-action, ~1-2 days + <$20, research-gated) **or declare the budget-bounded terminal** — aliveness
+  was not measurable as a static property on any $0 substrate (8 families) AND the interventional
+  reformulation has no $0-anchorable form even in principle (`cr-interventional-entry-asymmetry`).
+- SSOT: `verification.verification-h010` (+4) + `convergence.cr-interventional-entry-asymmetry`; updated
+  `decision-reframe-c` + `reframe-c-first-step` (first move RAN = REFUSED). REGISTRY: H_010 = 🔴 FALSIFIED.
+  No new tool/ primitive (reuses `run_h009` machinery). Note: the substrate live-appends the running
+  session (~1-pair drift between runs); the verdict is miles from threshold and robust.
+
+
 ## 2026-07-16 — H_009 f3-continuous-oracle → 🔴 F3-CONTINUOUS-REFUSED (instrument CERTIFIED): the last F3 organ premise dies at $0 → reframe (C) FIRED
 
 - Ran the (B)-gate card. Verdict = **F3-CONTINUOUS-REFUSED** ($0, GPU 0). The continuous rank-k code

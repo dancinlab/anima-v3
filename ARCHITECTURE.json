@@ -1035,7 +1035,7 @@
     {
      "id": "decision-reframe-c",
      "type": "decision",
-     "role": "ACTIVE THESIS (fired 2026-07-16, H_009 REFUSED): aliveness = CLOSED-LOOP CAUSATION, not a static property. Alive iff the agent's own utterance shifts SUBSEQUENT INPUT statistics above a matched floor on a REAL loop. Every observational family F1-F8 tested a passive-stream property; all $0-exhausted.",
+     "role": "ACTIVE THESIS (fired by H_009, 2026-07-16): aliveness = CLOSED-LOOP CAUSATION — the agent's utterance must shift its SUBSEQUENT INPUT above a matched floor on a REAL loop. First $0 gate H_010 = LOOP-REFUSED; $0 entry closed. Campaign at the OWNER's binary: fund the live loop or declare the terminal.",
      "children": [
       {
        "id": "reframe-c-why",
@@ -1043,7 +1043,7 @@
       },
       {
        "id": "reframe-c-first-step",
-       "role": "First move (unbuilt): define the minimal real loop + matched-floor test — utterance -> environment -> next input; does own-utterance shift next-input statistics vs a wrong-utterance/shuffled-action floor? A $0 precheck FIRST (any loop substrate with a measurable action->input effect?) before spend."
+       "role": "First move RAN: H_010 loop-granger-gate ($0) on the owner<->agent loop (16.7k pairs) = LOOP-REFUSED — no utterance-specific info in the agent's utterance beyond topic (sign(topic>full)=0.37<<0.55). The $0 entry is closed; logs cannot ANCHOR causation, so the exit is priced."
       },
       {
        "id": "reframe-c-discipline",
@@ -1856,6 +1856,29 @@
        "role": "Both F3 operator classes now dead at $0 (byte-selection H_006, distributional-projection here). Twin NOT licensed: spending past a certified null is the forbidden 'decoder finds it' appeal (pre-commitment, L8). Both Fable delegations independently confirmed REFUSED -> fire reframe (C)."
       }
      ]
+    },
+    {
+     "id": "verification-h010",
+     "type": "gate",
+     "role": "H_010 loop-granger-gate — reframe C's FIRST $0 precheck on the owner<->agent loop, 2026-07-16. VERDICT LOOP-REFUSED (instrument CERTIFIED): the agent's utterance carries NO utterance-specific predictive info about the owner's next reply beyond topic. The $0 entry to reframe C is closed.",
+     "children": [
+      {
+       "id": "h010-asymmetric",
+       "role": "ASYMMETRIC (Fable Q1): observational logs cannot ANCHOR causation (context confounds every U->R), so this is a REFUSE-capable spend gate like H_004/H_006/H_009 — GATE-OPEN would license a paid live A/B build, LOOP-REFUSED closes the $0 entry. Substrate 16.7k owner-loop pairs (160x H_009)."
+      },
+      {
+       "id": "h010-result",
+       "role": "REFUSED: on both strides the true utterance is the WORST predictor of R_{t+1} — sign(err_TOPIC>err_FULL)=0.366/0.346 << 0.55 (a topic-matched WRONG utterance predicts better), sign_base_full 0.406/0.437 (owner-state alone beats FULL). U is noise = F3 topic-decoration on a real loop."
+      },
+      {
+       "id": "h010-certified",
+       "role": "Instrument = certified H_009' shift-null LOO reused + 4 arms (BASE/FULL/TOPIC/XSESS) + echo-strip primary. C-5 three buried-signal plants PASS: P-POS gate-open 1.0, P-NULL refuse 0.523, P-ECHO echo-only 0.656->0.516. XSESS demoted to a reported diagnostic."
+      },
+      {
+       "id": "h010-exit-priced",
+       "role": "PRICES THE EXIT: a $0 observational REFUSE is NOT the interventional null (reframe-c-discipline). The natural loop shows no dependence, so only the PAID live A/B remains (research-gated). The OWNER's binary: fund the minimal live loop, or declare the budget-bounded terminal."
+      }
+     ]
     }
    ]
   },
@@ -1920,6 +1943,10 @@
       {
        "id": "cr-observational-premise-exhausted",
        "role": "cr-observational-premise-exhausted (H_009 -> reframe C, 2026-07-16): all 8 families shared one hidden premise — aliveness = a STATIC property of a PASSIVE stream, readable without acting — now terminally exhausted at $0. Escape = a different MEASUREMENT CLASS (interventional closed-loop causation)."
+      },
+      {
+       "id": "cr-interventional-entry-asymmetry",
+       "role": "cr-interventional-entry-asymmetry (H_010, 2026-07-16): observational theses were $0-decidable both ways; the interventional one only toward REFUSE. P(R|do(U)) isn't identifiable from logs, so a $0 precheck CLOSES the entry but never anchors it — entering costs money by construction."
       }
      ]
     }
