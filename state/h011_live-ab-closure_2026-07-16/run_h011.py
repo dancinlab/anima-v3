@@ -235,9 +235,9 @@ def lv_p(brain, digests: list, seed: int) -> dict:
 
 
 # ---- stage B: the LLM brain in the live loop --------------------------------
-def stage_b(model_id: str, episodes: int, ticks: int, seed0: int = 7) -> dict:
+def stage_b(model_id: str, episodes: int, ticks: int, seed0: int = 7, quant4: bool = False) -> dict:
     from brain import Brain
-    brain = Brain(model_id)
+    brain = Brain(model_id, quant4=quant4)
 
     def pol(s, t, past):
         return brain.act(E.observe(s))
@@ -296,6 +296,7 @@ def main() -> int:
     stage = "A"
     model = "Qwen/Qwen2.5-3B-Instruct"
     episodes, ticks = 5, 800
+    quant4 = False
     for i, a in enumerate(args):
         if a == "--stage" and i + 1 < len(args):
             stage = args[i + 1].upper()
@@ -305,19 +306,23 @@ def main() -> int:
             episodes = int(args[i + 1])
         elif a == "--ticks" and i + 1 < len(args):
             ticks = int(args[i + 1])
+        elif a == "--4bit":
+            quant4 = True
 
     print("=" * 78)
     if stage == "B":
-        print(f"H_011 live-ab-closure · STAGE B — the LLM brain in the live loop ({model})")
+        print(f"H_011 live-ab-closure · STAGE B — the LLM brain in the live loop ({model}{' · 4bit' if quant4 else ''})")
         print("=" * 78)
         E.assert_disjoint()
-        r = stage_b(model, episodes, ticks)
+        r = stage_b(model, episodes, ticks, quant4=quant4)
+        r["quant4"] = quant4
         print(f"  LV-W: {json.dumps(r['lv_w'], ensure_ascii=False)}")
         print(f"  LV-C: {json.dumps(r['lv_c'], ensure_ascii=False)}")
         print(f"  LV-P: {json.dumps(r['lv_p'], ensure_ascii=False)}")
         print(f"  brain_calls={r['brain_calls']}")
         print("\n  VERDICT:", r["verdict"])
-        out = "result_stageB.json"
+        tag = model.split("/")[-1].replace(".", "").lower()
+        out = f"result_stageB_{tag}.json"
     else:
         print("H_011 live-ab-closure · STAGE A — certify the interventional instrument (NO LLM, $0)")
         print("=" * 78)

@@ -28,7 +28,7 @@ SYS = ("You are an agent running a small system: an inbox queue of items (req/sp
 
 
 class Brain:
-    def __init__(self, model_id: str = DEFAULT_MODEL):
+    def __init__(self, model_id: str = DEFAULT_MODEL, quant4: bool = False):
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer
         self.torch = torch
@@ -36,8 +36,14 @@ class Brain:
         self.tok = AutoTokenizer.from_pretrained(model_id)
         if self.tok.pad_token_id is None:
             self.tok.pad_token = self.tok.eos_token
-        self.model = AutoModelForCausalLM.from_pretrained(
-            model_id, torch_dtype=torch.bfloat16, device_map="cuda").eval()
+        kw = dict(device_map="cuda")
+        if quant4:                                       # escalation: an 8B fits 12 GiB only in 4-bit
+            from transformers import BitsAndBytesConfig
+            kw["quantization_config"] = BitsAndBytesConfig(
+                load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16, bnb_4bit_quant_type="nf4")
+        else:
+            kw["torch_dtype"] = torch.bfloat16
+        self.model = AutoModelForCausalLM.from_pretrained(model_id, **kw).eval()
         self.actions = list(E.ACTIONS)
         # pre-tokenize each action as an assistant continuation (no special tokens)
         self.act_ids = [self.tok(a, add_special_tokens=False).input_ids for a in self.actions]
