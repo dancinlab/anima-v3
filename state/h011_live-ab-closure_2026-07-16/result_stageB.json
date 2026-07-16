@@ -1,0 +1,70 @@
+{
+ "model": "Qwen/Qwen2.5-3B-Instruct",
+ "episodes": 5,
+ "ticks": 800,
+ "per_episode": [
+  {
+   "seed": 7,
+   "lv_w": {
+    "sign_base_full": 0.0,
+    "sign_shuf_full": 0.0
+   },
+   "closure": 0.5,
+   "blocks": 16
+  },
+  {
+   "seed": 8,
+   "lv_w": {
+    "sign_base_full": 0.02625,
+    "sign_shuf_full": 0.5325
+   },
+   "closure": 0.4375,
+   "blocks": 16
+  },
+  {
+   "seed": 9,
+   "lv_w": {
+    "sign_base_full": 0.0,
+    "sign_shuf_full": 0.0
+   },
+   "closure": 0.375,
+   "blocks": 16
+  },
+  {
+   "seed": 10,
+   "lv_w": {
+    "sign_base_full": 0.0,
+    "sign_shuf_full": 0.0
+   },
+   "closure": 0.5625,
+   "blocks": 16
+  },
+  {
+   "seed": 11,
+   "lv_w": {
+    "sign_base_full": 0.0725,
+    "sign_shuf_full": 0.2875
+   },
+   "closure": 0.4375,
+   "blocks": 16
+  }
+ ],
+ "lv_w": {
+  "sign_base_full": 0.019749999999999997,
+  "sign_shuf_full": 0.16399999999999998,
+  "pass": false
+ },
+ "lv_c": {
+  "closure_mean": 0.4625,
+  "episodes_pass": 0,
+  "pass": false
+ },
+ "lv_p": {
+  "CR": 0.0,
+  "replay_agree": 1.0,
+  "n": 200,
+  "pass": false
+ },
+ "brain_calls": 8600,
+ "verdict": "CHANNEL-MISSING/INSTRUMENT — the brain's executed actions do not predict the next observation (LV-W fail); the env channel that stage A certified did not carry through the brain run — treat as INSTRUMENT-INVALID, inspect the brain harness."
+}

@@ -42,6 +42,11 @@ class Brain:
         # pre-tokenize each action as an assistant continuation (no special tokens)
         self.act_ids = [self.tok(a, add_special_tokens=False).input_ids for a in self.actions]
         self.calls = 0
+        # CONTRASTIVE (PMI) baseline: score the actions under a STATE-FREE prompt ONCE. Raw
+        # log-prob scoring is dominated by each action's model PRIOR (Qwen picks COMPACT for
+        # every state); subtracting the state-free score cancels that prior so act() ranks by
+        # how much the STATE shifts each action — the whole point of a contingent policy.
+        self.neutral_lp = self._score("(state not shown)")
 
     def _prompt_ids(self, digest: str) -> list:
         user = (f"State: {digest}\nActions: {' '.join(self.actions)}\n"
@@ -50,10 +55,9 @@ class Brain:
         text = self.tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
         return self.tok(text, add_special_tokens=False).input_ids
 
-    def act(self, digest: str) -> str:
-        """Return the argmax action by total continuation log-prob (batched, greedy)."""
+    def _score(self, digest: str) -> list:
+        """Per-action length-normalized continuation log-prob (batched, one forward pass)."""
         torch = self.torch
-        self.calls += 1
         base = self._prompt_ids(digest)
         seqs = [base + aid for aid in self.act_ids]
         maxlen = max(len(s) for s in seqs)
@@ -68,17 +72,21 @@ class Brain:
         with torch.no_grad():
             logits = self.model(input_ids=ii, attention_mask=am).logits
         logprobs = torch.log_softmax(logits.float(), dim=-1)
-        best, best_lp = self.actions[0], -1e18
+        out = []
         for a_i, aid in enumerate(self.act_ids):
             start = len(base)
             lp = 0.0
             for k, tokid in enumerate(aid):
-                pos = start + k - 1                      # logit predicting token at start+k
-                lp += logprobs[a_i, pos, tokid].item()
-            lp /= max(1, len(aid))                       # length-normalize (fair across 1-3 token actions)
-            if lp > best_lp:
-                best_lp, best = lp, self.actions[a_i]
-        return best
+                lp += logprobs[a_i, start + k - 1, tokid].item()
+            out.append(lp / max(1, len(aid)))
+        return out
+
+    def act(self, digest: str) -> str:
+        """argmax over actions of the CONTRASTIVE score s(a|state) - s(a|neutral) (greedy)."""
+        self.calls += 1
+        s = self._score(digest)
+        contrast = [s[i] - self.neutral_lp[i] for i in range(len(self.actions))]
+        return self.actions[max(range(len(self.actions)), key=lambda i: contrast[i])]
 
 
 if __name__ == "__main__":

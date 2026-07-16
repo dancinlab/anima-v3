@@ -263,20 +263,22 @@ def stage_b(model_id: str, episodes: int, ticks: int, seed0: int = 7) -> dict:
     lv_c_pass = closure_mean >= CLOSURE_SIGN and closure_eps >= (len(ep_signs) * 4 + 4) // 5  # >=4/5 co-gate
     lv_p_pass = p["CR"] >= 0.20 and p["replay_agree"] >= 0.98
 
-    if not lv_w_pass:
-        verdict = ("CHANNEL-MISSING/INSTRUMENT — the brain's executed actions do not predict the next "
-                   "observation (LV-W fail); the env channel that stage A certified did not carry through "
-                   "the brain run — treat as INSTRUMENT-INVALID, inspect the brain harness.")
-    elif lv_c_pass and lv_p_pass:
+    # The env action->input channel is CERTIFIED in stage A, so a stage-B LV-W miss is NOT an
+    # instrument fault — it means the brain emitted a (near-)constant action (low diversity), which
+    # is itself an open-loop signature. Read the brain on LV-P (does it read its input) and LV-C
+    # (does its contingency fingerprint its input); LV-W low is folded into CHANNEL-ONLY.
+    if not lv_p_pass:
+        verdict = (f"CHANNEL-ONLY — the brain acts but does NOT read its input (CR {p['CR']:.3f} < 0.20"
+                   f"{'; near-constant action, LV-W ' + format(lvw_bf, '.3f') if not lv_w_pass else ''}): "
+                   "an open-loop emitter, not closed-loop. Its output does not depend on what it perceives, "
+                   "so no contingency can fingerprint its own next input.")
+    elif lv_c_pass and lv_w_pass:
         verdict = (f"CLOSED-LOOP-ANCHORED (rung 1) — the brain's CONTINGENCY (not its action marginal) "
                    f"fingerprints its own next input: closure {closure_mean:.3f} >= {CLOSURE_SIGN} "
                    f"({closure_eps}/{len(ep_signs)} episodes), it READS its input (CR {p['CR']:.3f}). "
                    "Closed-loop causation exists + is measurable for THIS agent. NOT 'aliveness found' "
                    "(rung 1; a thermostat passes) — but it certifies the interventional instrument and "
                    "LICENSES the owner-loop RCT (the real exit H_010 priced).")
-    elif not lv_p_pass:
-        verdict = (f"CHANNEL-ONLY — the brain acts with effects but does NOT read its input "
-                   f"(CR {p['CR']:.3f} < 0.20): an open-loop emitter, not closed-loop.")
     else:
         verdict = (f"LOOP-REFUSED (localized to THIS agent) — the brain reads its input (CR {p['CR']:.3f}) "
                    f"but its contingency leaves no fingerprint above the yoked floor (closure "
