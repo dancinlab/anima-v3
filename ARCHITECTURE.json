@@ -1895,7 +1895,7 @@
       },
       {
        "id": "h011-staging",
-       "role": "STAGE GATING (H_009 two-INVALID lesson): stage A (--plants-only, NO LLM, local $0) certifies the instrument via P-LIVE(anchor)/P-OPEN(channel-only)/P-DEAD(refuse)/NULL-env/ghosts FIRST; stage B (summer LLM ~1.5h $0) fires ONLY on a clean stage A. B-before-A is the one forbidden outcome."
+       "role": "STAGE GATING (H_009 lesson): stage A (plants-only, NO LLM, local $0) = CERTIFIED 2026-07-16 first try. P-LIVE anchors (ch 0.61/0.73, closure 0.75), P-OPEN channel-only (closure 0.42 = contingency not marginal), P-DEAD refuses (ch 0.20). Stage B (summer LLM $0) fires on owner go."
       },
       {
        "id": "h011-licenses",
