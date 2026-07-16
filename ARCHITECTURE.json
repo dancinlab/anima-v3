@@ -1910,6 +1910,29 @@
        "role": "LV-W repair (restrict to INFORMATIVE ticks) is PARTIAL: the dead null env stays REFUSED (base_full_r 0.241) but the mid3bal/7B regime is NOT rescued (0.446) — its one-step channel is WEAK (diffuse/delayed), which LV-C (block timescale) captures. LV-W quarantined; LV-C valid AND sufficient."
       }
      ]
+    },
+    {
+     "id": "verification-h012",
+     "type": "gate",
+     "role": "H_012 owner-loop-rct — reframe C's licensed EXIT (H_011 anchor licensed it): the interventional test on the REAL owner loop. Deception dissolved by grounding randomization. H_012A precheck = REFUSE (lowers prior); H_012B = consent-gated live RCT, launch-pending-consent.",
+     "children": [
+      {
+       "id": "h012-grounding-randomization",
+       "role": "Crux: randomize do(GROUNDING), not truth. LIVE = agent replies from true relationship-state; GHOST = same model/prompt/owner-msg but grounding replaced by a topic-matched snapshot of the owner's OWN past. Every reply genuine -> no deception; GHOST = Watson yoked control on the real loop."
+      },
+      {
+       "id": "h012a-precheck",
+       "role": "H_012A ($0 semi-interventional): decode stochasticity as a local U-randomizer; within CONTEXT-MATCHED strata (tightness 0.06) does the utterance predict the owner's next reply? sign_base_full 0.424<0.55 (2 disjoint samples) = PRECHECK-REFUSE, strengthening H_010's observational 0.406. Cannot anchor."
+      },
+      {
+       "id": "h012a-regime",
+       "role": "verdict-integrity re-check (run-h011-py-1 recurrence): plants certified at M=12, real data M=60. Re-certified sign_base_full in-regime (channel 0.81 vs null 0.515; real 0.424 below null) -> REFUSE trustworthy. rank_full unreliable at M=60 (null plant rank 0/24); frozen AND-gate is robust."
+      },
+      {
+       "id": "h012b-launch-pending",
+       "role": "H_012B = the consent-gated LIVE RCT: LIVE/GHOST coin p=0.5 pre-logged, eligibility classifier (conversational turns, <=1/session, kill-switch), privacy hard-rule (no content to repo), certified LV-C estimator, ~250-300 trials (~2-3mo). LAUNCH-PENDING-CONSENT = a human gate, NOT a terminal."
+      }
+     ]
     }
    ]
   },
@@ -2004,8 +2027,12 @@
     "id": "run-h011-py-1",
     "source": "state/h011_live-ab-closure_2026-07-16/run_h011.py",
     "lesson": "cogate-metric-regime-blindness: a co-gate metric (LV-W) certified in stage A ONLY with action-DIVERSE plants silently MISMEASURES the low/moderate-entropy regime a real LLM occupies — a known-live plant (mid3bal) also fails it while LV-C PASSES. Recurrence of H_009's instrument-regime lesson: an instrument is valid only inside its certified regime.",
-    "value": "On LV-C/LV-W divergence, suspect the ruler: run a $0 entropy-sweep of KNOWN-LIVE plants reusing the same metric; if one reproduces the target's fail-signature, QUARANTINE that gate (infra-wall-noneval), never fold it into the verdict. Certify each co-gate across the regime the subject actually occupies.",
-    "threshold": "metric divergence between two liveness gates on the SAME clean run"
+    "value": "On metric divergence or a regime shift from certification, RE-CERTIFY the metric in the regime the subject occupies (a $0 in-regime plant/sweep); if a co-metric is unreliable there, do NOT gate on it (an AND-gate on a certified primary is robust). Seen twice: H_011 LV-W, H_012A rank_full.",
+    "threshold": "metric divergence between two liveness gates on the SAME clean run",
+    "recurrences": [
+     "H_011 LV-W under-power (moderate entropy)",
+     "H_012A rank_full/shift-null unreliable at M=60 (null plant rank 0/24)"
+    ]
    }
   ]
  }

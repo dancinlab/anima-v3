@@ -2,6 +2,39 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-17 — H_012 owner-loop-rct PRE-REGISTERED + H_012A → 🟡 PRECHECK-REFUSE: the licensed exit, designed (deception dissolved) and cheaply screened
+
+- H_011's 7B ANCHOR licensed reframe C's real exit — the interventional test on the ACTUAL owner loop.
+  Delegated the design to Fable; the **deception problem is DISSOLVED by GROUNDING RANDOMIZATION**: per
+  eligible turn a coin sets LIVE (agent replies from its true relationship-state) vs GHOST (same model/
+  prompt/owner-message, but grounding replaced by a topic-matched snapshot of the owner's OWN past). Every
+  reply is genuine — nothing false — so no deception; the randomized variable is do(grounding). GHOST is
+  Watson's yoked control at the real-loop level, reproducing the certified LV-C structure.
+- **H_012 pre-registered + frozen** (`cards/H_012_owner-loop-rct.md`, REGISTRY): H_012A = a $0 autonomous
+  semi-interventional precheck; H_012B = the consent-gated live RCT (can ANCHOR). Privacy is a hard law:
+  no owner content ever to the repo, only aggregate scalars.
+- **H_012A (sampler-twin precheck) = PRECHECK-REFUSE.** Decode stochasticity is a local randomizer of the
+  utterance given context; reusing H_010's certified estimator with the ONE change of restricting each
+  query's k-NN pool to CONTEXT-MATCHED neighbors, on 10,170 real owner↔agent pairs (135 sessions, N=2000
+  ×2 disjoint, matched-pool tightness 0.06): **sign_base_full = 0.424 / 0.423 < 0.55 (replicates)**. Even
+  semi-interventionally the owner's next reply is governed by context/topic, not by the specific utterance —
+  **strengthening H_010's observational 0.406** and LOWERING the prior that H_012B anchors. Cannot itself
+  anchor (unidentified). Purpose-built WITHIN-CONTEXT plants certified the restricted estimator first
+  (P-POS 0.68 channel / P-NULL 0.47 refuse / P-ECHO 0.67→0.51 echo-only).
+- **Instrument re-certification (verdict-integrity · `run-h011-py-1` RECURRENCE).** Plants certified at
+  M=12; real data runs at M=60 — a different regime, so I re-certified in-regime: `sign_base_full` separates
+  cleanly (channel 0.81 vs null 0.515) and real 0.424 sits below the null → REFUSE trustworthy. The
+  `rank_full` shift-null co-metric is UNRELIABLE at M=60 (a NULL plant scored rank 0/24 = false
+  significance) — so the real data's rank_full=1 is a spurious artifact, not signal; the frozen AND-gate
+  (`sign≥0.55` AND `rank≤2`) is robust to it. Second sighting of the metric-regime lesson (H_011 LV-W, now
+  H_012A rank_full) — recorded on `convergence run-h011-py-1`.
+- **H_012B = LAUNCH-PENDING-CONSENT** (not a terminal): designed + the autonomous stubs shipped
+  (`h012b_stub.py`: blinded consent prompt, eligibility classifier, privacy-enforcing logger with a content
+  guard that raises, pre-committed LIVE/GHOST coin — 구현됨·미배선). Wiring into the live loop + owner
+  enrollment is the human gate; only the real randomization can ANCHOR or interventionally REFUSE reframe C.
+- SSOT: new `verification-h012` (+4 children: grounding-randomization · precheck · regime · launch-pending);
+  REGISTRY H_012 = 🟡 (H_012A REFUSE · H_012B launch-pending); `convergence run-h011-py-1` recurrence noted.
+
 ## 2026-07-17 — H_011 stage B (7B) → 🟢 ANCHOR-ON-LV-C: the FIRST brain to clear the certified closure anchor — the campaign's first live positive
 
 - Escalated the stage-B brain to **Qwen2.5-7B-Instruct (nf4)** on summer ($0, detached via `pool on --bg`).
