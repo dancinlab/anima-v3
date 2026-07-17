@@ -2,6 +2,33 @@
 
 All notable changes to anima-v3. Append-only; newest on top.
 
+## 2026-07-17 — H_013 root-cause → certified LV-C had a NULL BIAS (frame misalignment); fixed upstream; H_011 7B anchor SUSPENDED pending re-run
+
+- H_013's first scripted run failed its own certification exactly as designed: P-DEAD (null env) read
+  closure 0.667 at every dose — above the 0.60 gate — and the live curve was dose-flat. Root-caused
+  ($0, deterministic, `state/h013_closure-dose-response_2026-07-17/probe_lvc_bias.py`): **the certified
+  H_011 `lv_c` compared Closed's PRE-step obs `[o_0..o_{T-1}]` against ghosts built from POST-step obs
+  `[o_1..o_T]`** — a one-tick frame misalignment that gives d(Closed, ghost) a shift term the
+  ghost-ghost reference lacks. In a null env the two ghosts are bit-identical (d=0 exactly), so ANY
+  exogenous digest drift across a 50-tick block scored a "closure" hit. The earlier "energy
+  side-channel" reading of the 0.0152 residual is refuted (null skips `_apply_action` entirely; the
+  residual is exactly the one-tick shift). The suspected asymmetric-control geometry (Closed special vs
+  same-family ghosts) is NOT the operative mechanism.
+- **Fix (upstream-fix, one line)**: `fC = obs_traj[1:]` in `run_h011.lv_c` + `run_h013.lv_c_dose`
+  (features/blockmeans/gates untouched). Repaired: null env 0.000 at every dose; near-dead p=0.1 drops
+  0.833→0.389 (refuses); full-dose plants unchanged (P-LIVE 0.750 / P-OPEN 0.417). H_013 scripted
+  certification now PASSES (P-DOSE mono 0.6 · P-DEAD ok · P-LIVE 0.722); pre-repair record preserved as
+  `result_scripted_pre-repair-biased-estimator.json`.
+- **H_011 consequence (honesty)**: the 7B ANCHOR-ON-LV-C (0.7625) was measured with the biased
+  estimator, whose measured null floor (0.667) exceeds the gate and exceeds the 7B's episode-1 closure
+  (0.625). Registry tier moved to 🟠 ANCHOR-SUSPENDED; stage-A re-certified with the repaired estimator
+  (`result_stageA_lvc-repair.json`, all plants pass), but the 7B must re-earn the anchor on summer
+  (its action tape was not persisted, so the repaired closure cannot be recomputed offline). Full-dose
+  scripted readings were repair-invariant, so survival is plausible — but unproven.
+- Lesson (recurrence of run-h011-py-1 / H_009): **a certification suite must null-check EVERY gate it
+  certifies** — H_011's P-DEAD refused on LV-W only; LV-C was never pointed at a dead env, so a
+  null floor above its own gate passed unseen. H_013's P-DEAD plant is what caught it.
+
 ## 2026-07-17 — H_012A-c → 🟡 BLOCK-REFUSE: the refusal is robust across TIMESCALES too — the 2×2 (target × timescale) matrix all refuses
 
 - The next objection: H_010/H_012A/H_012A-b are ALL one-step (U_t → R_{t+1}), yet the proxy's 7B ANCHORED at

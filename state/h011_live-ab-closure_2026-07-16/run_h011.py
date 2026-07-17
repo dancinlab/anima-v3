@@ -206,7 +206,11 @@ def lv_c(policy, seed: int, T: int, null: bool = False) -> dict:
     permuted). Per block, sign(d(Closed,P1) > d(P1,P2))."""
     closed = run_episode(policy, seed, T, null=null, ab=False)
     tape = closed["tape"]
-    fC = [features(o.encode()) for o in closed["obs_traj"][:-1]]
+    # FRAME ALIGNMENT (H_013 null-bias repair): Closed must use POST-step obs [o_1..o_T] like
+    # _replay_tape does. obs_traj[:-1] (pre-step, [o_0..o_T-1]) put Closed one tick behind both
+    # ghosts, so d(C,P1) carried a shift term the ghost-ghost pair lacked -> null-env closure
+    # floor 0.667 (> gate) from pure exogenous drift. Aligned, a null env reads 0.0.
+    fC = [features(o.encode()) for o in closed["obs_traj"][1:]]
     fP1 = _replay_tape(_derange(tape, seed, 1), seed, null=null)
     fP2 = _replay_tape(_derange(tape, seed, 2), seed, null=null)
     mC, mP1, mP2 = _blockmeans(fC), _blockmeans(fP1), _blockmeans(fP2)
