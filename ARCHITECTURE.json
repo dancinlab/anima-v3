@@ -3,7 +3,7 @@
  "id": "anima-v3",
  "role": "anima-v3 — Architecture (JSON tree · SSOT)",
  "title": "anima-v3 — Architecture",
- "updated": "2026-07-16",
+ "updated": "2026-07-17",
  "ssot_note": "JSON=SSOT (AI/tool parse); humans view architecture.html via `python3 serve.py`. Update in-place (not append). History/decisions/dates → CHANGELOG.md + git (never in tree). Hierarchy decomposes via `children` (commons single-doc); one fact per node, deeper detail → child nodes.",
  "children": [
   {
@@ -1883,7 +1883,7 @@
     {
      "id": "verification-h011",
      "type": "gate",
-     "role": "H_011 live-ab-closure. Stage A CERTIFIED. Stage B: 3B LOOP-REFUSED (closure 0.50=chance); 7B(nf4) CLEARS the certified closure anchor (LV-C 0.76, 5/5 — 1st brain to). LV-W miss = instrument artifact (tiebreak plant mid3bal reproduces it). Rung-1 closed-loop -> LICENSES owner-loop RCT.",
+     "role": "H_011 live-ab-closure. Stage A CERTIFIED. 3B LOOP-REFUSED; 7B cleared LV-C 0.76 5/5 — but ANCHOR SUSPENDED (H_013 root-cause): certified lv_c had a frame-misalignment null bias (null floor 0.667 > 0.60 gate). Estimator repaired (fC=obs_traj[1:]), stage-A re-passes; 7B must re-earn on summer.",
      "children": [
       {
        "id": "h011-closure-gate",
@@ -1908,8 +1908,17 @@
       {
        "id": "h011-lvw-repair",
        "role": "LV-W repair (restrict to INFORMATIVE ticks) is PARTIAL: the dead null env stays REFUSED (base_full_r 0.241) but the mid3bal/7B regime is NOT rescued (0.446) — its one-step channel is WEAK (diffuse/delayed), which LV-C (block timescale) captures. LV-W quarantined; LV-C valid AND sufficient."
+      },
+      {
+       "id": "h011-lvc-null-bias",
+       "role": "NULL BIAS: Closed used PRE-step obs, ghosts POST-step — d(C,ghost) carries a one-tick shift the bit-identical ghost pair lacks (null d(P1,P2)=0), so any exogenous block drift scored a hit (floor 0.667). The '0.0152 energy side-channel' is refuted. Lesson: a cert suite must null-check EVERY gate."
       }
      ]
+    },
+    {
+     "id": "verification-h013",
+     "type": "gate",
+     "role": "H_013 closure-dose-response. First scripted run INSTRUMENT-INVALID (P-DEAD 0.667 all doses) -> root-caused + repaired the certified lv_c upstream (h011-lvc-null-bias). Repaired: P-DEAD 0.000, P-DOSE monotone 0.6 (0.722..0.389), P-LIVE 0.722. d*=p0.25. Pending: 7B sweep + H_011 re-run (summer)."
     },
     {
      "id": "verification-h012",
@@ -2041,6 +2050,13 @@
      "H_011 LV-W under-power (moderate entropy)",
      "H_012A rank_full/shift-null unreliable at M=60 (null plant rank 0/24)"
     ]
+   },
+   {
+    "id": "run-h013-py-1",
+    "source": "state/h011_live-ab-closure_2026-07-16/run_h011.py",
+    "lesson": "lv-c-null-bias-frame: a statistic that scores a SPECIAL reference (Closed) against same-family controls (permuted ghosts) hid a frame misalignment (Closed PRE-step obs vs ghosts POST-step) that gave a null-env closure floor 0.667 > the 0.60 gate — undetected because H_011's P-DEAD checked LV-W, never pointed LV-C at a dead env. Surfaced by H_013's dose sweep (the multi-lens check H_011 lacked).",
+    "value": "A certification suite must NULL-CHECK EVERY gate it certifies — run each statistic on an env/input where the measured effect is provably ABSENT and require it to read the floor. Frame-align a special-vs-control comparison (both post-step). On divergence, suspect the ruler (verdict-integrity).",
+    "threshold": "a certified gate never null-tested on its own measurement axis"
    }
   ]
  }
